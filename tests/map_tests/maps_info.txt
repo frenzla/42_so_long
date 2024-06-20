@@ -16,8 +16,8 @@ map6:	not valid		2 starting position
 map7:	not valid		2 exits
 
 map8:	not valid		map not rectangular
-map9:	valid			space before map
-map10:	valid			tabs before map
+map9:	not valid			space before map
+map10:	not valid			tabs before map
 
 map11:	not valid		invalid_player_path
 
