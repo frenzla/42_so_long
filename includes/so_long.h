@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/19 17:07:57 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/20 10:17:11 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef	struct s_map {
 	char	**map_layout;
 	int		start_x;
 	int		start_y;
+	int		nb_collectibles;
 } t_map;
 
 typedef struct s_data {
@@ -109,5 +110,6 @@ int		check_external_walls(char ***map, int nb_lines);
 int		position_is_valid(int x, int y, char ***map, int nb_lines);
 int		there_is_a_valid_path(int y, int x, char **map, int nb_lines, int *nb_collectibles);
 int		get_nb_lines(char *map_path);
+int		get_map_info(t_data *data);
 
 #endif

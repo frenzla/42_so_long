@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:49:18 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/19 19:06:07 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/20 11:22:48 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -395,6 +395,33 @@ Test(map_checks, flood_fill)
 			cr_expect_eq(ret, 0, "map[%d]: invalid format after checks: map should FAIL", z);
 			free_map(&(data.map.map_layout));
 		}
+		z++;
+	}
+}
+
+Test(map_checks, get_map_info_check)
+{
+	int	z = 2;
+	int	fd = 0;
+	int	nb_lines;
+
+	while (map_paths[z])
+	{
+		data.map.map_path = map_paths[z];
+		data.map.height = get_nb_lines(map_paths[z]);
+
+		fd = open(map_paths[z], O_RDONLY);
+		ret = parse_map(fd, &data);
+		close(fd);
+
+		ret = get_map_info(&data);
+
+		if (z == 4)
+			cr_expect_eq(ret, 0, "map[%d]: map with no collectibles, should FAIL", z);
+		else
+			cr_expect_eq(ret, 1, "map[%d]: good map, should PASS", z);
+
+		free_map(&(data.map.map_layout));
 		z++;
 	}
 }

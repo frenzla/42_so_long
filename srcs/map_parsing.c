@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:33:46 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/19 17:20:40 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/20 11:32:57 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,23 @@ int	get_nb_lines(char *map_path)
 int	get_map(char *map_path, t_data *data)
 {
 	int		fd;
-	char	*line;
 	int		ret;
 
+	data->map.map_path = map_path;
 	data->map.height = get_nb_lines(map_path);
-	if (data->map.height == RET_ERR)
+	if (data->map.height == RET_ERR || !data->map.map_path)
 		return (RET_ERR);
 	fd = open(map_path, O_RDONLY);
 	if (fd < 1)
 		return (ft_printf(RED"Error\nCouldn't open file" RESET), RET_ERR);
 	ret = parse_map(fd, data);
 	close(fd);
-	if (!map_is_valid(&(data->map.map_layout), data->map.height) ||	\
-		!map_path_valid(map_path) || ret == RET_ERR) // here
+	if (!map_is_valid(&(data->map.map_layout), data->map.height) || \
+		!map_path_valid(map_path) || ret == RET_ERR)
 		return (RET_ERR);
+	ret = get_map_info(data);
+	if (ret == RET_ERR)
+		return (ft_printf(RED"Error\nCouldn't get map data" RESET), RET_ERR);
 	return (1);
 }
 
