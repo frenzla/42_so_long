@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/13 18:38:58 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/14 09:46:18 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <stdlib.h>
+//To delete
+# include </home/alarose/Criterion/include/criterion/criterion.h>
 
 // Définir les codes de couleur ANSI
 #define RED "\x1b[31m"

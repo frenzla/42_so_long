@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/13 18:24:02 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/14 11:31:02 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ LIBFT = libft.a
 LIBFT_FILE = $(LIBFT_PATH)$(LIBFT)
 LIBFT_FLAGS = $(LIBFT_FILE) -L$(LIBFT_PATH) -lft
 
-MINI_LIB_PATH = /home/alarose/sgoinfre/mlx
+MINI_LIB_PATH = $(HOME)/sgoinfre/mlx
 MLX_FLAGS = -L$(MINI_LIB_PATH) -lmlx_Linux -lXext -lX11
 
 INCLUDES_PATH = ./includes
@@ -72,11 +72,10 @@ fclean : clean
 
 re : fclean all
 
-$(TESTDIR)/%: $(TESTDIR)/%.c
-	make $(NAME)
-	$(CC) $(INCLUDES) -o $@ $^ $(MLX_FLAGS) $(LIBFT_FLAGS) -lcriterion
+$(TESTDIR)/%.o : $(TESTDIR)/%.c
+	$(CC) $(INCLUDES) $< $(OBJS) -g3 -ggdb3 -o $@ $(MLX_FLAGS) $(LIBFT_FLAGS) -I$(HOME)/Criterion/include/criterion -Wl,-rpath=$(HOME)/Criterion/build/src -L$(HOME)/Criterion/build/src -W -lcriterion --verbose
 
-test: $(TESTBINS)
+test: $(OBJS) $(LIBFT_FILE) $(TESTBINS)
 	for test in $(TESTBINS) ; do ./$$test ; done
 
 .PHONY: all clean fclean re test

@@ -6,48 +6,71 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:49:18 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/12 19:22:18 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/14 17:48:03 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
+#include </home/alarose/Criterion/include/criterion/criterion.h>
 
-int	main(int argc, char **argv)
+	char	*map_paths[] = {
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map9.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map15.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map0.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map1.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map2.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map3.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map4.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map5.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map6.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map7.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map8.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map10.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map11.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map12.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map13.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map14.ber",
+		NULL
+	};
+
+Test(mapcreation, map_empty)
 {
-	t_data	data;
-	char	*img_paths[NB_IMAGES];
-	char 	**map;
-	char	*map_path = "./maps/mapOK.ber";
-	int		fd;
-	char	*line;
-	int		nb_lines;
+	char	**map = NULL;
+	int	ret;
 
-	fd = open(map_path, O_RDONLY);
-	printf("\n%d\n", fd);
+	printf("\nTEST: MAP EMPTY\n");
+	ret = get_map(map_paths[0], &map);
+		cr_assert_eq(ret, 0, "get_map should return 0");
+	printf("\n\n");
+}
 
-	line = get_next_line(fd);
-	printf("%s", line);
-		if (!line)
-		return (close(fd), ft_printf("Error\nMap is empty"), NULL);
-	else
-		nb_lines = 1;
-	printf("          %d\n", nb_lines);
-	while (line)
+Test(mapcreation, map_invalid_path)
+{
+	char	**map = NULL;
+	int	ret;
+
+	printf("TEST: INVALID PATH\n");
+	ret = get_map(map_paths[1], &map);
+		cr_assert_eq(ret, 0, "get_map should return 0");
+	printf("\n");
+}
+//to change when checks will be implemented
+Test(mapcreation, creation)
+{
+	char	**map = NULL;
+	int	i = 2;
+	int k = 0;
+	int	ret;
+	printf("TEST: VALID MAPS\n");
+	while (map_paths[i])
 	{
-		nb_lines++;
-		free(line);
-		line = get_next_line(fd);
-		printf("%s", line);
-		printf("          %d\n", nb_lines);
+		ret = get_map(map_paths[i], &map);
+		cr_assert_eq(ret, 1, "get_map should return 1");
+		printf("\n\nMap OK:\n");
+		while (map[k])
+			printf("%s\n", map[k++]);
+		map = NULL;
+		i++;
+		k = 0;
 	}
-
-
-/*	line = get_next_line(fd);
-	printf("%s\n", line);*/
-
-/*	map = get_map(argv[1]);
-	if (!map)
-		return (1);*/
-
-	return (0);
 }
