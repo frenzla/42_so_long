@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/12 16:38:53 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/12 18:28:24 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@
 # include <errno.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <fcntl.h>
 
-# define MLX_ERROR 1
+# define TRUE 1
+# define FALSE 0
+# define RET_ERR 0
 # define TILE_SIZE 20
 
 # define MAP_PATH "./maps/mapOK.ber"
@@ -69,5 +72,7 @@ int		handle_input(int keysym, t_data *data);
 void	init_img_paths(char **img_paths);
 int		new_img_from_file(char **paths, t_data *data, int i);
 int		render(t_data *data);
+char	**get_map(char *map_path);
+int		parse_map(int fd, int nb_lines, char **map);
 
 #endif

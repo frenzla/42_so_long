@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:50:15 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/12 16:24:05 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/12 17:20:53 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	new_img_from_file(char **paths, t_data *data, int i)
 {
 	data->img[i].img = mlx_xpm_file_to_image(data->mlx, paths[i], &(data->img[i].width), &(data->img[i].height));
 	if (!(data->img[i].img))
-		return (MLX_ERROR);
+		return (RET_ERR);
 	data->img[i].addr = mlx_get_data_addr(data->img[i].img, &(data->img[i].bits_per_pixel), &(data->img[i].line_length), &(data->img[i].endian));
 	//Define position of image
 /*	data->img[i].x = 300;

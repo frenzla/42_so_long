@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:33:14 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/11 18:58:43 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/12 17:20:53 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ void	craft_pixel_in_img(t_img *img, int x, int y, int color)
 	//initialize connection for display
 	data.mlx = mlx_init();
 	if (!data.mlx)
-		return (ft_printf("Error\nConnection between program and display couldn't be established"), free(data.mlx), MLX_ERROR);
+		return (ft_printf("Error\nConnection between program and display couldn't be established"), free(data.mlx), RET_ERR);
 
 	//open new window
 	data.mlx_win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_LENGTH, "Hello world!");
 	if (!data.mlx_win)
-		return (ft_printf("Error\nNew window couldn't open"), free(data.mlx), MLX_ERROR);
+		return (ft_printf("Error\nNew window couldn't open"), free(data.mlx), RET_ERR);
 
 //SQUARE: Manually crafting, designing & displaying an image
 	//Create image
 	data.img[SQUARE].img = mlx_new_image(data.mlx, WIN_WIDTH, WIN_LENGTH);
 	if (!data.img[SQUARE].img)
-		return (ft_printf("Error\nNew image couldn't be generated"), free(data.mlx), MLX_ERROR);
+		return (ft_printf("Error\nNew image couldn't be generated"), free(data.mlx), RET_ERR);
 	data.img[SQUARE].addr = mlx_get_data_addr(data.img[SQUARE].img, &data.img[SQUARE].bits_per_pixel, &data.img[SQUARE].line_length, &data.img[SQUARE].endian);
 
 	//Craft pixels in image
