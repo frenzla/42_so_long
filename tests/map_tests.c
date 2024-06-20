@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:49:18 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/20 18:02:16 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/20 18:16:57 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -433,7 +433,7 @@ Test(map_checks, valid_position_for_flood_fill)
 		i++;
 	}
 }
-/*
+
 Test(map_checks, flood_fill_without_other_checks)
 {
 	int	z = 2;
@@ -457,14 +457,8 @@ Test(map_checks, flood_fill_without_other_checks)
 		close(fd);
 
 		ret = get_map_info(&data);
-
-		printf(GREEN "Map path = %s\n", data.map.map_path);
-		printf("Map width = %d & Map height = %d\n", data.map.width, data.map.height);
-		printf("Starting position: y = %d | x = %d\n", data.map.start_y, data.map.start_x);
-		printf("NB collectibles = %d\n" RESET, data.map.nb_collectibles);
-
 		ret = there_is_a_valid_path(data.map.start_y, data.map.start_x, &data, data.map.map_layout);
-		printf("RET: %d\n", ret);
+
 		if (z == 2 || z == 6 || z == 7 || z == 8 || z == 9 || z == 10 || z == 12 || z == 13 || z == 14 || z == 16)
 			cr_expect_eq(ret, 1, "map[%d]: perfect map, should PASS", z);
 		else
@@ -527,4 +521,4 @@ Test(map_checks, flood_fill)
 		free_map(data.map.map_layout);
 		z++;
 	}
-}*/
+}
