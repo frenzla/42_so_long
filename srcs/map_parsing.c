@@ -6,18 +6,17 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:33:46 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/18 18:06:38 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/19 11:03:44 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	get_map(char *map_path, char ***map)
+int	get_nb_lines(char *map_path)
 {
 	int		fd;
 	char	*line;
 	int		nb_lines;
-	int		ret;
 
 	fd = open(map_path, O_RDONLY);
 	if (fd < 1)
@@ -34,7 +33,24 @@ int	get_map(char *map_path, char ***map)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	ret = parse_map(open(map_path, O_RDONLY), nb_lines, map);
+	return (nb_lines);
+}
+
+int	get_map(char *map_path, char ***map)
+{
+	int		fd;
+	char	*line;
+	int		nb_lines;
+	int		ret;
+
+	nb_lines = get_nb_lines(map_path);
+	if (nb_lines == RET_ERR)
+		return (RET_ERR);
+	fd = open(map_path, O_RDONLY);
+	if (fd < 1)
+		return (ft_printf(RED"Error\nCouldn't open file" RESET), RET_ERR);
+	ret = parse_map(fd, nb_lines, map);
+	close(fd);
 	if (!map_is_valid(map, nb_lines) || !map_path_valid(map_path) || \
 		ret == RET_ERR)
 		return (RET_ERR);
@@ -46,17 +62,17 @@ int	parse_map(int fd, int nb_lines, char ***map)
 	char	*line;
 	int		i;
 
-	line = NULL;
 	*map = malloc(sizeof(char *) * (nb_lines + 1));
 	if (!*map)
-		return (ft_printf(RED"Error\nMap couldn't be malloc\n"RESET), RET_ERR);
+		return (close(fd), ft_printf(RED"Error\n	\
+		Map couldn't be malloc\n"RESET), RET_ERR);
 	line = get_next_line(fd);
 	i = 0;
 	while (i < nb_lines - 1)
 	{
 		(*map)[i] = malloc(sizeof(char) * (ft_strlen(line)));
 		if (!((*map)[i]))
-			return (ft_printf(RED"Error\n	\
+			return (close(fd), ft_printf(RED"Error\n	\
 				Line in Map couldn't be malloc\n"RESET), RET_ERR);
 		ft_strlcpy(((*map)[i]), line, ft_strlen(line));
 		i++;

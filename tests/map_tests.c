@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:49:18 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/18 19:28:23 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/19 10:52:49 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 	int	ret;
 
 
-	int	get_nb_lines(char *map_path)
+	int	get_nb_lines_TEST(char *map_path)
 	{
 		int		fd;
 		char	*line;
@@ -281,7 +281,7 @@ Test(map_checks, checks_walls)
 	while (map_paths[i])
 	{
 	get_map(map_paths[i], &map);
-	nb_lines = get_nb_lines(map_paths[i]); // ===>>> Function in test file (here above)
+	nb_lines = get_nb_lines_TEST(map_paths[i]); // ===>>> Function in test file (here above)
 	ret = check_external_walls(&map, nb_lines);
 		if (i == 0)
 		{
@@ -334,7 +334,7 @@ Test(map_checks, valid_position_for_flood_fill)
 	};
 
 	get_map(map_paths[2], &map);
-	nb_lines = get_nb_lines(map_paths[2]); // ===>>> Function in test file (here above)
+	nb_lines = get_nb_lines_TEST(map_paths[2]); // ===>>> Function in test file (here above)
 	while (i < sizeof(pos)/sizeof(pos[0]))
 	{
 		ret = position_is_valid(pos[i][0], pos[i][1], &map, nb_lines);

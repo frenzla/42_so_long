@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:10:42 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/18 20:44:05 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/19 11:10:04 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,30 @@ int	position_is_valid(int y, int x, char ***map, int nb_lines)
 	return (0);
 }
 
-int	there_is_a_valid_path(char ***map, int nb_lines)
+int	there_is_a_valid_path(int y, int x, char **map, int nb_lines, int nb_collectibles)
 {
+	char	temp;
 
+	if (!position_is_valid(y, x, &map, nb_lines))
+		return (0);
+	if (map[y][x] == 'E' && nb_collectibles == 0)
+		return (1);
+	if (map[y][x] == 'C')
+		(nb_collectibles)--;
+	temp = map[y][x];
+	map[y][x] = '-';
+	if (there_is_a_valid_path(y, x + 1, map, nb_lines, nb_collectibles) || \
+		there_is_a_valid_path(y, x - 1, map, nb_lines, nb_collectibles) || \
+		there_is_a_valid_path(y + 1, x, map, nb_lines, nb_collectibles) || \
+		there_is_a_valid_path(y - 1, x, map, nb_lines, nb_collectibles))
+		return (1);
+	map[y][x] = temp;
+	if (temp == 'C')
+		nb_collectibles++;
+	return (0);
 }
 
-/*int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	char	**map;
 	int		ret;
@@ -123,4 +141,4 @@ int	there_is_a_valid_path(char ***map, int nb_lines)
 	ret = position_is_valid(1, 34, &map, nb_lines);
 	printf("ret = %d\n", ret);
 	return (0);
-}*/
+}

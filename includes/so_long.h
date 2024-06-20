@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/18 18:04:05 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/19 11:07:12 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,18 @@ typedef struct s_img {
 	int		y;
 }	t_img;
 
+typedef	struct s_map {
+	char	*map_path;
+	int		width;
+	int		height;
+	char	**map_layout;
+} t_map;
+
 typedef struct s_data {
 	void	*mlx;
 	void	*mlx_win;
 	t_img	img[5];
+	t_map	map;
 }	t_data;
 
 typedef void (*keystroke_func)(t_img*);
@@ -98,5 +106,7 @@ int		is_rectangle(char ***map);
 int		map_path_valid(char *map_path);
 int		check_external_walls(char ***map, int nb_lines);
 int		position_is_valid(int x, int y, char ***map, int nb_lines);
+int		there_is_a_valid_path(int y, int x, char **map, int nb_lines, int nb_collectibles);
+int		get_nb_lines(char *map_path);
 
 #endif
