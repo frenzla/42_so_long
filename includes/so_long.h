@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/19 11:07:12 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/19 15:17:30 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdlib.h>
 //To delete
 # include </home/alarose/Criterion/include/criterion/criterion.h>
+#include <unistd.h>
 
 // Définir les codes de couleur ANSI
 #define RED "\x1b[31m"
@@ -66,6 +67,8 @@ typedef	struct s_map {
 	int		width;
 	int		height;
 	char	**map_layout;
+	int		start_x;
+	int		start_y;
 } t_map;
 
 typedef struct s_data {
@@ -106,7 +109,7 @@ int		is_rectangle(char ***map);
 int		map_path_valid(char *map_path);
 int		check_external_walls(char ***map, int nb_lines);
 int		position_is_valid(int x, int y, char ***map, int nb_lines);
-int		there_is_a_valid_path(int y, int x, char **map, int nb_lines, int nb_collectibles);
+int		there_is_a_valid_path(int y, int x, char **map, int nb_lines, int *nb_collectibles);
 int		get_nb_lines(char *map_path);
 
 #endif

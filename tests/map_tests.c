@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:49:18 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/19 10:52:49 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:24:41 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 	};
 	int	ret;
 
-
 	int	get_nb_lines_TEST(char *map_path)
 	{
 		int		fd;
@@ -62,7 +61,6 @@
 		return (nb_lines);
 	}
 
-// to change when other checks will be implemented
 Test(map_checks, map_validity)
 {
 	int i = 0;
@@ -338,10 +336,63 @@ Test(map_checks, valid_position_for_flood_fill)
 	while (i < sizeof(pos)/sizeof(pos[0]))
 	{
 		ret = position_is_valid(pos[i][0], pos[i][1], &map, nb_lines);
-		if (i == 0 || i == 1 || i == 5 || i == 6 || i == 7 || i == 9)
+		if (i == 0 || i == 1 || i == 5 || i == 6 || i == 7)
 			cr_expect_eq(ret, 0, "Position [%d, %d] (char: %c) shouldn't be valid", pos[i][0], pos[i][1], map[pos[i][0]][pos[i][1]]);
-		else if (i == 2 || i == 3 || i == 4 || i == 8)
+		else if (i == 2 || i == 3 || i == 4 || i == 8 || i == 9)
 			cr_expect_eq(ret, 1, "Position [%d, %d] (char: %c) should be valid", pos[i][0], pos[i][1], map[pos[i][0]][pos[i][1]]);
 		i++;
+	}
+}
+
+Test(map_checks, flood_fill)
+{
+	int	z = 0;
+	int i;
+	int k;
+	int	nb_lines;
+	int	nb_collectibles;
+	int	start_x;
+	int	start_y;
+
+	while (map_paths[z])
+	{
+		ret = get_map(map_paths[z], &map);
+		nb_lines = get_nb_lines_TEST(map_paths[z]);
+		//get stating position coordinates & nb_collectibles
+		i = 0;
+		nb_collectibles = 0;
+		if (ret != 0)
+		{
+			while (map[i])
+			{
+				k = 0;
+				while (map[i][k])
+				{
+					if (map[i][k] == 'P')
+					{
+						start_x = k;
+						start_y = i;
+					}
+					if (map[i][k] == 'C')
+						nb_collectibles++;
+					k++;
+				}
+				i++;
+			}
+		ret = there_is_a_valid_path(start_y, start_x, map, nb_lines, &nb_collectibles);
+		}
+		if (z == 2 || z == 12)
+		{
+			cr_expect_eq(ret, 1, "map[%d]: perfect map, should PASS", z);
+			free_map(&map);
+		}
+		else if (z == 0 || z == 1)
+			cr_expect_eq(ret, 0, "map[%d]: invalid map or empty_file, should FAIL", z);
+		else
+		{
+			cr_expect_eq(ret, 0, "map[%d]: invalid format after checks: map should FAIL", z);
+			free_map(&map);
+		}
+		z++;
 	}
 }

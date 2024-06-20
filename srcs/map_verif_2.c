@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:10:42 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/19 11:10:04 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:30:28 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,35 +82,48 @@ int	check_external_walls(char ***map, int nb_lines)
 
 int	position_is_valid(int y, int x, char ***map, int nb_lines)
 {
-	printf("Char = %c\n", (*map)[y][x]);
-	if (x < 1 || x > strlen((*map)[0]) - 2 || y < 0 || y > nb_lines - 2)
+	if (x < 1 || x > ft_strlen((*map)[0]) - 2 || y < 0 || y > nb_lines - 2)
 		return (0);
-	if ((*map)[y][x] == '0' || (*map)[y][x] == 'E' || (*map)[y][x] == 'C')
+	if ((*map)[y][x] == '0' || (*map)[y][x] == 'E' ||	\
+		(*map)[y][x] == 'C' || (*map)[y][x] == 'P')
 		return (1);
 	return (0);
 }
 
-int	there_is_a_valid_path(int y, int x, char **map, int nb_lines, int nb_collectibles)
-{
-	char	temp;
+#include <time.h>
 
+int	there_is_a_valid_path(int y, int x, char **map, int nb_lines, int *nb_collectibles)
+{
+	char		temp;
+	static int	got_exit = 0;
+/*
+	struct timespec req;	// Define the timespec structure for sleeping half a second
+	req.tv_sec = 0;				// Seconds
+	req.tv_nsec = 100000000L;	// Nanoseconds (500 milliseconds)
+	nanosleep(&req, (struct timespec *)NULL); // Sleep
+
+	//print map for checks
+	int	i = 0;
+	while (map[i]) // delete when checks are done
+		printf("%s\n", map[i++]); // delete when checks are done
+*/
+	if (!map || !nb_lines || nb_lines < 3)
+		return (ft_printf(RED"Error\nUnvalid map\n"RESET), RET_ERR);
 	if (!position_is_valid(y, x, &map, nb_lines))
-		return (0);
-	if (map[y][x] == 'E' && nb_collectibles == 0)
-		return (1);
+		return (RET_ERR);
+	if (map[y][x] == 'E')
+		got_exit = 1;
 	if (map[y][x] == 'C')
-		(nb_collectibles)--;
-	temp = map[y][x];
-	map[y][x] = '-';
+		(*nb_collectibles)--;
+	if (got_exit && *nb_collectibles == 0)
+		return (1);
+	map[y][x] = 'X';
 	if (there_is_a_valid_path(y, x + 1, map, nb_lines, nb_collectibles) || \
 		there_is_a_valid_path(y, x - 1, map, nb_lines, nb_collectibles) || \
 		there_is_a_valid_path(y + 1, x, map, nb_lines, nb_collectibles) || \
 		there_is_a_valid_path(y - 1, x, map, nb_lines, nb_collectibles))
 		return (1);
-	map[y][x] = temp;
-	if (temp == 'C')
-		nb_collectibles++;
-	return (0);
+	return (RET_ERR);
 }
 
 int	main(int argc, char **argv)
@@ -118,7 +131,11 @@ int	main(int argc, char **argv)
 	char	**map;
 	int		ret;
 	int		i;
+	int		k;
 	int		nb_lines;
+	int		start_x;
+	int		start_y;
+	int		nb_collectibles;
 
 	map = NULL;
 	//check if more than 1 elements in argv
@@ -133,12 +150,35 @@ int	main(int argc, char **argv)
 	//show map
 	nb_lines = 0;
 	while (map[nb_lines])
-		printf("%s\n", map[nb_lines++]);
+		printf(BLUE"%s\n" RESET, map[nb_lines++]);
 
-	printf(GREEN"NB LINES: %d\n" RESET, nb_lines);
-	printf(BLUE"Len: %ld\n" RESET, ft_strlen(map[0]));
+	printf(GREEN"NB LINES: %d\n", nb_lines);
+	printf("Len: %ld\n" , ft_strlen(map[0]));
 
-	ret = position_is_valid(1, 34, &map, nb_lines);
+	//get stating position coordinates
+	i = 0;
+	nb_collectibles = 0;
+	while (map[i])
+	{
+		k = 0;
+		while (map[i][k])
+		{
+			if (map[i][k] == 'P')
+			{
+				start_x = k;
+				start_y = i;
+			}
+			if (map[i][k] == 'C')
+				nb_collectibles++;
+			k++;
+		}
+		i++;
+	}
+	printf("Starting position: y = %d | x = %d\n", start_y, start_x);
+	printf("NB collectibles = %d\n" RESET, nb_collectibles);
+
+	//Flood fill
+	ret = there_is_a_valid_path(start_y, start_x, map, nb_lines, &nb_collectibles);
 	printf("ret = %d\n", ret);
 	return (0);
 }
