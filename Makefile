@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/11 19:06:23 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/12 14:36:34 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,25 +17,28 @@ SRC_FILES =		img_manager.c	\
 				player_mov.c\
 				main.c\
 
-
 BONUSDIR = ./
-BONUS = ft_lstnew_bonus.c		\
-		ft_lstadd_front_bonus.c	\
+BONUS =
 
-LIBFT_PATH = ./
+LIBFT_PATH = ./libft/
 LIBFT = libft.a
-LIBFT_FLAGS = -L$(LIBFT_PATH) -lft
+LIBFT_FILE = $(LIBFT_PATH)$(LIBFT)
+LIBFT_FLAGS = $(LIBFT_FILE) -L$(LIBFT_PATH) -lft
 
 MINI_LIB_PATH = /home/alarose/sgoinfre/mlx
-MLX_FLAGS = -L$(MINI_LIB_PATH) -lmlx_Linux -lXext -lX11 -I$(MINI_LIB_PATH)
+MLX_FLAGS = -L$(MINI_LIB_PATH) -lmlx_Linux -lXext -lX11
 
 INCLUDES_PATH = ./includes
-INCLUDES = -I $(INCLUDES_PATH) -I $(MINI_LIB_PATH)
+INCLUDES = -I$(INCLUDES_PATH) -I$(LIBFT_PATH)
 
 SRCS = $(addprefix $(SRCDIR), $(SRC_FILES))
 BONUS_FILES = $(addprefix $(BONUSDIR), $(BONUS))
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(BONUS_FILES:.c=.o)
+
+TESTDIR=./tests
+TESTS = $(wildcard $(TESTDIR)/*.c)
+TESTBINS = $(TESTS:.c=.o)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -44,21 +47,33 @@ RM = rm -f
 all : $(NAME)
 
 #insert flags when ready!
-%.o : %.c
+./%.o : ./%.c
 	$(CC) $(INCLUDES) -o $@ -c $<
 
-$(NAME) : $(OBJS)
-	$(CC) $(INCLUDES) -o $@ $^ $(MLX_FLAGS) $(LIBFT_FLAGS)
+$(LIBFT_FILE) :
+	make -C $(LIBFT_PATH)
+
+$(NAME) : $(OBJS) $(LIBFT_FILE)
+	$(CC) -o $@ $^ $(MLX_FLAGS) $(LIBFT_FLAGS)
+#delete this one
+	make clean
 
 clean :
+	make -C $(LIBFT_PATH) clean
 	$(RM) $(OBJS)
-	$(RM) $(OBJS_BONUS)
+#	$(RM) $(OBJS_BONUS)
 
 fclean : clean
+	make -C $(LIBFT_PATH) fclean
 	$(RM) $(NAME)
 
 re : fclean all
 
-bonus :
+$(TESTDIR)/%: $(TESTDIR)/%.c
+	make $(NAME)
+	$(CC) $(INCLUDES) -o $@ $^ $(MLX_FLAGS) $(LIBFT_FLAGS) -lcriterion
 
-.PHONY: all clean fclean re bonus
+test: $(TESTBINS)
+	for test in $(TESTBINS) ; do ./$$test ; done
+
+.PHONY: all clean fclean re

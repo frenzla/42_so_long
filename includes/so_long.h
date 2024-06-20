@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/11 19:07:56 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/12 11:42:00 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 # define MLX_ERROR 1
 # define TILE_SIZE 20
+
+# define MAP_PATH "./maps/mapOK.ber"
 
 # define NB_IMAGES 2
 # define SQUARE 0	//No path

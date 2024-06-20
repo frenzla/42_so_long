@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 09:31:06 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/11 18:57:20 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/12 13:40:15 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	handle_input(int keysym, t_data *data)
 		if (f_table[i].keycode == keysym)
 		{
 			f_table[i].func(&(data->img[CARROT]));
-			printf("Move number %d\n", ++NB_moves);
+			ft_printf("Move number %d\n", ++NB_moves);
 			return (0);
 		}
 		i++;

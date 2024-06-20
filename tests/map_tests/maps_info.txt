@@ -1,0 +1,23 @@
+Think of invalid permissions,
+a map with too few columns/rows,
+or even an empty line in the middle of the map.
+
+map0:	valid map		1 start point + 10 collectibles + 1 exit + valid path
+
+map1:	not valid		no exit
+map2:	not valid		no collectible
+map3:	not valid		no starting position
+
+map4:	not valid		2 starting position
+map5:	not valid		2 exits
+
+map6:	not valid		map not rectangular
+map7:	valid			space before map
+map8:	valid			tabs before map
+map9:	not valid		empty file
+map10:	valid			minimum size
+map11:	not valid		empty space in map
+map12:	not valid		unknown char in map
+map13:	not valid		not closed by walls (starting point on map limit)
+
+map14:	not valid		invalid path
