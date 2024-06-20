@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/11 09:36:27 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/11 13:57:03 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@
 
 # define MLX_ERROR 1
 
+# define NB_IMAGES 2
+# define SQUARE 0	//No path
+# define SQUARE_PATH ""	//No path
 # define CARROT 1
 # define CARROT_PATH "./assets/carrot.xpm"
 
-# define SQUARE 0
 
 # define WIN_WIDTH 640
 # define WIN_LENGTH 480
@@ -54,5 +56,8 @@ void	go_up(t_img *img);
 void	go_down(t_img *img);
 void	craft_pixel_in_img(t_img *img, int x, int y, int color);
 int		handle_input(int keysym, t_data *data);
+void	init_img_paths(char **img_paths);
+int		new_img_from_file(char **paths, t_data *data, int i);
+int		render(t_data *data);
 
 #endif

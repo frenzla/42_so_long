@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:33:14 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/11 09:37:44 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/11 17:53:48 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int	render(t_data *data)
 	return (-1);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	t_data	data;
-	char	*relative_path = "./assets/carrot.xpm";
-	int		i;
 
 	ft_printf("Hey! Libft is linked ;-)");
+
+	init_img_paths(img_paths);
 
 	//initialize connection for display
 	data.mlx = mlx_init();
@@ -48,14 +48,14 @@ int	main(void)
 	if (!data.mlx_win)
 		return (ft_printf("Error\nNew window couldn't open"), free(data.mlx), MLX_ERROR);
 
-/*//SQUARE: Manually crafting, designing & displaying an image/*
+//SQUARE: Manually crafting, designing & displaying an image
 	//Create image
 	data.img[SQUARE].img = mlx_new_image(data.mlx, WIN_WIDTH, WIN_LENGTH);
 	if (!data.img[SQUARE].img)
 		return (ft_printf("Error\nNew image couldn't be generated"), free(data.mlx), MLX_ERROR);
 	data.img[SQUARE].addr = mlx_get_data_addr(data.img[SQUARE].img, &data.img[SQUARE].bits_per_pixel, &data.img[SQUARE].line_length, &data.img[SQUARE].endian);
 
-	//C#include "so_long.h"raft pixels in image
+	//Craft pixels in image
 	i = 5;
 	while (i < 105)
 	{
@@ -72,25 +72,7 @@ int	main(void)
 		i++;
 	}
 	//Show image
-	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img[SQUARE].img, 0, 0);*/
-
-//From file: crafting & displaying image
-	//Craft img from file
-	data.img[CARROT].img = mlx_xpm_file_to_image(data.mlx, relative_path, &(data.img[CARROT].width), &(data.img[CARROT].height));
-
-	//Define position of image
-	data.img[CARROT].x = 300;
-	data.img[CARROT].y = 300;
-
-	//Show image
-	/*mlx_put_image_to_window(data.mlx, data.mlx_win, data.img[CARROT].img, data.img[CARROT].x, data.img[CARROT].y);*/
-
-	//Register loop_hook (what happens when no event is triggered)
-	mlx_loop_hook(data.mlx, render, &data);
-
-	//Register key
-	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, handle_input, &data);
-	//mlx_key_hook(data.mlx_win, &handle_input, &data);
+	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img[SQUARE].img, 0, 0);
 
 	//Rendering
 	mlx_loop(data.mlx);
@@ -99,4 +81,4 @@ int	main(void)
 	free(data.mlx);
 
 	return (0);
-}
+}*/
