@@ -6,14 +6,15 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/09 17:27:47 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/10 12:02:39 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
 SRCDIR = ./
-SRC_FILES = 	sandbox.c	\
+SRC_FILES =		sandbox.c	\
+				events.c
 
 BONUSDIR = ./
 BONUS = ft_lstnew_bonus.c		\
@@ -45,7 +46,7 @@ all : $(NAME)
 	$(CC) $(INCLUDES) -o $@ -c $<
 
 $(NAME) : $(OBJS)
-	$(CC) $(INCLUDES) -o $@ $< $(MLX_FLAGS) $(LIBFT_FLAGS)
+	$(CC) $(INCLUDES) -o $@ $^ $(MLX_FLAGS) $(LIBFT_FLAGS)
 
 clean :
 	$(RM) $(OBJS)

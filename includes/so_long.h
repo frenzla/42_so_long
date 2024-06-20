@@ -6,18 +6,29 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/09 17:03:16 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/11 09:36:27 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "mlx.h"
+# include "/home/alarose/sgoinfre/mlx/mlx.h"
+# include "libft.h"
 # include <stdio.h>
 # include <errno.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 # define MLX_ERROR 1
+
+# define CARROT 1
+# define CARROT_PATH "./assets/carrot.xpm"
+
+# define SQUARE 0
+
+# define WIN_WIDTH 640
+# define WIN_LENGTH 480
 
 typedef struct s_img {
 	void	*img;
@@ -25,6 +36,10 @@ typedef struct s_img {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
+	int		x;
+	int		y;
 }	t_img;
 
 typedef struct s_data {
@@ -32,5 +47,12 @@ typedef struct s_data {
 	void	*mlx_win;
 	t_img	img[5];
 }	t_data;
+
+void	go_right(t_img *img);
+void	go_left(t_img *img);
+void	go_up(t_img *img);
+void	go_down(t_img *img);
+void	craft_pixel_in_img(t_img *img, int x, int y, int color);
+int		handle_input(int keysym, t_data *data);
 
 #endif
