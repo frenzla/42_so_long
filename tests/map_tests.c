@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:49:18 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/20 18:16:57 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/20 18:42:37 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -457,7 +457,7 @@ Test(map_checks, flood_fill_without_other_checks)
 		close(fd);
 
 		ret = get_map_info(&data);
-		ret = there_is_a_valid_path(data.map.start_y, data.map.start_x, &data, data.map.map_layout);
+		ret = path_ok(data.map.start_y, data.map.start_x, &data, data.map.map_layout);
 
 		if (z == 2 || z == 6 || z == 7 || z == 8 || z == 9 || z == 10 || z == 12 || z == 13 || z == 14 || z == 16)
 			cr_expect_eq(ret, 1, "map[%d]: perfect map, should PASS", z);

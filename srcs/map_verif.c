@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:15:58 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/20 10:16:11 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/20 18:40:41 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int	have_one_start(char ***map)
 		i++;
 	}
 	if (count_start != 1)
-		return (ft_printf(RED"Error\n	\
-			Wrong NB of Starting point\n"RESET), RET_ERR);
+		return (ft_printf(RED"Error\n\
+Wrong NB of Starting point\n"RESET), RET_ERR);
 	return (1);
 }
 
@@ -102,8 +102,8 @@ int	is_rectangle(char ***map)
 	{
 		if (i != 0)
 			if (ft_strlen((*map)[i]) != ft_strlen((*map)[i - 1]))
-				return (ft_printf(RED"Error\n	\
-				Map is not a rectangle\n"RESET), RET_ERR);
+				return (ft_printf(RED"Error\n\
+Map is not a rectangle\n"RESET), RET_ERR);
 		i++;
 	}
 	return (1);
@@ -118,5 +118,5 @@ int	map_path_valid(char *map_path)
 	temp = map_path + ft_strlen(map_path) - 4;
 	if (ft_strncmp(temp, ".ber", 4) == 0)
 		return (1);
-	return (RET_ERR);
+	return (ft_printf(RED"Error\nInvalid file format\n"RESET), RET_ERR);
 }

@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:10:42 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/20 16:14:56 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/20 18:43:21 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	check_chars(char ***map)
 		while ((*map)[i][k])
 		{
 			if (!is_in_charset((*map)[i][k]))
-				return (ft_printf(RED"Error\n	\
-					Unknown char in map\n"RESET), RET_ERR);
+				return (ft_printf(RED"Error\n\
+Unknown char in map\n"RESET), RET_ERR);
 			k++;
 		}
 		i++;
@@ -67,8 +67,8 @@ int	check_external_walls(char ***map, int nb_lines)
 		{
 			if (y == 0 || y == nb_lines - 1 || x == 0 || x == len - 1)
 				if ((*map)[y][x] != '1')
-					return (ft_printf(RED"Error\n	\
-					Map should be surrounded by walls\n"RESET), RET_ERR);
+					return (ft_printf(RED"Error\n\
+Map should be surrounded by walls\n"RESET), RET_ERR);
 			x++;
 		}
 		y++;
@@ -90,8 +90,8 @@ int	position_is_valid(int y, int x, char ***map, int nb_lines)
 	return (0);
 }
 
-#include <time.h> // can delete this (for checks)
-/*  Add this inside there_is_a_valid_path to see filling up in real time.
+//#include <time.h> // For below checks. Must stay here
+/*  Add this inside "path_ok" to see filling up in real time:
 	struct timespec req;	// Define the timespec structure for sleeping half a second
 	req.tv_sec = 0;				// Seconds
 	req.tv_nsec = 100000000L;	// Nanoseconds (500 milliseconds)
@@ -103,7 +103,7 @@ int	position_is_valid(int y, int x, char ***map, int nb_lines)
 		printf("%s\n", map[i++]); // delete when checks are done
 */
 
-int	there_is_a_valid_path(int y, int x, t_data *data, char **map)
+int	path_ok(int y, int x, t_data *data, char **map)
 {
 	static int	got_exit = 0;
 	static int	collec = 0;
@@ -119,10 +119,8 @@ int	there_is_a_valid_path(int y, int x, t_data *data, char **map)
 	if (got_exit && collec == data->map.nb_collectibles)
 		return (got_exit = 0, collec = 0, 1); // can delete the reset on var
 	map[y][x] = 'X';
-	if (there_is_a_valid_path(y, x + 1, data, map) || \
-		there_is_a_valid_path(y, x - 1, data, map) || \
-		there_is_a_valid_path(y + 1, x, data, map) || \
-		there_is_a_valid_path(y - 1, x, data, map))
+	if (path_ok(y, x + 1, data, map) || path_ok(y, x - 1, data, map) || \
+		path_ok(y + 1, x, data, map) || path_ok(y - 1, x, data, map))
 		return (1);
 	return (RET_ERR);
 }
@@ -151,7 +149,7 @@ int	main(int argc, char **argv)
 	printf("NB collectibles = %d\n" RESET, data.map.nb_collectibles);
 
 	//Flood fill
-	ret = there_is_a_valid_path(data.map.start_y, data.map.start_x, &data, data.map.map_layout);
+	ret = path_ok(data.map.start_y, data.map.start_x, &data, data.map.map_layout);
 	printf("ret = %d\n", ret);
 	return (0);
 }

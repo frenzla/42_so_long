@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/20 18:00:02 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/20 18:41:14 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,11 @@ int	main(int argc, char **argv)
 
 	//check if more than 1 elements in argv
 	if (argc != 2)
-		return (ft_printf("Error\nIncorrect input. Please enter map path (only)"), 1);
+		return (ft_printf(RED "Error\nIncorrect input" RESET), 1);
 	//parse map
 	ret = get_map(argv[1], &data);
-	if (!data.map.map_layout)
-	{
-		printf("No working: can't find data.map.map_layout\n");
-		return (1);
-	}
 	if (ret == RET_ERR)
-	{
-		printf("get_map doesn't work\n");
 		return (1);
-	}
 
 	printf("ret: %d\n", ret);
 
@@ -77,5 +69,5 @@ int	main(int argc, char **argv)
 	free(data.mlx);
 
 	return (0);
-}*/
-
+}
+*/
