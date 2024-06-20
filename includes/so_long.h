@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/14 09:46:18 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/14 18:38:14 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,8 @@ void	clean_quit(char ***map, t_data *data);
 int		map_is_valid(char ***map);
 int		map_path_valid(char *map_path);
 int		have_all_elements(char ***map);
+int		have_one_exit(char ***map);
+int		have_collectibles(char ***map);
+int		have_one_start(char ***map);
 
 #endif

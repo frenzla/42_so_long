@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/14 11:31:02 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/14 19:07:44 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ $(NAME) : $(OBJS) $(LIBFT_FILE)
 clean :
 	make -C $(LIBFT_PATH) clean
 	$(RM) $(OBJS)
+	$(RM) $(TESTBINS)
 #	$(RM) $(OBJS_BONUS)
 
 fclean : clean
@@ -71,6 +72,8 @@ fclean : clean
 	$(RM) $(NAME)
 
 re : fclean all
+
+re_test : fclean test
 
 $(TESTDIR)/%.o : $(TESTDIR)/%.c
 	$(CC) $(INCLUDES) $< $(OBJS) -g3 -ggdb3 -o $@ $(MLX_FLAGS) $(LIBFT_FLAGS) -I$(HOME)/Criterion/include/criterion -Wl,-rpath=$(HOME)/Criterion/build/src -L$(HOME)/Criterion/build/src -W -lcriterion --verbose
