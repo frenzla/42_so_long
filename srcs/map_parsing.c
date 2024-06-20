@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:33:46 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/17 16:34:08 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/17 18:47:58 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ int	get_map(char *map_path, char ***map)
 	}
 	close(fd);
 	ret = parse_map(open(map_path, O_RDONLY), nb_lines, map);
-/*	if (!map_is_valid(map) || !map_path_valid(map_path) || ret == RET_ERR)
-		return (RET_ERR);*/
+	if (!map_is_valid(map, nb_lines) || !map_path_valid(map_path) || \
+		ret == RET_ERR)
+		return (RET_ERR);
 	return (1);
 }
 
@@ -69,10 +70,14 @@ int	parse_map(int fd, int nb_lines, char ***map)
 	return (1);
 }
 
-int	map_is_valid(char ***map)
+int	map_is_valid(char ***map, int nb_lines)
 {
-/*	INCLUDE ALL CHECKS HERE (aggregator)
-	e.g. have_all_elements(char **map)*/
+	if (have_one_exit(map) && have_one_start(map) && \
+		have_collectibles(map) && is_rectangle(map) && \
+		check_chars(map) && check_external_walls(map, nb_lines))
+		return (1);
+	else
+		return (RET_ERR);
 }
 
 int	free_map(char ***map)

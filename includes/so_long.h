@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/17 17:12:15 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/17 18:48:48 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		get_map(char *map_path, char ***map);
 int		parse_map(int fd, int nb_lines, char ***map);
 int		free_map(char ***map);
 void	clean_quit(char ***map, t_data *data);
-int		map_is_valid(char ***map);
+int		map_is_valid(char ***map, int nb_lines);
 int		map_path_valid(char *map_path);
 int		have_all_elements(char ***map);
 int		have_one_exit(char ***map);

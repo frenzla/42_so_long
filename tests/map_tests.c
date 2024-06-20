@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:49:18 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/17 18:31:44 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/17 18:58:04 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@
 	}
 
 // to change when other checks will be implemented
-Test(map_checks, map_parsing)
+Test(map_checks, map_validity)
 {
 	int i = 0;
 	while (map_paths[i])
@@ -73,9 +73,25 @@ Test(map_checks, map_parsing)
 			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, get_map should FAIL", i);
 		else if (i == 1)
 			cr_expect_eq(ret, 0, "map[%d]: empty file, get_map should FAIL", i);
-		else
+		else if (i == 2)
 		{
 			cr_expect_eq(ret, 1, "map[%d]: get_map should generate a map & return 1", i);
+			free_map(&map);
+		}
+//THIS TEST SHOULD RETURN 0 ONCE FLOOD FILL IS DONE!
+		else if (i == 11)
+		{
+			cr_expect_eq(ret, 1, "map[%d]: get_map should generate a map & return 1", i);
+			free_map(&map);
+		}
+		else if (i == 12)
+		{
+			cr_expect_eq(ret, 1, "map[%d]: get_map should generate a map & return 1", i);
+			free_map(&map);
+		}
+		else
+		{
+			cr_expect_eq(ret, 0, "map[%d]: get_map should FAIL because of checks", i);
 			free_map(&map);
 		}
 		i++;
@@ -261,21 +277,12 @@ Test(map_checks, checks_walls)
 {
 	int i = 0;
 	int	nb_lines;
-	int ret_get_map;
 
 	while (map_paths[i])
 	{
-		ret_get_map = get_map(map_paths[i], &map);
-		if (ret_get_map == 0)
-			ret = 0;
-		else
-		{
-			nb_lines = get_nb_lines(map_paths[i]);
-			if (!nb_lines || nb_lines == 0)
-				ret = 0;
-			else
-				ret = check_external_walls(&map, nb_lines);
-		}
+	get_map(map_paths[i], &map);
+	nb_lines = get_nb_lines(map_paths[i]);
+	ret = check_external_walls(&map, nb_lines);
 		if (i == 0)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on check_walls", i);
