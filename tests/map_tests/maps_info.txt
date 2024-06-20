@@ -2,25 +2,26 @@ Think of invalid permissions,
 a map with too few columns/rows,
 or even an empty line in the middle of the map.
 
-map9:	not valid		empty file
+mapXX:	not valid		invalid_file_path
 
-map15:	not valid		invalid_file_path
+map1:	not valid		empty file
 
-map0:	valid map		1 start point + 10 collectibles + 1 exit + valid path
+map2:	valid map		1 start point + 10 collectibles + 1 exit + valid path
 
-map1:	not valid		no exit
-map2:	not valid		no collectible
-map3:	not valid		no starting position
+map3:	not valid		no exit
+map4:	not valid		no collectible
+map5:	not valid		no starting position
 
-map4:	not valid		2 starting position
-map5:	not valid		2 exits
+map6:	not valid		2 starting position
+map7:	not valid		2 exits
 
-map6:	not valid		map not rectangular
-map7:	valid			space before map
-map8:	valid			tabs before map
-map10:	valid			minimum size
-map11:	not valid		empty space in map
-map12:	not valid		unknown char in map
-map13:	not valid		not closed by walls (starting point on map limit)
+map8:	not valid		map not rectangular
+map9:	valid			space before map
+map10:	valid			tabs before map
 
-map14:	not valid		invalid_player_path
+map11:	not valid		invalid_player_path
+
+map12:	valid			minimum size
+map13:	not valid		empty space in map
+map14:	not valid		unknown char in map
+map15:	not valid		not closed by walls (starting point on map limit)

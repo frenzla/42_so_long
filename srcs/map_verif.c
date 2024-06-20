@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:15:58 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/14 19:09:50 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/17 10:40:05 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	have_collectibles(char ***map)
 	int	i;
 	int	k;
 
+	if (!(*map))
+		return (RET_ERR);
 	count_coll = 0;
 	i = 0;
 	while ((*map)[i])
@@ -73,6 +75,8 @@ int	have_one_start(char ***map)
 	int	i;
 	int	k;
 
+	if (!(*map))
+		return (RET_ERR);
 	count_start = 0;
 	i = 0;
 	while ((*map)[i])
