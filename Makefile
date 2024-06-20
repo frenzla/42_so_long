@@ -6,15 +6,16 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/12 19:23:52 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/13 18:24:02 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRCDIR = ./
+SRCDIR = ./srcs/
 SRC_FILES =		img_manager.c	\
 				player_mov.c	\
+				map_parsing.c	\
 				map_verif.c		\
 				main.c			\
 #				map_creation_tests.c	\
@@ -50,15 +51,15 @@ all : $(NAME)
 
 #insert flags when ready!
 ./%.o : ./%.c
-	$(CC) $(INCLUDES) -o $@ -c $<
+	$(CC) -g3 -ggdb3 $(INCLUDES) -o $@ -c $<
 
 $(LIBFT_FILE) :
 	make -C $(LIBFT_PATH)
 
 $(NAME) : $(OBJS) $(LIBFT_FILE)
-	$(CC) -o $@ $^ $(MLX_FLAGS) $(LIBFT_FLAGS)
+	$(CC) -g3 -ggdb3 -o $@ $^ $(MLX_FLAGS) $(LIBFT_FLAGS)
 #delete this one
-	make clean
+#	make clean
 
 clean :
 	make -C $(LIBFT_PATH) clean

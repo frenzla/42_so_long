@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/12 19:31:37 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/13 18:38:58 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
+# include <stdlib.h>
 
 // Définir les codes de couleur ANSI
 #define RED "\x1b[31m"
@@ -45,8 +46,6 @@
 
 # define WIN_WIDTH 640
 # define WIN_LENGTH 480
-
-# define NB_KEY_FUNC 4
 
 typedef struct s_img {
 	void	*img;
@@ -81,7 +80,12 @@ int		handle_input(int keysym, t_data *data);
 void	init_img_paths(char **img_paths);
 int		new_img_from_file(char **paths, t_data *data, int i);
 int		render(t_data *data);
-char	**get_map(char *map_path);
-int		parse_map(int fd, int nb_lines, char **map);
+int		get_map(char *map_path, char ***map);
+int		parse_map(int fd, int nb_lines, char ***map);
+int		free_map(char ***map);
+void	clean_quit(char ***map, t_data *data);
+int		map_is_valid(char ***map);
+int		map_path_valid(char *map_path);
+int		have_all_elements(char ***map);
 
 #endif

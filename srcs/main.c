@@ -6,25 +6,36 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/12 19:00:46 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/13 18:10:35 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	clean_quit(char ***map, t_data *data)
+{
+	if (*map)
+		free_map(map);
+	if (data->mlx)
+		free(data->mlx);
+	return ;
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
 	char	*img_paths[NB_IMAGES];
-	char 	**map;
+	char	**map;
+	int		ret;
 
+	map = NULL;
 	//check if more than 1 elements in argv
 	if (argc != 2)
 		return (ft_printf("Error\nIncorrect input. Please enter map path (only)"), 1);
 
 	//parse map
-	map = get_map(argv[1]);
-	if (!map)
+	ret = get_map(argv[1], &map);
+	if (!map || ret == RET_ERR)
 		return (1);
 
 	//initialize connection for display
