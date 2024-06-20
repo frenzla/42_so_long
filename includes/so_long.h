@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/12 18:28:24 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/12 19:31:37 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
+
+// Définir les codes de couleur ANSI
+#define RED "\x1b[31m"
+#define GREEN "\x1b[32m"
+#define YELLOW "\x1b[33m"
+#define BLUE "\x1b[34m"
+#define MAGENTA "\x1b[35m"
+#define CYAN "\x1b[36m"
+#define RESET "\x1b[0m"
 
 # define TRUE 1
 # define FALSE 0

@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/12 18:34:36 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/12 19:00:46 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 
 	//check if more than 1 elements in argv
 	if (argc != 2)
-		return (ft_printf("Error\nIncorrect input. Please enter only the map path"), 1);
+		return (ft_printf("Error\nIncorrect input. Please enter map path (only)"), 1);
 
 	//parse map
 	map = get_map(argv[1]);

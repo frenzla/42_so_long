@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/12 17:07:39 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/12 19:23:52 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,9 @@ NAME = so_long
 SRCDIR = ./
 SRC_FILES =		img_manager.c	\
 				player_mov.c	\
+				map_verif.c		\
 				main.c			\
-				map_verif.c
+#				map_creation_tests.c	\
 
 BONUSDIR = ./
 BONUS =

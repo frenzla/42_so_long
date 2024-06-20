@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:33:46 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/12 18:33:42 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/12 19:38:12 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char **get_map(char *map_path)
 		return (ft_printf("Error\nCouldn't open map: invalid path"), NULL);
 	line = get_next_line(fd);
 	if (!line)
-		return (ft_printf("Error\nMap is empty"), NULL);
+		return (close(fd), ft_printf("Error\nMap is empty"), NULL);
 	else
 		nb_lines = 1;
 	while (line)
@@ -34,7 +34,7 @@ char **get_map(char *map_path)
 		free(line);
 		line = get_next_line(fd);
 	}
-	close(fd);
+	close(fd); // tested until here
 	ret = parse_map(open(map_path, O_RDONLY), nb_lines, map);
 	if (!map_is_valid(map) || !map_path_valid(map_path) || ret == RET_ERR)
 		return (NULL);
