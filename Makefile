@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/11 13:28:32 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/11 19:06:23 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = so_long
 
 SRCDIR = ./
 SRC_FILES =		img_manager.c	\
-				events.c\
-				sandbox.c\
+				player_mov.c\
+				main.c\
 
 
 BONUSDIR = ./

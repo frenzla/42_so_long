@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:33:14 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/11 17:53:48 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/11 18:58:43 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,6 @@ void	craft_pixel_in_img(t_img *img, int x, int y, int color)
 
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
-}
-
-int	render(t_data *data)
-{
-	if (data->mlx_win != NULL)
-	{
-			mlx_put_image_to_window(data->mlx, data->mlx_win, data->img[CARROT].img, data->img[CARROT].x, data->img[CARROT].y);
-			return (0);
-	}
-	return (-1);
 }
 
 /*int	main(void)
