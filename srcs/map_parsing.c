@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:33:46 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/17 18:47:58 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/18 18:06:38 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_map(char *map_path, char ***map)
 	if (!line)
 		return (close(fd), ft_printf(RED"Error\nFile empty\n"RESET), RET_ERR);
 	else
-		nb_lines = 1;
+		nb_lines = 0;
 	while (line)
 	{
 		nb_lines++;
@@ -47,12 +47,12 @@ int	parse_map(int fd, int nb_lines, char ***map)
 	int		i;
 
 	line = NULL;
-	*map = malloc(sizeof(char *) * (nb_lines));
+	*map = malloc(sizeof(char *) * (nb_lines + 1));
 	if (!*map)
 		return (ft_printf(RED"Error\nMap couldn't be malloc\n"RESET), RET_ERR);
 	line = get_next_line(fd);
 	i = 0;
-	while (i < nb_lines - 2)
+	while (i < nb_lines - 1)
 	{
 		(*map)[i] = malloc(sizeof(char) * (ft_strlen(line)));
 		if (!((*map)[i]))

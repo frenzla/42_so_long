@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:10:42 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/17 18:32:27 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/18 20:44:05 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	check_external_walls(char ***map, int nb_lines)
 		x = 0;
 		while ((*map)[y][x])
 		{
-			if (y == 0 || y == nb_lines - 2 || x == 0 || x == len - 1)
+			if (y == 0 || y == nb_lines - 1 || x == 0 || x == len - 1)
 				if ((*map)[y][x] != '1')
 					return (ft_printf(RED"Error\n	\
 					Map should be surrounded by walls\n"RESET), RET_ERR);
@@ -77,3 +77,50 @@ int	check_external_walls(char ***map, int nb_lines)
 }
 
 //flood fill
+
+#include <unistd.h>
+
+int	position_is_valid(int y, int x, char ***map, int nb_lines)
+{
+	printf("Char = %c\n", (*map)[y][x]);
+	if (x < 1 || x > strlen((*map)[0]) - 2 || y < 0 || y > nb_lines - 2)
+		return (0);
+	if ((*map)[y][x] == '0' || (*map)[y][x] == 'E' || (*map)[y][x] == 'C')
+		return (1);
+	return (0);
+}
+
+int	there_is_a_valid_path(char ***map, int nb_lines)
+{
+
+}
+
+/*int	main(int argc, char **argv)
+{
+	char	**map;
+	int		ret;
+	int		i;
+	int		nb_lines;
+
+	map = NULL;
+	//check if more than 1 elements in argv
+	if (argc != 2)
+		return (ft_printf("Error\nIncorrect input. Please enter map path (only)"), 1);
+
+	//parse map
+	ret = get_map(argv[1], &map);
+	if (!map || ret == RET_ERR)
+		return (1);
+
+	//show map
+	nb_lines = 0;
+	while (map[nb_lines])
+		printf("%s\n", map[nb_lines++]);
+
+	printf(GREEN"NB LINES: %d\n" RESET, nb_lines);
+	printf(BLUE"Len: %ld\n" RESET, ft_strlen(map[0]));
+
+	ret = position_is_valid(1, 34, &map, nb_lines);
+	printf("ret = %d\n", ret);
+	return (0);
+}*/

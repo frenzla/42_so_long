@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:49:18 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/17 18:58:04 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/18 19:28:23 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 		if (!line)
 			return (close(fd), 0);
 		else
-			nb_lines = 1;
+			nb_lines = 0;
 		while (line)
 		{
 			nb_lines++;
@@ -281,7 +281,7 @@ Test(map_checks, checks_walls)
 	while (map_paths[i])
 	{
 	get_map(map_paths[i], &map);
-	nb_lines = get_nb_lines(map_paths[i]);
+	nb_lines = get_nb_lines(map_paths[i]); // ===>>> Function in test file (here above)
 	ret = check_external_walls(&map, nb_lines);
 		if (i == 0)
 		{
@@ -311,6 +311,37 @@ Test(map_checks, checks_walls)
 			cr_expect_eq(ret, 1, "map[%d]: valide map, it should PASS", i);
 			free_map(&map);
 		}
+		i++;
+	}
+}
+
+Test(map_checks, valid_position_for_flood_fill)
+{
+	long unsigned int i = 0;
+	int	nb_lines;
+
+	int	pos[10][2] = {
+		{0, 0},
+		{0, 1},
+		{1, 1},
+		{1, 33},
+		{1, 34},
+		{1, 35},
+		{1, 36},
+		{2, 20},
+		{2, 22},
+		{8, 1},
+	};
+
+	get_map(map_paths[2], &map);
+	nb_lines = get_nb_lines(map_paths[2]); // ===>>> Function in test file (here above)
+	while (i < sizeof(pos)/sizeof(pos[0]))
+	{
+		ret = position_is_valid(pos[i][0], pos[i][1], &map, nb_lines);
+		if (i == 0 || i == 1 || i == 5 || i == 6 || i == 7 || i == 9)
+			cr_expect_eq(ret, 0, "Position [%d, %d] (char: %c) shouldn't be valid", pos[i][0], pos[i][1], map[pos[i][0]][pos[i][1]]);
+		else if (i == 2 || i == 3 || i == 4 || i == 8)
+			cr_expect_eq(ret, 1, "Position [%d, %d] (char: %c) should be valid", pos[i][0], pos[i][1], map[pos[i][0]][pos[i][1]]);
 		i++;
 	}
 }
