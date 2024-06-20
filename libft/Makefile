@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 11:35:36 by alarose           #+#    #+#              #
-#    Updated: 2024/06/12 14:00:41 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/12 16:46:22 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,9 @@ SRC = 	ft_isalpha.c	\
 		ft_putstr_fd.c	\
 		ft_putendl_fd.c	\
 		ft_putnbr_fd.c	\
-		ft_printf.c		\
-		get_next_line.c	\
+		ft_printf.c				\
+		ft_printf_utils.c		\
+		get_next_line.c			\
 		get_next_line_utils.c	\
 		ft_lstnew_bonus.c		\
 		ft_lstadd_front_bonus.c	\

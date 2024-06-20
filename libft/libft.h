@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:31:12 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/12 14:59:49 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/12 16:38:24 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,9 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+// OTHERS
+int		ft_printf(const char *str, ...);
+char	*get_next_line(int fd);
 
 #endif
