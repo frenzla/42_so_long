@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:10:42 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/19 16:40:36 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/20 16:14:56 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,8 @@ int	position_is_valid(int y, int x, char ***map, int nb_lines)
 	return (0);
 }
 
-#include <time.h>
-
-int	there_is_a_valid_path(int y, int x, char **map, int nb_lines, int *nb_collectibles)
-{
-	char		temp;
-	static int	got_exit = 0;
-/*
+#include <time.h> // can delete this (for checks)
+/*  Add this inside there_is_a_valid_path to see filling up in real time.
 	struct timespec req;	// Define the timespec structure for sleeping half a second
 	req.tv_sec = 0;				// Seconds
 	req.tv_nsec = 100000000L;	// Nanoseconds (500 milliseconds)
@@ -107,78 +102,89 @@ int	there_is_a_valid_path(int y, int x, char **map, int nb_lines, int *nb_collec
 	while (map[i]) // delete when checks are done
 		printf("%s\n", map[i++]); // delete when checks are done
 */
-	if (!map || !nb_lines || nb_lines < 3)
+
+int	there_is_a_valid_path(int y, int x, t_data *data, char **map)
+{
+	static int	got_exit = 0;
+	static int	collec = 0;
+
+	if (!map || !data->map.height || data->map.height < 3)
 		return (ft_printf(RED"Error\nUnvalid map\n"RESET), RET_ERR);
-	if (!position_is_valid(y, x, &map, nb_lines))
+	if (!position_is_valid(y, x, &map, data->map.height))
 		return (RET_ERR);
 	if (map[y][x] == 'E')
 		got_exit = 1;
 	if (map[y][x] == 'C')
-		(*nb_collectibles)--;
-	if (got_exit && *nb_collectibles == 0)
-		return (1);
+		collec++;
+	if (got_exit && collec == data->map.nb_collectibles)
+		return (got_exit = 0, collec = 0, 1); // can delete the reset on var
 	map[y][x] = 'X';
-	if (there_is_a_valid_path(y, x + 1, map, nb_lines, nb_collectibles) || \
-		there_is_a_valid_path(y, x - 1, map, nb_lines, nb_collectibles) || \
-		there_is_a_valid_path(y + 1, x, map, nb_lines, nb_collectibles) || \
-		there_is_a_valid_path(y - 1, x, map, nb_lines, nb_collectibles))
+	if (there_is_a_valid_path(y, x + 1, data, map) || \
+		there_is_a_valid_path(y, x - 1, data, map) || \
+		there_is_a_valid_path(y + 1, x, data, map) || \
+		there_is_a_valid_path(y - 1, x, data, map))
 		return (1);
 	return (RET_ERR);
 }
-
-/*int	main(int argc, char **argv)
+/*
+int	main(int argc, char **argv)
 {
-	char	**map;
+	t_data	data;
 	int		ret;
-	int		i;
-	int		k;
 	int		nb_lines;
-	int		start_x;
-	int		start_y;
-	int		nb_collectibles;
 
-	map = NULL;
-	//check if more than 1 elements in argv
 	if (argc != 2)
 		return (ft_printf("Error\nIncorrect input. Please enter map path (only)"), 1);
 
 	//parse map
-	ret = get_map(argv[1], &map);
-	if (!map || ret == RET_ERR)
-		return (1);
+	ret = get_map(argv[1], &data);
+	if (!data.map.map_layout || ret == RET_ERR)
+		printf(RED "parsing failed OR map not valid, but here carrying on...\n" RESET);
 
-	//show map
+	//show map & info
 	nb_lines = 0;
-	while (map[nb_lines])
-		printf(BLUE"%s\n" RESET, map[nb_lines++]);
-
-	printf(GREEN"NB LINES: %d\n", nb_lines);
-	printf("Len: %ld\n" , ft_strlen(map[0]));
-
-	//get stating position coordinates
-	i = 0;
-	nb_collectibles = 0;
-	while (map[i])
-	{
-		k = 0;
-		while (map[i][k])
-		{
-			if (map[i][k] == 'P')
-			{
-				start_x = k;
-				start_y = i;
-			}
-			if (map[i][k] == 'C')
-				nb_collectibles++;
-			k++;
-		}
-		i++;
-	}
-	printf("Starting position: y = %d | x = %d\n", start_y, start_x);
-	printf("NB collectibles = %d\n" RESET, nb_collectibles);
+	while (data.map.map_layout[nb_lines])
+		printf(BLUE"%s\n" RESET, data.map.map_layout[nb_lines++]);
+	printf(GREEN "Map path = %s\n", data.map.map_path);
+	printf("Map width = %d & Map height = %d\n", data.map.width, data.map.height);
+	printf("Starting position: y = %d | x = %d\n", data.map.start_y, data.map.start_x);
+	printf("NB collectibles = %d\n" RESET, data.map.nb_collectibles);
 
 	//Flood fill
-	ret = there_is_a_valid_path(start_y, start_x, map, nb_lines, &nb_collectibles);
+	ret = there_is_a_valid_path(data.map.start_y, data.map.start_x, &data, data.map.map_layout);
 	printf("ret = %d\n", ret);
 	return (0);
-}*/
+}
+*/
+/*
+int	main(int argc, char **argv)
+{
+	int fd;
+	t_data data;
+	int ret;
+	int nb_lines;
+
+	data.map.map_path = argv[1];
+	data.map.height = get_nb_lines(argv[1]);
+
+	fd = open(argv[1], O_RDONLY);
+	ret = parse_map(fd, &data);
+	close(fd);
+
+	nb_lines = 0;
+	while (data.map.map_layout[nb_lines])
+		printf(BLUE"%s\n" RESET, data.map.map_layout[nb_lines++]);
+
+	ret = get_map_info(&data);
+
+	printf(GREEN "Map path = %s\n", data.map.map_path);
+	printf("Map width = %d & Map height = %d\n", data.map.width, data.map.height);
+	printf("Starting position: y = %d | x = %d\n", data.map.start_y, data.map.start_x);
+	printf("NB collectibles = %d\n" RESET, data.map.nb_collectibles);
+
+	nb_lines = 0;
+	while (data.map.map_layout[nb_lines])
+		printf(BLUE"%s\n" RESET, data.map.map_layout[nb_lines++]);
+
+}
+*/

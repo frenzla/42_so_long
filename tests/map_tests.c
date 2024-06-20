@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:49:18 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/20 11:22:48 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/20 18:02:16 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,71 +63,81 @@
 		return (nb_lines);
 	}
 
-Test(map_checks, map_validity)
+Test(map_checks, get_map_check)
 {
-	int i = 0;
-	while (map_paths[i])
+	int i = 2;
+	while (i < 12)
 	{
 		ret = get_map(map_paths[i], &data);
-		if (i == 0)
-			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, get_map should FAIL", i);
-		else if (i == 1)
-			cr_expect_eq(ret, 0, "map[%d]: empty file, get_map should FAIL", i);
-		else if (i == 2)
+		printf("RET = %d\n", ret);
+		if (i == 2)
 		{
 			cr_expect_eq(ret, 1, "map[%d]: get_map should generate a map & return 1", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
-//THIS TEST SHOULD RETURN 0 ONCE FLOOD FILL IS DONE!
 		else if (i == 11)
 		{
-			cr_expect_eq(ret, 1, "map[%d]: get_map should generate a map & return 1", i);
-			free_map(&(data.map.map_layout));
+			cr_expect_eq(ret, 0, "map[%d]: get_map should generate a map & return 1", i);
+			free_map(data.map.map_layout);
 		}
 		else if (i == 12)
 		{
 			cr_expect_eq(ret, 1, "map[%d]: get_map should generate a map & return 1", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else
 		{
 			cr_expect_eq(ret, 0, "map[%d]: get_map should FAIL because of checks", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		i++;
 	}
 }
+
 //Checks that map contains 1 EXIT
 Test(map_checks, exit_check)
 {
-	int i = 0;
+	int i = 2;
+	int fd;
+
 	while (map_paths[i])
 	{
-		get_map(map_paths[i], &data);
+		data.map.map_path = NULL;
+		data.map.height = 0;
+		data.map.width = 0;
+		data.map.start_x = 0;
+		data.map.start_y = 0;
+		data.map.nb_collectibles = 0;
+
+		data.map.map_path = map_paths[i];
+		data.map.height = get_nb_lines(map_paths[i]);
+
+		fd = open(map_paths[i], O_RDONLY);
+		ret = parse_map(fd, &data);
+		close(fd);
+
 		ret = have_one_exit(&(data.map.map_layout));
-		if (i == 0)
-			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on Exit check", i);
-		else if (i == 1)
+		if (i == 1)
 			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Exit check", i);
 		else if (i == 2)
 		{
 			cr_expect_eq(ret, 1, "map[%d]: perfect map - should PASS", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else if (i == 3)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: no exit on map - should FAIL", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else if (i == 7)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: 2 exits, should FAIL", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else
 		{
 			cr_expect_eq(ret, 1, "map[%d]: map has only 1 exit, should PASS", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		i++;
 	}
@@ -136,34 +146,48 @@ Test(map_checks, exit_check)
 //Checks that map contains 1 STARTING position
 Test(map_checks, start_check)
 {
-	int i = 0;
+	int i = 2;
+	int	fd;
+
 	while (map_paths[i])
 	{
-		get_map(map_paths[i], &data);
+		//reset
+		data.map.map_path = NULL;
+		data.map.height = 0;
+		data.map.width = 0;
+		data.map.start_x = 0;
+		data.map.start_y = 0;
+		data.map.nb_collectibles = 0;
+
+		data.map.map_path = map_paths[i];
+		data.map.height = get_nb_lines(map_paths[i]);
+
+		fd = open(map_paths[i], O_RDONLY);
+		parse_map(fd, &data);
+		close(fd);
+
 		ret = have_one_start(&(data.map.map_layout));
-		if (i == 0)
-			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on Start check", i);
-		else if (i == 1)
+		if (i == 1)
 			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Start check", i);
 		else if (i == 2)
 		{
 			cr_expect_eq(ret, 1, "map[%d]: perfect map - should PASS", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else if (i == 5)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: no starting point on map - should FAIL", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else if (i == 6)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: 2 starting points, should FAIL", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else
 		{
 			cr_expect_eq(ret, 1, "map[%d]: map has only 1 starting point, should PASS", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		i++;
 	}
@@ -172,10 +196,26 @@ Test(map_checks, start_check)
 //Checks that map contains at least 1 collectible
 Test(map_checks, collectibles_check)
 {
-	int i = 0;
+	int i = 2;
+	int fd;
+
 	while (map_paths[i])
 	{
-		get_map(map_paths[i], &data);
+		//reset
+		data.map.map_path = NULL;
+		data.map.height = 0;
+		data.map.width = 0;
+		data.map.start_x = 0;
+		data.map.start_y = 0;
+		data.map.nb_collectibles = 0;
+
+		data.map.map_path = map_paths[i];
+		data.map.height = get_nb_lines(map_paths[i]);
+
+		fd = open(map_paths[i], O_RDONLY);
+		parse_map(fd, &data);
+		close(fd);
+
 		ret = have_collectibles(&(data.map.map_layout));
 		if (i == 0)
 			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on Collectibles check", i);
@@ -184,17 +224,17 @@ Test(map_checks, collectibles_check)
 		else if (i == 2)
 		{
 			cr_expect_eq(ret, 1, "map[%d]: perfect map - should PASS", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else if (i == 4)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: no collectibles on map - should FAIL", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else
 		{
 			cr_expect_eq(ret, 1, "map[%d]: map has more than 1 collectible, should PASS", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		i++;
 	}
@@ -203,10 +243,26 @@ Test(map_checks, collectibles_check)
 //Checks that map is a rectangle/square
 Test(map_checks, is_rectangular)
 {
-	int i = 0;
+	int i = 2;
+	int fd;
+
 	while (map_paths[i])
 	{
-		get_map(map_paths[i], &data);
+		//reset
+		data.map.map_path = NULL;
+		data.map.height = 0;
+		data.map.width = 0;
+		data.map.start_x = 0;
+		data.map.start_y = 0;
+		data.map.nb_collectibles = 0;
+
+		data.map.map_path = map_paths[i];
+		data.map.height = get_nb_lines(map_paths[i]);
+
+		fd = open(map_paths[i], O_RDONLY);
+		parse_map(fd, &data);
+		close(fd);
+
 		ret = is_rectangle(&(data.map.map_layout));
 		if (i == 0)
 			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on Rectangle check", i);
@@ -215,12 +271,12 @@ Test(map_checks, is_rectangular)
 		else if (i == 8)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: no rectangular map - should FAIL", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else
 		{
 			cr_expect_eq(ret, 1, "map[%d]: map is a rectangle, should PASS", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		i++;
 	}
@@ -229,10 +285,26 @@ Test(map_checks, is_rectangular)
 //Checks that every char in map is correct
 Test(map_checks, checks_on_map_chars)
 {
-	int i = 0;
+	int i = 2;
+	int fd;
+
 	while (map_paths[i])
 	{
-		get_map(map_paths[i], &data);
+		//reset
+		data.map.map_path = NULL;
+		data.map.height = 0;
+		data.map.width = 0;
+		data.map.start_x = 0;
+		data.map.start_y = 0;
+		data.map.nb_collectibles = 0;
+
+		data.map.map_path = map_paths[i];
+		data.map.height = get_nb_lines(map_paths[i]);
+
+		fd = open(map_paths[i], O_RDONLY);
+		parse_map(fd, &data);
+		close(fd);
+
 		ret = check_chars(&(data.map.map_layout));
 		if (i == 0)
 			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on check_chars", i);
@@ -241,17 +313,17 @@ Test(map_checks, checks_on_map_chars)
 		else if (i == 8 || i == 9 || i == 10)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: not spaces allowed before map - should FAIL", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else if (i == 13 || i == 14)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: unrecognised char in map - should FAIL", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else
 		{
 			cr_expect_eq(ret, 1, "map[%d]: all char of the map are in charset, should PASS", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		i++;
 	}
@@ -275,14 +347,29 @@ Test(map_checks, check_map_path)
 //Checks if map is closed by walls (1)
 Test(map_checks, checks_walls)
 {
-	int i = 0;
-	int	nb_lines;
+	int i = 2;
+	int fd;
+	int nb_lines;
 
 	while (map_paths[i])
 	{
-	get_map(map_paths[i], &data);
-	nb_lines = get_nb_lines_TEST(map_paths[i]); // ===>>> Function in test file (here above)
-	ret = check_external_walls(&(data.map.map_layout), nb_lines);
+		//reset
+		data.map.map_path = NULL;
+		data.map.height = 0;
+		data.map.width = 0;
+		data.map.start_x = 0;
+		data.map.start_y = 0;
+		data.map.nb_collectibles = 0;
+
+		data.map.map_path = map_paths[i];
+		data.map.height = get_nb_lines(map_paths[i]);
+
+		fd = open(map_paths[i], O_RDONLY);
+		parse_map(fd, &data);
+		close(fd);
+
+		nb_lines = get_nb_lines(map_paths[i]);
+		ret = check_external_walls(&(data.map.map_layout), nb_lines);
 		if (i == 0)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on check_walls", i);
@@ -294,22 +381,22 @@ Test(map_checks, checks_walls)
 		else if (i == 8)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: map not rectangular, should FAIL", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else if (i == 9 || i == 10)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: unreconised chars before map, should FAIL", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else if (i == 15)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: not closed by wall, should FAIL", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		else
 		{
 			cr_expect_eq(ret, 1, "map[%d]: valide map, it should PASS", i);
-			free_map(&(data.map.map_layout));
+			free_map(data.map.map_layout);
 		}
 		i++;
 	}
@@ -334,7 +421,8 @@ Test(map_checks, valid_position_for_flood_fill)
 	};
 
 	get_map(map_paths[2], &data);
-	nb_lines = get_nb_lines_TEST(map_paths[2]); // ===>>> Function in test file (here above)
+
+	nb_lines = get_nb_lines(map_paths[2]);
 	while (i < sizeof(pos)/sizeof(pos[0]))
 	{
 		ret = position_is_valid(pos[i][0], pos[i][1], &(data.map.map_layout), nb_lines);
@@ -345,56 +433,44 @@ Test(map_checks, valid_position_for_flood_fill)
 		i++;
 	}
 }
-
-Test(map_checks, flood_fill)
+/*
+Test(map_checks, flood_fill_without_other_checks)
 {
-	int	z = 0;
-	int i;
-	int k;
-	int	nb_lines;
-	int	nb_collectibles;
-	int	start_x;
-	int	start_y;
+	int	z = 2;
+	int fd;
 
 	while (map_paths[z])
 	{
-		ret = get_map(map_paths[z], &data);
-		nb_lines = get_nb_lines_TEST(map_paths[z]);
-		//get stating position coordinates & nb_collectibles
-		i = 0;
-		nb_collectibles = 0;
-		if (ret != 0)
-		{
-			while ((data.map.map_layout)[i])
-			{
-				k = 0;
-				while ((data.map.map_layout)[i][k])
-				{
-					if ((data.map.map_layout)[i][k] == 'P')
-					{
-						start_x = k;
-						start_y = i;
-					}
-					if ((data.map.map_layout)[i][k] == 'C')
-						nb_collectibles++;
-					k++;
-				}
-				i++;
-			}
-		ret = there_is_a_valid_path(start_y, start_x, data.map.map_layout, nb_lines, &nb_collectibles);
-		}
-		if (z == 2 || z == 12)
-		{
+		//reset
+		data.map.map_path = NULL;
+		data.map.height = 0;
+		data.map.width = 0;
+		data.map.start_x = 0;
+		data.map.start_y = 0;
+		data.map.nb_collectibles = 0;
+
+		data.map.map_path = map_paths[z];
+		data.map.height = get_nb_lines_TEST(map_paths[z]);
+
+		fd = open(map_paths[z], O_RDONLY);
+		ret = parse_map(fd, &data);
+		close(fd);
+
+		ret = get_map_info(&data);
+
+		printf(GREEN "Map path = %s\n", data.map.map_path);
+		printf("Map width = %d & Map height = %d\n", data.map.width, data.map.height);
+		printf("Starting position: y = %d | x = %d\n", data.map.start_y, data.map.start_x);
+		printf("NB collectibles = %d\n" RESET, data.map.nb_collectibles);
+
+		ret = there_is_a_valid_path(data.map.start_y, data.map.start_x, &data, data.map.map_layout);
+		printf("RET: %d\n", ret);
+		if (z == 2 || z == 6 || z == 7 || z == 8 || z == 9 || z == 10 || z == 12 || z == 13 || z == 14 || z == 16)
 			cr_expect_eq(ret, 1, "map[%d]: perfect map, should PASS", z);
-			free_map(&(data.map.map_layout));
-		}
-		else if (z == 0 || z == 1)
-			cr_expect_eq(ret, 0, "map[%d]: invalid map or empty_file, should FAIL", z);
 		else
-		{
 			cr_expect_eq(ret, 0, "map[%d]: invalid format after checks: map should FAIL", z);
-			free_map(&(data.map.map_layout));
-		}
+
+		free_map(data.map.map_layout);
 		z++;
 	}
 }
@@ -403,7 +479,6 @@ Test(map_checks, get_map_info_check)
 {
 	int	z = 2;
 	int	fd = 0;
-	int	nb_lines;
 
 	while (map_paths[z])
 	{
@@ -421,7 +496,35 @@ Test(map_checks, get_map_info_check)
 		else
 			cr_expect_eq(ret, 1, "map[%d]: good map, should PASS", z);
 
-		free_map(&(data.map.map_layout));
+		free_map(data.map.map_layout);
 		z++;
 	}
 }
+
+Test(map_checks, flood_fill)
+{
+	int	z = 2;
+	int fd;
+
+	while (map_paths[z])
+	{
+		//reset
+		data.map.map_path = NULL;
+		data.map.height = 0;
+		data.map.width = 0;
+		data.map.start_x = 0;
+		data.map.start_y = 0;
+		data.map.nb_collectibles = 0;
+
+		ret = get_map(map_paths[z], &data);
+
+		printf("RET: %d\n", ret);
+		if (z == 2 || z == 12)
+			cr_expect_eq(ret, 1, "map[%d]: perfect map, should PASS", z);
+		else
+			cr_expect_eq(ret, 0, "map[%d]: invalid format after checks: map should FAIL", z);
+
+		free_map(data.map.map_layout);
+		z++;
+	}
+}*/

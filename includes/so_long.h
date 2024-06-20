@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/20 10:17:11 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/20 16:15:26 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int		new_img_from_file(char **paths, t_data *data, int i);
 int		render(t_data *data);
 int		get_map(char *map_path, t_data *data);
 int		parse_map(int fd, t_data *data);
-int		free_map(char ***map);
+void		free_map(char **map);
 void	clean_quit(char ***map, t_data *data);
 int		map_is_valid(char ***map, int nb_lines);
 int		map_path_valid(char *map_path);
@@ -108,8 +108,9 @@ int		check_chars(char ***map);
 int		is_rectangle(char ***map);
 int		check_external_walls(char ***map, int nb_lines);
 int		position_is_valid(int x, int y, char ***map, int nb_lines);
-int		there_is_a_valid_path(int y, int x, char **map, int nb_lines, int *nb_collectibles);
+int		there_is_a_valid_path(int y, int x, t_data *data, char **map);
 int		get_nb_lines(char *map_path);
 int		get_map_info(t_data *data);
+char	**copy_map(char **map, int height);
 
 #endif

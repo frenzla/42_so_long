@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 09:52:20 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/20 11:15:37 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/20 17:59:08 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,46 @@ int	get_map_info(t_data *data)
 		!data->map.nb_collectibles)
 		return (RET_ERR);
 	return (1);
+}
+
+char **copy_map(char **map, int height)
+{
+	int	i;
+	char **new_map;
+
+	new_map = malloc(sizeof(char *) * height + 1);
+	if (!new_map)
+		return (RET_ERR);
+	i = 0;
+	while (map[i])
+	{
+		new_map[i] = strdup(map[i]);
+		if (!new_map[i])
+		{
+			while (--i >= 0)
+				free(new_map[i]);
+			free(new_map);
+			return (RET_ERR);
+		}
+		i++;
+	}
+	new_map[i] = 0;
+	return (new_map);
+}
+
+void free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		map[i] = NULL;
+		i++;
+	}
+	free(map);
+	map = NULL;
 }
 
 /*int	main(int argc, char **argv)
