@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/19 17:08:22 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/19 18:49:24 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	clean_quit(char ***map, t_data *data)
 		free(data->mlx);
 	return ;
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -73,3 +73,4 @@ int	main(int argc, char **argv)
 
 	return (0);
 }
+*/
