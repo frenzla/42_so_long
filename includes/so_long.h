@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/14 18:38:14 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/17 14:41:55 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,9 @@ int		have_all_elements(char ***map);
 int		have_one_exit(char ***map);
 int		have_collectibles(char ***map);
 int		have_one_start(char ***map);
+int		is_in_charset(char c);
+int		check_chars(char ***map);
+int		is_rectangle(char ***map);
+int		map_path_valid(char *map_path);
 
 #endif

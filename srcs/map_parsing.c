@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:33:46 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/17 10:25:57 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:25:30 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	get_map(char *map_path, char ***map)
 
 	fd = open(map_path, O_RDONLY);
 	if (fd < 1)
-		return (ft_printf(RED"Error\nNo such file or directory: %s\n"RESET), strerror(errno), RET_ERR);
+		return (ft_printf(RED"Error\n	\
+			No such file or directory: %s\n"RESET), strerror(errno), RET_ERR);
 	line = get_next_line(fd);
 	if (!line)
 		return (close(fd), ft_printf(RED"Error\nFile empty\n"RESET), RET_ERR);
@@ -40,7 +41,7 @@ int	get_map(char *map_path, char ***map)
 	return (1);
 }
 
-int parse_map(int fd, int nb_lines, char ***map)
+int	parse_map(int fd, int nb_lines, char ***map)
 {
 	char	*line;
 	int		i;
@@ -55,7 +56,8 @@ int parse_map(int fd, int nb_lines, char ***map)
 	{
 		(*map)[i] = malloc(sizeof(char) * (ft_strlen(line)));
 		if (!((*map)[i]))
-			return (ft_printf(RED"Error\nLine in Map couldn't be malloc\n"RESET), RET_ERR);
+			return (ft_printf(RED"Error\n	\
+				Line in Map couldn't be malloc\n"RESET), RET_ERR);
 		ft_strlcpy(((*map)[i]), line, ft_strlen(line));
 		i++;
 		free(line);

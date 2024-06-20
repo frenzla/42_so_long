@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 09:31:06 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/13 18:37:44 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:28:07 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 int	handle_input(int keysym, t_data *data)
 {
-	static int			NB_moves = 0;
-	int					i;
-	keycode_f_mapping	f_table[] = {
-		{XK_Right, go_right},
-		{XK_d, go_right},
-		{XK_Left, go_left},
-		{XK_a, go_left},
-		{XK_Up, go_up},
-		{XK_w, go_up},
-		{XK_Down, go_down},
-		{XK_s, go_down}
+	static int				nb_moves = 0;
+	int						i;
+	const keycode_f_mapping	f_table[] = {
+	{XK_Right, go_right},
+	{XK_d, go_right},
+	{XK_Left, go_left},
+	{XK_a, go_left},
+	{XK_Up, go_up},
+	{XK_w, go_up},
+	{XK_Down, go_down},
+	{XK_s, go_down}
 	};
 
 	i = 0;
-	while (i < (sizeof(f_table)/sizeof(f_table[0])))
+	while (i < (sizeof(f_table) / sizeof(f_table[0])))
 	{
 		if (f_table[i].keycode == keysym)
 		{
 			f_table[i].func(&(data->img[CARROT]));
-			ft_printf("Move number %d\n", ++NB_moves);
+			ft_printf("Move number %d\n", ++nb_moves);
 			return (0);
 		}
 		i++;

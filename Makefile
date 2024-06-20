@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/17 08:58:07 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/17 15:17:57 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC_FILES =		img_manager.c	\
 				map_parsing.c	\
 				map_verif.c		\
 				main.c			\
-#				map_creation_tests.c	\
+				map_verif_2.c	\
 
 BONUSDIR = ./
 BONUS =
@@ -76,7 +76,7 @@ re : fclean all
 re_test : fclean test
 
 $(TESTDIR)/%.o : $(TESTDIR)/%.c
-	$(CC) $(INCLUDES) $< $(OBJS) -g3 -ggdb3 -o $@ $(MLX_FLAGS) $(LIBFT_FLAGS) -I$(HOME)/Criterion/include/criterion -Wl,-rpath=$(HOME)/Criterion/build/src -L$(HOME)/Criterion/build/src -W -lcriterion --verbose
+	$(CC) $(INCLUDES) $< $(OBJS) -g3 -ggdb3 -o $@ $(MLX_FLAGS) $(LIBFT_FLAGS) -I$(HOME)/Criterion/include/criterion -Wl,-rpath=$(HOME)/Criterion/build/src -L$(HOME)/Criterion/build/src -W -lcriterion
 
 test: $(OBJS) $(LIBFT_FILE) $(TESTBINS)
 	for test in $(TESTBINS) ; do ./$$test ; done

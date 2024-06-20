@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:49:18 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/17 10:46:33 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:11:24 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map13.ber",
 		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map14.ber",
 		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map15.ber",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map16.pue",
 		NULL
 	};
 	int	ret;
@@ -135,9 +136,9 @@ Test(map_checks, collectibles_check)
 		get_map(map_paths[i], &map);
 		ret = have_collectibles(&map);
 		if (i == 0)
-			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Start check", i);
+			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Collectibles check", i);
 		else if (i == 1)
-			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on Start check", i);
+			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on Collectibles check", i);
 		else if (i == 2)
 		{
 			cr_expect_eq(ret, 1, "map[%d]: perfect map - should PASS", i);
@@ -153,6 +154,78 @@ Test(map_checks, collectibles_check)
 			cr_expect_eq(ret, 1, "map[%d]: map has more than 1 collectible, should PASS", i);
 			free_map(&map);
 		}
+		i++;
+	}
+}
+
+//Checks that map is a rectangle/square
+Test(map_checks, is_rectangular)
+{
+	int i = 0;
+	while (map_paths[i])
+	{
+		get_map(map_paths[i], &map);
+		ret = is_rectangle(&map);
+		if (i == 0)
+			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Rectangle check", i);
+		else if (i == 1)
+			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on Rectangle check", i);
+		else if (i == 8)
+		{
+			cr_expect_eq(ret, 0, "map[%d]: no rectangular map - should FAIL", i);
+			free_map(&map);
+		}
+		else
+		{
+			cr_expect_eq(ret, 1, "map[%d]: map is a rectangle, should PASS", i);
+			free_map(&map);
+		}
+		i++;
+	}
+}
+
+//Checks that every char in map is correct
+Test(map_checks, checks_on_map_chars)
+{
+	int i = 0;
+	while (map_paths[i])
+	{
+		get_map(map_paths[i], &map);
+		ret = check_chars(&map);
+		if (i == 0)
+			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on check_chars", i);
+		else if (i == 1)
+			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on check_chars", i);
+		else if (i == 8 || i == 9 || i == 10)
+		{
+			cr_expect_eq(ret, 0, "map[%d]: not spaces allowed before map - should FAIL", i);
+			free_map(&map);
+		}
+		else if (i == 13 || i == 14)
+		{
+			cr_expect_eq(ret, 0, "map[%d]: unrecognised char in map - should FAIL", i);
+			free_map(&map);
+		}
+		else
+		{
+			cr_expect_eq(ret, 1, "map[%d]: all char of the map are in charset, should PASS", i);
+			free_map(&map);
+		}
+		i++;
+	}
+}
+
+//Checks that map path end with ".ber"
+Test(map_checks, check_map_path)
+{
+	int i = 0;
+	while (map_paths[i])
+	{
+		ret = map_path_valid(map_paths[i]);
+		if (i == 16)
+			cr_expect_eq(ret, 0, "map[%d]: map path doesn't end with .ber, should FAIL", i);
+		else
+			cr_expect_eq(ret, 1, "map[%d]: map path ends with .ber, should PASS", i);
 		i++;
 	}
 }
