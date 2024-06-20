@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:10:42 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/19 16:30:28 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:40:36 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int	there_is_a_valid_path(int y, int x, char **map, int nb_lines, int *nb_collec
 	return (RET_ERR);
 }
 
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	char	**map;
 	int		ret;
@@ -181,4 +181,4 @@ int	main(int argc, char **argv)
 	ret = there_is_a_valid_path(start_y, start_x, map, nb_lines, &nb_collectibles);
 	printf("ret = %d\n", ret);
 	return (0);
-}
+}*/

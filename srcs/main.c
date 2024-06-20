@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/17 13:27:06 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:08:22 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,28 @@ void	clean_quit(char ***map, t_data *data)
 	return ;
 }
 
-/*int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 	char	*img_paths[NB_IMAGES];
-	char	**map;
 	int		ret;
 
-	map = NULL;
 	//check if more than 1 elements in argv
 	if (argc != 2)
 		return (ft_printf("Error\nIncorrect input. Please enter map path (only)"), 1);
 
 	//parse map
-	ret = get_map(argv[1], &map);
-	if (!map || ret == RET_ERR)
+	ret = get_map(argv[1], &data);
+	if (!data.map.map_layout)
+	{
+		printf("No working: can't find data.map.map_layout\n");
 		return (1);
+	}
+	if (ret == RET_ERR)
+	{
+		printf("get_map doesn't work\n");
+		return (1);
+	}
 
 	printf("ret: %d\n", ret);
 	//initialize connection for display
@@ -66,4 +72,4 @@ void	clean_quit(char ***map, t_data *data)
 	free(data.mlx);
 
 	return (0);
-}*/
+}

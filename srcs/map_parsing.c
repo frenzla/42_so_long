@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:33:46 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/19 11:03:44 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:20:40 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,53 +36,52 @@ int	get_nb_lines(char *map_path)
 	return (nb_lines);
 }
 
-int	get_map(char *map_path, char ***map)
+int	get_map(char *map_path, t_data *data)
 {
 	int		fd;
 	char	*line;
-	int		nb_lines;
 	int		ret;
 
-	nb_lines = get_nb_lines(map_path);
-	if (nb_lines == RET_ERR)
+	data->map.height = get_nb_lines(map_path);
+	if (data->map.height == RET_ERR)
 		return (RET_ERR);
 	fd = open(map_path, O_RDONLY);
 	if (fd < 1)
 		return (ft_printf(RED"Error\nCouldn't open file" RESET), RET_ERR);
-	ret = parse_map(fd, nb_lines, map);
+	ret = parse_map(fd, data);
 	close(fd);
-	if (!map_is_valid(map, nb_lines) || !map_path_valid(map_path) || \
-		ret == RET_ERR)
+	if (!map_is_valid(&(data->map.map_layout), data->map.height) ||	\
+		!map_path_valid(map_path) || ret == RET_ERR) // here
 		return (RET_ERR);
 	return (1);
 }
 
-int	parse_map(int fd, int nb_lines, char ***map)
+int	parse_map(int fd, t_data *data)
 {
 	char	*line;
 	int		i;
 
-	*map = malloc(sizeof(char *) * (nb_lines + 1));
-	if (!*map)
+	data->map.map_layout = malloc(sizeof(char *) * (data->map.height + 1));
+	if (!data->map.map_layout)
 		return (close(fd), ft_printf(RED"Error\n	\
 		Map couldn't be malloc\n"RESET), RET_ERR);
 	line = get_next_line(fd);
 	i = 0;
-	while (i < nb_lines - 1)
+	while (i < data->map.height - 1)
 	{
-		(*map)[i] = malloc(sizeof(char) * (ft_strlen(line)));
-		if (!((*map)[i]))
+		(data->map.map_layout)[i] = malloc(sizeof(char) * (ft_strlen(line)));
+		if (!((data->map.map_layout)[i]))
 			return (close(fd), ft_printf(RED"Error\n	\
 				Line in Map couldn't be malloc\n"RESET), RET_ERR);
-		ft_strlcpy(((*map)[i]), line, ft_strlen(line));
+		ft_strlcpy((data->map.map_layout)[i], line, ft_strlen(line));
 		i++;
 		free(line);
 		line = get_next_line(fd);
 	}
-	(*map)[i] = malloc(sizeof(char) * (ft_strlen(line) + 1));
-	ft_strlcpy(((*map)[i]), line, ft_strlen(line) + 1);
+	(data->map.map_layout)[i] = malloc(sizeof(char) * (ft_strlen(line) + 1));
+	ft_strlcpy((data->map.map_layout)[i], line, ft_strlen(line) + 1);
 	free(line);
-	(*map)[++i] = 0;
+	(data->map.map_layout)[++i] = 0;
 	return (1);
 }
 

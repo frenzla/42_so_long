@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/19 15:17:30 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:07:57 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,20 +93,18 @@ int		handle_input(int keysym, t_data *data);
 void	init_img_paths(char **img_paths);
 int		new_img_from_file(char **paths, t_data *data, int i);
 int		render(t_data *data);
-int		get_map(char *map_path, char ***map);
-int		parse_map(int fd, int nb_lines, char ***map);
+int		get_map(char *map_path, t_data *data);
+int		parse_map(int fd, t_data *data);
 int		free_map(char ***map);
 void	clean_quit(char ***map, t_data *data);
 int		map_is_valid(char ***map, int nb_lines);
 int		map_path_valid(char *map_path);
-int		have_all_elements(char ***map);
 int		have_one_exit(char ***map);
 int		have_collectibles(char ***map);
 int		have_one_start(char ***map);
 int		is_in_charset(char c);
 int		check_chars(char ***map);
 int		is_rectangle(char ***map);
-int		map_path_valid(char *map_path);
 int		check_external_walls(char ***map, int nb_lines);
 int		position_is_valid(int x, int y, char ***map, int nb_lines);
 int		there_is_a_valid_path(int y, int x, char **map, int nb_lines, int *nb_collectibles);
