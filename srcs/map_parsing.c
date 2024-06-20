@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:33:46 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/17 15:25:30 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/17 16:34:08 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int	get_map(char *map_path, char ***map)
 
 	fd = open(map_path, O_RDONLY);
 	if (fd < 1)
-		return (ft_printf(RED"Error\n	\
-			No such file or directory: %s\n"RESET), strerror(errno), RET_ERR);
+		return (ft_printf(RED"Error\nCouldn't open file" RESET), RET_ERR);
 	line = get_next_line(fd);
 	if (!line)
 		return (close(fd), ft_printf(RED"Error\nFile empty\n"RESET), RET_ERR);

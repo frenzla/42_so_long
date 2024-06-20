@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/17 14:41:55 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/17 17:12:15 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ int		is_in_charset(char c);
 int		check_chars(char ***map);
 int		is_rectangle(char ***map);
 int		map_path_valid(char *map_path);
+int		check_external_walls(char ***map, int nb_lines);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:49:18 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/17 15:11:24 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/17 18:31:44 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,32 @@
 	};
 	int	ret;
 
+
+	int	get_nb_lines(char *map_path)
+	{
+		int		fd;
+		char	*line;
+		int		nb_lines;
+		int		ret;
+
+		fd = open(map_path, O_RDONLY);
+		if (fd < 1)
+			return (0);
+		line = get_next_line(fd);
+		if (!line)
+			return (close(fd), 0);
+		else
+			nb_lines = 1;
+		while (line)
+		{
+			nb_lines++;
+			free(line);
+			line = get_next_line(fd);
+		}
+		close(fd);
+		return (nb_lines);
+	}
+
 // to change when other checks will be implemented
 Test(map_checks, map_parsing)
 {
@@ -64,9 +90,9 @@ Test(map_checks, exit_check)
 		get_map(map_paths[i], &map);
 		ret = have_one_exit(&map);
 		if (i == 0)
-			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Exit check", i);
-		else if (i == 1)
 			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on Exit check", i);
+		else if (i == 1)
+			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Exit check", i);
 		else if (i == 2)
 		{
 			cr_expect_eq(ret, 1, "map[%d]: perfect map - should PASS", i);
@@ -100,9 +126,9 @@ Test(map_checks, start_check)
 		get_map(map_paths[i], &map);
 		ret = have_one_start(&map);
 		if (i == 0)
-			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Start check", i);
-		else if (i == 1)
 			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on Start check", i);
+		else if (i == 1)
+			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Start check", i);
 		else if (i == 2)
 		{
 			cr_expect_eq(ret, 1, "map[%d]: perfect map - should PASS", i);
@@ -136,9 +162,9 @@ Test(map_checks, collectibles_check)
 		get_map(map_paths[i], &map);
 		ret = have_collectibles(&map);
 		if (i == 0)
-			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Collectibles check", i);
-		else if (i == 1)
 			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on Collectibles check", i);
+		else if (i == 1)
+			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Collectibles check", i);
 		else if (i == 2)
 		{
 			cr_expect_eq(ret, 1, "map[%d]: perfect map - should PASS", i);
@@ -167,9 +193,9 @@ Test(map_checks, is_rectangular)
 		get_map(map_paths[i], &map);
 		ret = is_rectangle(&map);
 		if (i == 0)
-			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Rectangle check", i);
-		else if (i == 1)
 			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on Rectangle check", i);
+		else if (i == 1)
+			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Rectangle check", i);
 		else if (i == 8)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: no rectangular map - should FAIL", i);
@@ -193,9 +219,9 @@ Test(map_checks, checks_on_map_chars)
 		get_map(map_paths[i], &map);
 		ret = check_chars(&map);
 		if (i == 0)
-			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on check_chars", i);
-		else if (i == 1)
 			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on check_chars", i);
+		else if (i == 1)
+			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on check_chars", i);
 		else if (i == 8 || i == 9 || i == 10)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: not spaces allowed before map - should FAIL", i);
@@ -226,6 +252,58 @@ Test(map_checks, check_map_path)
 			cr_expect_eq(ret, 0, "map[%d]: map path doesn't end with .ber, should FAIL", i);
 		else
 			cr_expect_eq(ret, 1, "map[%d]: map path ends with .ber, should PASS", i);
+		i++;
+	}
+}
+
+//Checks if map is closed by walls (1)
+Test(map_checks, checks_walls)
+{
+	int i = 0;
+	int	nb_lines;
+	int ret_get_map;
+
+	while (map_paths[i])
+	{
+		ret_get_map = get_map(map_paths[i], &map);
+		if (ret_get_map == 0)
+			ret = 0;
+		else
+		{
+			nb_lines = get_nb_lines(map_paths[i]);
+			if (!nb_lines || nb_lines == 0)
+				ret = 0;
+			else
+				ret = check_external_walls(&map, nb_lines);
+		}
+		if (i == 0)
+		{
+			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on check_walls", i);
+		}
+		else if (i == 1)
+		{
+			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on check_walls", i);
+		}
+		else if (i == 8)
+		{
+			cr_expect_eq(ret, 0, "map[%d]: map not rectangular, should FAIL", i);
+			free_map(&map);
+		}
+		else if (i == 9 || i == 10)
+		{
+			cr_expect_eq(ret, 0, "map[%d]: unreconised chars before map, should FAIL", i);
+			free_map(&map);
+		}
+		else if (i == 15)
+		{
+			cr_expect_eq(ret, 0, "map[%d]: not closed by wall, should FAIL", i);
+			free_map(&map);
+		}
+		else
+		{
+			cr_expect_eq(ret, 1, "map[%d]: valide map, it should PASS", i);
+			free_map(&map);
+		}
 		i++;
 	}
 }

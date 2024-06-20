@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:10:42 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/17 15:23:50 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/17 18:32:27 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,32 @@ int	is_in_charset(char c)
 		i++;
 	}
 	return (RET_ERR);
+}
+
+int	check_external_walls(char ***map, int nb_lines)
+{
+	int	x;
+	int	y;
+	int	len;
+
+	if (!(*map) || !nb_lines || nb_lines < 3)
+		return (ft_printf(RED"Error\nUnvalid map\n"RESET), RET_ERR);
+	y = 0;
+	len = ft_strlen((*map)[y]);
+	while ((*map)[y])
+	{
+		x = 0;
+		while ((*map)[y][x])
+		{
+			if (y == 0 || y == nb_lines - 2 || x == 0 || x == len - 1)
+				if ((*map)[y][x] != '1')
+					return (ft_printf(RED"Error\n	\
+					Map should be surrounded by walls\n"RESET), RET_ERR);
+			x++;
+		}
+		y++;
+	}
+	return (1);
 }
 
 //flood fill
