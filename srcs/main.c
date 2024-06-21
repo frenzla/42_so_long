@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/21 15:13:22 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/21 17:47:17 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ int	main(int argc, char **argv)
 	if (ret == RET_ERR)
 		return (1);
 
-	printf("ret: %d\n", ret);
-
-/*	nb_lines = 0;
-	while (data.map.map_layout[nb_lines])
-		printf(BLUE"%s\n" RESET, data.map.map_layout[nb_lines++]);*/
-
 	//initialize connection for display
 	data.mlx = mlx_init();
 	if (!data.mlx)
@@ -56,7 +50,7 @@ int	main(int argc, char **argv)
 	if (ret == RET_ERR)
 		return (free(data.mlx), 1); // add free & destro windows
 
-//print imgs attributes
+/*//print imgs attributes
 	int	i;
 	while (i < NB_IMAGES)
 	{
@@ -70,13 +64,13 @@ x: %d | \
 y: %d | \
 map_code: %c\n", data.img[i].bits_per_pixel, data.img[i].line_length, data.img[i].endian, data.img[i].width, data.img[i].height, data.img[i].x, data.img[i].y, data.img[i].map_code);
 		i++;
-	}
+	}*/
 
 	//Register key
-	mlx_hook(data.mlx_win, KeyPress, KeyPressMask,
-	handle_input, &data);
+	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, handle_input, &data);
 
-	mlx_loop_hook(data.mlx, render, &data);
+	//mlx_loop_hook(data.mlx, render, &data);
+	render_map(&data);
 
 	//Rendering
 	mlx_loop(data.mlx);
