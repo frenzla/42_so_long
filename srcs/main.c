@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/21 17:47:17 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/21 18:28:41 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,14 @@ int	main(int argc, char **argv)
 	if (ret == RET_ERR)
 		return (free(data.mlx), 1); // add free & destro windows
 
-/*//print imgs attributes
-	int	i;
-	while (i < NB_IMAGES)
-	{
-		printf("\
-bits_per_pixel: %d | \
-line_length: %d | \
-endian: %d | \
-width: %d | \
-height: %d | \
-x: %d | \
-y: %d | \
-map_code: %c\n", data.img[i].bits_per_pixel, data.img[i].line_length, data.img[i].endian, data.img[i].width, data.img[i].height, data.img[i].x, data.img[i].y, data.img[i].map_code);
-		i++;
-	}*/
+	printf("map width = %d | map height = %d\n", data.map.width, data.map.height);
 
 	//Register key
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, handle_input, &data);
 
 	//mlx_loop_hook(data.mlx, render, &data);
 	render_map(&data);
+	printf("player X = %d | player Y = %d\n", data.img[PLAYER].x , data.img[PLAYER].y);
 
 	//Rendering
 	mlx_loop(data.mlx);

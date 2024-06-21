@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/21 15:20:46 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/21 18:50:45 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,17 @@ typedef struct s_data {
 	t_map	map;
 }	t_data;
 
-typedef void (*keystroke_func)(t_img*);
+typedef int (*keystroke_func)(t_data *data, int i_img);
 
 typedef struct {
 	unsigned int	keycode;
 	keystroke_func	func;
 } keycode_f_mapping;
 
-void	go_right(t_img *img);
-void	go_left(t_img *img);
-void	go_up(t_img *img);
-void	go_down(t_img *img);
+int		go_right(t_data *data, int i_img);
+int		go_left(t_data *data, int i_img);
+int		go_up(t_data *data, int i_img);
+int		go_down(t_data *data, int i_img);
 int		handle_input(int keysym, t_data *data);
 int		init_imgs(char **img_paths, t_data *data);
 int		new_img_from_file(char *path, t_data *data, int i);

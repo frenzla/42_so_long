@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 09:52:20 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/21 17:47:56 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/21 18:31:17 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	render_map(t_data *data)
 {
 	int		i;
 	int		k;
-	int		j;
+	int		i_img;
 
 	i = 0;
 	while (data->map.map_layout[i])
@@ -93,15 +93,15 @@ void	render_map(t_data *data)
 		k = 0;
 		while (data->map.map_layout[i][k])
 		{
-			j = 0;
-			while (j < NB_IMAGES)
+			i_img = 0;
+			while (i_img < NB_IMAGES)
 			{
-				if (data->map.map_layout[i][k] == data->img[j].map_code)
+				if (data->map.map_layout[i][k] == data->img[i_img].map_code)
 				{
-					set_img_position(data, j, k*TILE_SIZE, i*TILE_SIZE);
-					mlx_put_image_to_window(data->mlx, data->mlx_win, data->img[j].img, data->img[j].x, data->img[j].y);
+					set_img_position(data, i_img, k, i);
+					mlx_put_image_to_window(data->mlx, data->mlx_win, data->img[i_img].img, data->img[i_img].x * TILE_SIZE, data->img[i_img].y * TILE_SIZE);
 				}
-				j++;
+				i_img++;
 			}
 			k++;
 		}

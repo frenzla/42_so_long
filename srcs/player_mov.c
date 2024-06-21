@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 09:31:06 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/21 11:39:39 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/21 18:51:18 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	handle_input(int keysym, t_data *data)
 	{
 		if (f_table[i].keycode == keysym)
 		{
-			f_table[i].func(&(data->img[PLAYER]));
-			ft_printf("Move number %d\n", ++nb_moves);
+			nb_moves += f_table[i].func(data, PLAYER);
+			ft_printf("Move number %d\n", nb_moves);
 			return (0);
 		}
 		i++;
@@ -41,22 +41,38 @@ int	handle_input(int keysym, t_data *data)
 	return (ft_printf("Unknown keystroke: 0x%x\n", keysym), -1);
 }
 
-void	go_right(t_img *img)
+int	go_right(t_data *data, int i_img)
 {
-	img->x += TILE_SIZE;
+	if (data->map.map_layout[data->img[i_img].y][data->img[i_img].x + 1] == '1')
+		return (0);
+	(data->img[i_img].x)++;
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img[i_img].img, data->img[i_img].x * TILE_SIZE, data->img[i_img].y * TILE_SIZE);
+	return (1);
 }
 
-void	go_left(t_img *img)
+int	go_left(t_data *data, int i_img)
 {
-	img->x -= TILE_SIZE;
+	if (data->map.map_layout[data->img[i_img].y][data->img[i_img].x - 1] == '1')
+		return (0);
+	(data->img[i_img].x)--;
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img[i_img].img, data->img[i_img].x * TILE_SIZE, data->img[i_img].y * TILE_SIZE);
+	return (1);
 }
 
-void	go_up(t_img *img)
+int	go_up(t_data *data, int i_img)
 {
-	img->y -= TILE_SIZE;
+	if (data->map.map_layout[data->img[i_img].y - 1][data->img[i_img].x] == '1')
+		return (0);
+	(data->img[i_img].y)--;
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img[i_img].img, data->img[i_img].x * TILE_SIZE, data->img[i_img].y * TILE_SIZE);
+	return (1);
 }
 
-void	go_down(t_img *img)
+int	go_down(t_data *data, int i_img)
 {
-	img->y += TILE_SIZE;
+	if (data->map.map_layout[data->img[i_img].y + 1][data->img[i_img].x] == '1')
+		return (0);
+	(data->img[i_img].y)++;
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img[i_img].img, data->img[i_img].x * TILE_SIZE, data->img[i_img].y * TILE_SIZE);
+	return (1);
 }
