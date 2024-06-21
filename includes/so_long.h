@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/20 18:36:45 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/21 13:24:18 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,22 @@
 # define TRUE 1
 # define FALSE 0
 # define RET_ERR 0
-# define TILE_SIZE 20
+# define TILE_SIZE 32
 
 # define MAP_PATH "./maps/mapOK.ber"
 
-# define NB_IMAGES 2
-# define SQUARE 0	//No path
-# define SQUARE_PATH ""	//No path
-# define CARROT 1
-# define CARROT_PATH "./assets/carrot.xpm"
+# define NB_IMAGES 4
+# define WALL 0
+# define WALL_PATH "./assets/tree_on_grass.xpm"
+# define COLL 1
+# define COLL_PATH "./assets/carrot_on_grass.xpm"
+# define EXIT 2
+# define EXIT_PATH "./assets/exit_on_grass.xpm"
+# define PLAYER 3
+# define PLAYER_PATH "./assets/player_on_grass.xpm"
 
 # define WIN_WIDTH 640
-# define WIN_LENGTH 480
+# define WIN_HEIGHT 480
 
 typedef struct s_img {
 	void	*img;
@@ -91,12 +95,13 @@ void	go_left(t_img *img);
 void	go_up(t_img *img);
 void	go_down(t_img *img);
 int		handle_input(int keysym, t_data *data);
-void	init_img_paths(char **img_paths);
-int		new_img_from_file(char **paths, t_data *data, int i);
+int		init_imgs(char **img_paths, t_data *data);
+int		new_img_from_file(char *path, t_data *data, int i);
+int		set_img_position(t_data *data, int i, int x, int y);
 int		render(t_data *data);
 int		get_map(char *map_path, t_data *data);
 int		parse_map(int fd, t_data *data);
-void		free_map(char **map);
+void	free_map(char **map);
 void	clean_quit(char ***map, t_data *data);
 int		map_is_valid(char ***map, int nb_lines);
 int		map_path_valid(char *map_path);

@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 09:52:20 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/20 17:59:08 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/21 09:01:33 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,31 +81,3 @@ void free_map(char **map)
 	map = NULL;
 }
 
-/*int	main(int argc, char **argv)
-{
-
-	t_data	data;
-	int		ret;
-	int		nb_lines;
-
-	//check if more than 1 elements in argv
-	if (argc != 2)
-		return (ft_printf("Error\nIncorrect input. Please enter map path (only)"), 1);
-
-	//parse map
-	ret = get_map(argv[1], &data);
-	if (!data.map.map_layout || ret == RET_ERR)
-		return (1);
-
-	//show map
-	nb_lines = 0;
-	while (data.map.map_layout[nb_lines])
-		printf(BLUE"%s\n" RESET, data.map.map_layout[nb_lines++]);
-
-	printf(GREEN "Map path = %s\n", data.map.map_path);
-	printf("Map width = %d & Map height = %d\n", data.map.width, data.map.height);
-	printf("Starting position: y = %d | x = %d\n", data.map.start_y, data.map.start_x);
-	printf("NB collectibles = %d\n" RESET, data.map.nb_collectibles);
-
-	return (0);
-}*/

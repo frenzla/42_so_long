@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/20 18:41:14 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/21 13:21:00 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	clean_quit(char ***map, t_data *data)
 		free(data->mlx);
 	return ;
 }
-/*
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -38,9 +38,9 @@ int	main(int argc, char **argv)
 
 	printf("ret: %d\n", ret);
 
-	nb_lines = 0;
+/*	nb_lines = 0;
 	while (data.map.map_layout[nb_lines])
-		printf(BLUE"%s\n" RESET, data.map.map_layout[nb_lines++]);
+		printf(BLUE"%s\n" RESET, data.map.map_layout[nb_lines++]);*/
 
 	//initialize connection for display
 	data.mlx = mlx_init();
@@ -48,13 +48,13 @@ int	main(int argc, char **argv)
 		return (ft_printf("Error\nConnection between program and display couldn't be established"), 1);
 
 	//open new window
-	data.mlx_win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_LENGTH, "Hello world!");
+	data.mlx_win = mlx_new_window(data.mlx, data.map.width*TILE_SIZE, data.map.height*TILE_SIZE, "Hello world!");
 	if (!data.mlx_win)
 		return (ft_printf("Error\nNew window couldn't open"), free(data.mlx), 1);
 
-	init_img_paths(img_paths);
-	if (new_img_from_file(img_paths, &data, CARROT) == -1)
-		return (ft_printf("Error\nFile could not be read"), free(data.mlx), 1); // add free & destro windows
+	ret = init_imgs(img_paths, &data);
+	if (ret == RET_ERR)
+		return (free(data.mlx), 1); // add free & destro windows
 
 	mlx_loop_hook(data.mlx, render, &data);
 
@@ -70,4 +70,3 @@ int	main(int argc, char **argv)
 
 	return (0);
 }
-*/

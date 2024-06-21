@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:49:18 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/20 18:42:37 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/21 09:52:45 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map14.ber",
 		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map15.ber",
 		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map16.pue",
+		"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map17.ber",
 		NULL
 	};
 	int	ret;
@@ -66,7 +67,7 @@
 Test(map_checks, get_map_check)
 {
 	int i = 2;
-	while (i < 12)
+	while (map_paths[i])
 	{
 		ret = get_map(map_paths[i], &data);
 		printf("RET = %d\n", ret);
@@ -268,7 +269,7 @@ Test(map_checks, is_rectangular)
 			cr_expect_eq(ret, 0, "map[%d]: invalid_file_path, should FAIL on Rectangle check", i);
 		else if (i == 1)
 			cr_expect_eq(ret, 0, "map[%d]: empty_file, should FAIL on Rectangle check", i);
-		else if (i == 8)
+		else if (i == 8 || i == 17)
 		{
 			cr_expect_eq(ret, 0, "map[%d]: no rectangular map - should FAIL", i);
 			free_map(data.map.map_layout);
