@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:50:15 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/21 13:24:41 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:21:11 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	init_imgs(char **img_paths, t_data *data)
 		WALL_PATH,
 		COLL_PATH,
 		EXIT_PATH,
-		PLAYER_PATH
+		PLAYER_PATH,
+		BG_PATH,
 	};
 
 	i = 0;
@@ -31,12 +32,12 @@ int	init_imgs(char **img_paths, t_data *data)
 		if (!img_paths[i])
 			return (ft_printf("Error\nCouldn't create img file\n"), RET_ERR);
 		ft_strlcpy(img_paths[i], paths[i], ft_strlen(paths[i])+1);
-		printf("img_paths before: %s\n", img_paths[i]);
-		ret = new_img_from_file(img_paths[i], data, i);
-		if (ret == RET_ERR)
+		ret = new_img_from_file(img_paths[i], data, i) + add_map_code(data);
+		if (ret != 2)
 			return (RET_ERR);
 		i++;
 	}
+	return (1);
 }
 
 int	new_img_from_file(char *path, t_data *data, int i)
@@ -47,10 +48,33 @@ int	new_img_from_file(char *path, t_data *data, int i)
 	data->img[i].addr = mlx_get_data_addr(data->img[i].img, &(data->img[i].bits_per_pixel), &(data->img[i].line_length), &(data->img[i].endian));
 	if (!data->img[i].addr)
 		return (ft_printf("Error\nCouldn't get data on img file\n"), RET_ERR);
+	set_img_position(data, i, 0, 0);
 	return (1);
 }
 
-int	set_img_position(t_data *data, int i, int x, int y)
+int	add_map_code(t_data *data)
+{
+	int		i;
+	char	map_code[NB_IMAGES] = {
+		WALL_CODE,
+		COLL_CODE,
+		EXIT_CODE,
+		PLAYER_CODE,
+		BG_CODE,
+	};
+
+	i = 0;
+	while (i < NB_IMAGES)
+	{
+		data->img[i].map_code = map_code[i];
+		if (!is_in_charset(data->img[i].map_code))
+			return (ft_printf("Error\nCouldn't link map code to image\n"), RET_ERR);
+		i++;
+	}
+	return (1);
+}
+
+void	set_img_position(t_data *data, int i, int x, int y)
 {
 		data->img[i].x = x;
 		data->img[i].y = y;
@@ -60,8 +84,9 @@ int	render(t_data *data)
 {
 	if (data->mlx_win != NULL)
 	{
+			render_map(data);
 			mlx_put_image_to_window(data->mlx, data->mlx_win, data->img[PLAYER].img, data->img[PLAYER].x, data->img[PLAYER].y);
-			return (0);
+			return (1);
 	}
-	return (-1);
+	return (RET_ERR);
 }

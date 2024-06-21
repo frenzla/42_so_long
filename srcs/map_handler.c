@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 09:52:20 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/21 09:01:33 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:15:59 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,3 +81,30 @@ void free_map(char **map)
 	map = NULL;
 }
 
+void	render_map(t_data *data)
+{
+	int		i;
+	int		k;
+	int		j;
+
+	i = 0;
+	while (data->map.map_layout[i])
+	{
+		k = 0;
+		while (data->map.map_layout[k])
+		{
+			j = 0;
+			while (j < NB_IMAGES)
+			{
+				if (data->map.map_layout[i][k] == data->img[j].map_code)
+				{
+					set_img_position(data, j, k*TILE_SIZE, i*TILE_SIZE);
+					mlx_put_image_to_window(data->mlx, data->mlx_win, data->img[j].img, data->img[j].x, data->img[j].y);
+				}
+				j++;
+			}
+			k++;
+		}
+		i++;
+	}
+}

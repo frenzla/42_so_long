@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/21 13:24:18 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:20:46 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,22 @@
 
 # define MAP_PATH "./maps/mapOK.ber"
 
-# define NB_IMAGES 4
+# define NB_IMAGES 5
 # define WALL 0
 # define WALL_PATH "./assets/tree_on_grass.xpm"
+# define WALL_CODE '1'
 # define COLL 1
 # define COLL_PATH "./assets/carrot_on_grass.xpm"
+# define COLL_CODE 'C'
 # define EXIT 2
 # define EXIT_PATH "./assets/exit_on_grass.xpm"
+# define EXIT_CODE 'E'
 # define PLAYER 3
 # define PLAYER_PATH "./assets/player_on_grass.xpm"
+# define PLAYER_CODE 'P'
+# define BG 4
+# define BG_PATH "./assets/grass.xpm"
+# define BG_CODE '0'
 
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
@@ -64,6 +71,7 @@ typedef struct s_img {
 	int		height;
 	int		x;
 	int		y;
+	char	map_code;
 }	t_img;
 
 typedef	struct s_map {
@@ -97,7 +105,7 @@ void	go_down(t_img *img);
 int		handle_input(int keysym, t_data *data);
 int		init_imgs(char **img_paths, t_data *data);
 int		new_img_from_file(char *path, t_data *data, int i);
-int		set_img_position(t_data *data, int i, int x, int y);
+void	set_img_position(t_data *data, int i, int x, int y);
 int		render(t_data *data);
 int		get_map(char *map_path, t_data *data);
 int		parse_map(int fd, t_data *data);
@@ -117,5 +125,7 @@ int		path_ok(int y, int x, t_data *data, char **map);
 int		get_nb_lines(char *map_path);
 int		get_map_info(t_data *data);
 char	**copy_map(char **map, int height);
+int		add_map_code(t_data *data);
+void	render_map(t_data *data);
 
 #endif
