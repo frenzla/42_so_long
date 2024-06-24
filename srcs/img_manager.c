@@ -6,13 +6,12 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:50:15 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/21 15:21:11 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/24 12:07:40 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-//change this function with struct name/path. Takes name I need in parameter, nothing else.
 int	init_imgs(char **img_paths, t_data *data)
 {
 	int		i;

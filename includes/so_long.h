@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/21 18:50:45 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/24 12:35:26 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 # define MAP_PATH "./maps/mapOK.ber"
 
-# define NB_IMAGES 5
+# define NB_IMAGES 6
 # define WALL 0
 # define WALL_PATH "./assets/tree_on_grass.xpm"
 # define WALL_CODE '1'
@@ -57,6 +57,8 @@
 # define BG 4
 # define BG_PATH "./assets/grass.xpm"
 # define BG_CODE '0'
+# define PLAYER_EXIT 5
+# define PLAYER_EXIT "./assets/player_on_exit.xpm"
 
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
@@ -82,6 +84,8 @@ typedef	struct s_map {
 	int		start_x;
 	int		start_y;
 	int		nb_collectibles;
+	char	move_in;
+	char	move_out_i_img;
 } t_map;
 
 typedef struct s_data {
