@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:10:42 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/20 18:43:21 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:15:29 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ Unknown char in map\n"RESET), RET_ERR);
 
 int	is_in_charset(char c)
 {
-	const char	charset[] = {'0', '1', 'P', 'C', 'E', 0};
+	const char	charset[] = {'0', '1', 'P', 'C', 'E', 'X', 0};
 	int			i;
 
 	i = 0;

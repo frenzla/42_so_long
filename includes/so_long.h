@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/24 12:35:26 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:06:55 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@
 # define BG_PATH "./assets/grass.xpm"
 # define BG_CODE '0'
 # define PLAYER_EXIT 5
-# define PLAYER_EXIT "./assets/player_on_exit.xpm"
+# define PLAYER_EXIT_PATH "./assets/player_on_exit.xpm"
+# define PLAYER_EXIT_CODE 'X'
 
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
@@ -91,7 +92,7 @@ typedef	struct s_map {
 typedef struct s_data {
 	void	*mlx;
 	void	*mlx_win;
-	t_img	img[5];
+	t_img	img[6];
 	t_map	map;
 }	t_data;
 
