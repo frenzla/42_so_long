@@ -6,9 +6,14 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:05:30 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/24 12:05:44 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/24 17:41:13 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 
+void	win(t_data *data)
+{
+	mlx_clear_window(data->mlx, data->mlx_win);
+	return ;
+}

@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 09:31:06 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/24 16:48:52 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/24 17:41:09 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,19 @@ int	go_right(t_data *data, int i_img)
 	if (data->map.map_layout[data->img[i_img].y][data->img[i_img].x + 1] == '1')
 		return (0);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img[data->map.move_out_i_img].img, data->img[i_img].x * TILE_SIZE, data->img[i_img].y * TILE_SIZE);
-
 	data->map.move_in = data->map.map_layout[data->img[i_img].y][data->img[i_img].x + 1];
 	(data->img[i_img].x)++;
-	if (data->map.move_in == '0' || data->map.move_in == 'C')
+	if (data->map.move_in == '0')
 		data->map.move_out_i_img = BG;
-	else if (data->map.move_in == 'E' && data->map.nb_collectibles == 0)
+	else if (data->map.move_in == 'C')
 	{
-		//WIN function
+		data->map.move_out_i_img = BG;
+		data->map.map_layout[data->img[i_img].y][data->img[i_img].x + 1] = BG_CODE;
+		data->map.nb_collectibles--;
 	}
+	else if (data->map.move_in == 'E' && data->map.nb_collectibles == 0)
+//WIN function
+		win(data);
 	else if (data->map.move_in == 'E' && data->map.nb_collectibles != 0)
 		{
 			data->map.move_out_i_img = EXIT;
@@ -70,12 +74,17 @@ int	go_left(t_data *data, int i_img)
 
 	data->map.move_in = data->map.map_layout[data->img[i_img].y][data->img[i_img].x - 1];
 	(data->img[i_img].x)--;
-	if (data->map.move_in == '0' || data->map.move_in == 'C')
+	if (data->map.move_in == '0')
 		data->map.move_out_i_img = BG;
-	else if (data->map.move_in == 'E' && data->map.nb_collectibles == 0)
+	else if (data->map.move_in == 'C')
 	{
-		//WIN function
+		data->map.move_out_i_img = BG;
+		data->map.map_layout[data->img[i_img].y][data->img[i_img].x - 1] = BG_CODE;
+		data->map.nb_collectibles--;
 	}
+	else if (data->map.move_in == 'E' && data->map.nb_collectibles == 0)
+//WIN function
+		win(data);
 	else if (data->map.move_in == 'E' && data->map.nb_collectibles != 0)
 		{
 			data->map.move_out_i_img = EXIT;
@@ -94,12 +103,17 @@ int	go_up(t_data *data, int i_img)
 
 	data->map.move_in = data->map.map_layout[data->img[i_img].y - 1][data->img[i_img].x];
 	(data->img[i_img].y)--;
-	if (data->map.move_in == '0' || data->map.move_in == 'C')
+	if (data->map.move_in == '0')
 		data->map.move_out_i_img = BG;
-	else if (data->map.move_in == 'E' && data->map.nb_collectibles == 0)
+	else if (data->map.move_in == 'C')
 	{
-		//WIN function
+		data->map.move_out_i_img = BG;
+		data->map.map_layout[data->img[i_img].y - 1][data->img[i_img].x] = BG_CODE;
+		data->map.nb_collectibles--;
 	}
+	else if (data->map.move_in == 'E' && data->map.nb_collectibles == 0)
+//WIN function
+		win(data);
 	else if (data->map.move_in == 'E' && data->map.nb_collectibles != 0)
 		{
 			data->map.move_out_i_img = EXIT;
@@ -118,12 +132,17 @@ int	go_down(t_data *data, int i_img)
 
 	data->map.move_in = data->map.map_layout[data->img[i_img].y + 1][data->img[i_img].x];
 	(data->img[i_img].y)++;
-	if (data->map.move_in == '0' || data->map.move_in == 'C')
+	if (data->map.move_in == '0')
 		data->map.move_out_i_img = BG;
-	else if (data->map.move_in == 'E' && data->map.nb_collectibles == 0)
+	else if (data->map.move_in == 'C')
 	{
-		//WIN function
+		data->map.move_out_i_img = BG;
+		data->map.map_layout[data->img[i_img].y + 1][data->img[i_img].x] = BG_CODE;
+		data->map.nb_collectibles--;
 	}
+	else if (data->map.move_in == 'E' && data->map.nb_collectibles == 0)
+//WIN function
+		win(data);
 	else if (data->map.move_in == 'E' && data->map.nb_collectibles != 0)
 		{
 			data->map.move_out_i_img = EXIT;

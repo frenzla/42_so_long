@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/20 09:52:43 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/24 17:41:37 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,9 @@ SRC_FILES =		img_manager.c	\
 				player_mov.c	\
 				map_parsing.c	\
 				map_verif.c		\
-				map_handler.c		\
+				map_handler.c	\
 				main.c			\
+				win_handler.c	\
 				map_verif_2.c	\
 
 BONUSDIR = ./

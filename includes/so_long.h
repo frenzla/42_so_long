@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/24 15:06:55 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/24 17:39:16 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,6 @@ int		get_map_info(t_data *data);
 char	**copy_map(char **map, int height);
 int		add_map_code(t_data *data);
 void	render_map(t_data *data);
+void	win(t_data *data);
 
 #endif
