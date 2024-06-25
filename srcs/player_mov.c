@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 09:31:06 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/24 17:41:09 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/25 10:41:37 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	handle_input(int keysym, t_data *data)
 	{XK_s, go_down}
 	};
 
+	if (data->game_over)
+		return (RET_ERR);
 	if (data->map.map_layout[data->img[PLAYER].y][data->img[PLAYER].x] == 'P')
 		data->map.move_out_i_img = BG;
 	i = 0;
@@ -55,7 +57,7 @@ int	go_right(t_data *data, int i_img)
 	}
 	else if (data->map.move_in == 'E' && data->map.nb_collectibles == 0)
 //WIN function
-		win(data);
+		return (win(data), 1);
 	else if (data->map.move_in == 'E' && data->map.nb_collectibles != 0)
 		{
 			data->map.move_out_i_img = EXIT;
@@ -84,7 +86,7 @@ int	go_left(t_data *data, int i_img)
 	}
 	else if (data->map.move_in == 'E' && data->map.nb_collectibles == 0)
 //WIN function
-		win(data);
+		return (win(data), 1);
 	else if (data->map.move_in == 'E' && data->map.nb_collectibles != 0)
 		{
 			data->map.move_out_i_img = EXIT;
@@ -113,7 +115,7 @@ int	go_up(t_data *data, int i_img)
 	}
 	else if (data->map.move_in == 'E' && data->map.nb_collectibles == 0)
 //WIN function
-		win(data);
+		return (win(data), 1);
 	else if (data->map.move_in == 'E' && data->map.nb_collectibles != 0)
 		{
 			data->map.move_out_i_img = EXIT;
@@ -142,7 +144,7 @@ int	go_down(t_data *data, int i_img)
 	}
 	else if (data->map.move_in == 'E' && data->map.nb_collectibles == 0)
 //WIN function
-		win(data);
+		return (win(data), 1);
 	else if (data->map.move_in == 'E' && data->map.nb_collectibles != 0)
 		{
 			data->map.move_out_i_img = EXIT;

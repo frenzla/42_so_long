@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/24 16:56:39 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/25 10:43:58 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,14 @@ int	main(int argc, char **argv)
 	if (ret == RET_ERR)
 		return (free(data.mlx), 1); // add free & destro windows
 
+	data.game_over = 0;
+
 	render_map(&data);
 
-	//Register key
+	//Register key press event
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, handle_input, &data);
+
+	//Register window closing event
 
 	//Rendering
 	mlx_loop(data.mlx);

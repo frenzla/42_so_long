@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/24 17:39:16 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/25 10:37:43 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@
 # define PLAYER_EXIT 5
 # define PLAYER_EXIT_PATH "./assets/player_on_exit.xpm"
 # define PLAYER_EXIT_CODE 'X'
+# define WIN_IMG_PATH "./assets/you_win.xpm"
 
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
@@ -94,6 +95,7 @@ typedef struct s_data {
 	void	*mlx_win;
 	t_img	img[6];
 	t_map	map;
+	int		game_over;
 }	t_data;
 
 typedef int (*keystroke_func)(t_data *data, int i_img);
