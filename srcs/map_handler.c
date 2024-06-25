@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 09:52:20 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/21 18:31:17 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/25 15:08:28 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ char **copy_map(char **map, int height)
 	int	i;
 	char **new_map;
 
-	new_map = malloc(sizeof(char *) * height + 1);
+	new_map = malloc(sizeof(char *) * (height + 1));
 	if (!new_map)
 		return (RET_ERR);
 	i = 0;
 	while (map[i])
 	{
-		new_map[i] = strdup(map[i]);
+		new_map[i] = ft_strdup(map[i]);
 		if (!new_map[i])
 		{
 			while (--i >= 0)

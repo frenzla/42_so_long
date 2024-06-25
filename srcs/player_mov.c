@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 09:31:06 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/25 10:41:37 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/25 11:37:13 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	handle_input(int keysym, t_data *data)
 	{XK_d, go_right},
 	{XK_a, go_left},
 	{XK_w, go_up},
-	{XK_s, go_down}
+	{XK_s, go_down},
+	{XK_Escape, close_win}
 	};
 
 	if (data->game_over)

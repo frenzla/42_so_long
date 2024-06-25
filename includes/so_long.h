@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/25 10:37:43 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/25 16:32:58 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,6 @@
 
 typedef struct s_img {
 	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
 	int		width;
 	int		height;
 	int		x;
@@ -117,7 +113,7 @@ int		render(t_data *data);
 int		get_map(char *map_path, t_data *data);
 int		parse_map(int fd, t_data *data);
 void	free_map(char **map);
-void	clean_quit(char ***map, t_data *data);
+void	clean_quit(t_data *data);
 int		map_is_valid(char ***map, int nb_lines);
 int		map_path_valid(char *map_path);
 int		have_one_exit(char ***map);
@@ -135,5 +131,7 @@ char	**copy_map(char **map, int height);
 int		add_map_code(t_data *data);
 void	render_map(t_data *data);
 void	win(t_data *data);
+int		close_win(t_data *data, int player_i);
+void	free_imgs_path(char **img_paths, int i);
 
 #endif

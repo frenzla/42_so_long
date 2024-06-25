@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:05:30 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/25 10:44:03 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/25 16:55:10 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,16 @@ void	win(t_data *data)
 	return ;
 }
 
+int	close_win(t_data *data, int player_i)
+{
+	//(void)player_i;
+	printf("HELLO!");
+	if (data->mlx_win)
+	{
+		clean_quit(data);
+		mlx_destroy_window(data->mlx, data->mlx_win);
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
+	return (0);
+}

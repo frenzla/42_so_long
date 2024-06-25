@@ -6,18 +6,25 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/25 10:43:58 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/25 16:56:42 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	clean_quit(char ***map, t_data *data)
+void	clean_quit(t_data *data)
 {
-	if (*map)
-		free_map(*map);
-	if (data->mlx)
-		free(data->mlx);
+	int	i;
+
+	i = 0;
+	if (data->map.map_layout)
+		free_map(data->map.map_layout);
+	while (i < NB_IMAGES)
+	{
+		if (data->img[i].img)
+			mlx_destroy_image(data->mlx, data->img[i].img);
+		i++;
+	}
 	return ;
 }
 
@@ -58,12 +65,10 @@ int	main(int argc, char **argv)
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, handle_input, &data);
 
 	//Register window closing event
+	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, close_win, &data);
 
 	//Rendering
 	mlx_loop(data.mlx);
-
-	mlx_destroy_display(data.mlx);
-	free(data.mlx);
 
 	return (0);
 }

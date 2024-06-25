@@ -6,11 +6,23 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:50:15 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/24 15:13:44 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/25 16:32:30 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	free_imgs_path(char **img_paths, int k)
+{
+	int	i;
+
+	i = 0;
+	while (i < k)
+	{
+		free(img_paths[i]);
+		i++;
+	}
+}
 
 int	init_imgs(char **img_paths, t_data *data)
 {
@@ -30,14 +42,14 @@ int	init_imgs(char **img_paths, t_data *data)
 	{
 		img_paths[i] = malloc(ft_strlen(paths[i]) + 1);
 		if (!img_paths[i])
-			return (ft_printf("Error\nCouldn't create img file\n"), RET_ERR);
+			return (free_imgs_path(img_paths, i), ft_printf("Error\nCouldn't create img file\n"), RET_ERR);
 		ft_strlcpy(img_paths[i], paths[i], ft_strlen(paths[i])+1);
 		ret = new_img_from_file(img_paths[i], data, i) + add_map_code(data);
 		if (ret != 2)
-			return (RET_ERR);
+			return (free_imgs_path(img_paths, i), RET_ERR);
 		i++;
 	}
-	return (1);
+	return (free_imgs_path(img_paths, i), 1);
 }
 
 int	new_img_from_file(char *path, t_data *data, int i)
@@ -45,9 +57,9 @@ int	new_img_from_file(char *path, t_data *data, int i)
 	data->img[i].img = mlx_xpm_file_to_image(data->mlx, path, &(data->img[i].width), &(data->img[i].height));
 	if (!(data->img[i].img))
 		return (ft_printf("Error\nImage file couldn't be open/read\n"), RET_ERR);
-	data->img[i].addr = mlx_get_data_addr(data->img[i].img, &(data->img[i].bits_per_pixel), &(data->img[i].line_length), &(data->img[i].endian));
-	if (!data->img[i].addr)
-		return (ft_printf("Error\nCouldn't get data on img file\n"), RET_ERR);
+	//data->img[i].addr = mlx_get_data_addr(data->img[i].img, &(data->img[i].bits_per_pixel), &(data->img[i].line_length), &(data->img[i].endian));
+	//if (!data->img[i].addr)
+	//	return (ft_printf("Error\nCouldn't get data on img file\n"), RET_ERR);
 	set_img_position(data, i, 0, 0);
 	return (1);
 }
