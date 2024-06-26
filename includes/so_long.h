@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/25 16:32:58 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/26 13:31:06 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ char	**copy_map(char **map, int height);
 int		add_map_code(t_data *data);
 void	render_map(t_data *data);
 void	win(t_data *data);
-int		close_win(t_data *data, int player_i);
+int		close_game(t_data *data, int i);
 void	free_imgs_path(char **img_paths, int i);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/25 16:56:42 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/26 13:38:58 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char **argv)
 	//check if more than 1 elements in argv
 	if (argc != 2)
 		return (ft_printf(RED "Error\nIncorrect input" RESET), 1);
+
 	//parse map
 	ret = get_map(argv[1], &data);
 	if (ret == RET_ERR)
@@ -55,20 +56,28 @@ int	main(int argc, char **argv)
 
 	ret = init_imgs(img_paths, &data);
 	if (ret == RET_ERR)
-		return (free(data.mlx), 1); // add free & destro windows
+		return (close_game(&data, 0), 1); // The close_game function doesn't work if init_imgs fails
 
 	data.game_over = 0;
 
 	render_map(&data);
 
+	//Register window closing event
+	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, close_game, &data);
 	//Register key press event
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, handle_input, &data);
 
-	//Register window closing event
-	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, close_win, &data);
+//	mlx_loop_hook(data.mlx, &handle_no_event, &data);
 
 	//Rendering
 	mlx_loop(data.mlx);
-
 	return (0);
 }
+
+/*
+int	handle_no_event(void *data)
+{
+    //This function needs to exist, but it is useless for the moment
+    return (0);
+}
+*/

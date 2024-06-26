@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:05:30 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/25 16:55:10 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/26 13:39:32 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,20 @@ void	win(t_data *data)
 	win_img = mlx_xpm_file_to_image(data->mlx, WIN_IMG_PATH, &img_width, &img_height);
 	mlx_clear_window(data->mlx, data->mlx_win);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, win_img, (data->map.width*TILE_SIZE/2)-(img_width/2), (data->map.height*TILE_SIZE/2)-(img_height/2));
+	//mlx_destroy_image(data->mlx, win_img);
 	return ;
 }
 
-int	close_win(t_data *data, int player_i)
+int	close_game(t_data *data, int i)
 {
-	//(void)player_i;
-	printf("HELLO!");
+	clean_quit(data);
 	if (data->mlx_win)
-	{
-		clean_quit(data);
 		mlx_destroy_window(data->mlx, data->mlx_win);
+	if (data->mlx)
+	{
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
+		exit(0);
 	}
-	return (0);
+	return (i);
 }
