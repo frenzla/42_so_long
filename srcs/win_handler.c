@@ -6,11 +6,27 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:05:30 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/26 13:39:32 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/26 14:55:57 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
+
+void	clean_quit(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->map.map_layout)
+		free_map(data->map.map_layout);
+	while (i < NB_IMAGES)
+	{
+		if (data->img[i].img)
+			mlx_destroy_image(data->mlx, data->img[i].img);
+		i++;
+	}
+	return ;
+}
 
 void	win(t_data *data)
 {
@@ -22,7 +38,7 @@ void	win(t_data *data)
 	win_img = mlx_xpm_file_to_image(data->mlx, WIN_IMG_PATH, &img_width, &img_height);
 	mlx_clear_window(data->mlx, data->mlx_win);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, win_img, (data->map.width*TILE_SIZE/2)-(img_width/2), (data->map.height*TILE_SIZE/2)-(img_height/2));
-	//mlx_destroy_image(data->mlx, win_img);
+	mlx_destroy_image(data->mlx, win_img);
 	return ;
 }
 

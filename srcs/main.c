@@ -6,27 +6,11 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/26 13:38:58 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/26 15:04:33 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	clean_quit(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	if (data->map.map_layout)
-		free_map(data->map.map_layout);
-	while (i < NB_IMAGES)
-	{
-		if (data->img[i].img)
-			mlx_destroy_image(data->mlx, data->img[i].img);
-		i++;
-	}
-	return ;
-}
 
 int	main(int argc, char **argv)
 {

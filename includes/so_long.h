@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/26 13:31:06 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/26 14:49:03 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int		path_ok(int y, int x, t_data *data, char **map);
 int		get_nb_lines(char *map_path);
 int		get_map_info(t_data *data);
 char	**copy_map(char **map, int height);
-int		add_map_code(t_data *data);
+int		add_map_code(t_data *data, int i);
 void	render_map(t_data *data);
 void	win(t_data *data);
 int		close_game(t_data *data, int i);

@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:50:15 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/26 13:38:38 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/26 14:49:49 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	init_imgs(char **img_paths, t_data *data)
 		img_paths[i] = malloc(ft_strlen(paths[i]) + 1);
 		if (!img_paths[i])
 			return (free_imgs_path(img_paths, i), ft_printf("Error\nCouldn't create img file\n"), RET_ERR);
-		ft_strlcpy(img_paths[i], paths[i], ft_strlen(paths[i])+1);
-		ret = new_img_from_file(img_paths[i], data, i) + add_map_code(data);
+		ft_strlcpy(img_paths[i], paths[i], ft_strlen(paths[i]) + 1);
+		ret = new_img_from_file(img_paths[i], data, i) + add_map_code(data, i);
 		if (ret != 2)
 			return (free_imgs_path(img_paths, i), RET_ERR);
 		i++;
@@ -57,16 +57,12 @@ int	new_img_from_file(char *path, t_data *data, int i)
 	data->img[i].img = mlx_xpm_file_to_image(data->mlx, path, &(data->img[i].width), &(data->img[i].height));
 	if (!(data->img[i].img))
 		return (ft_printf("Error\nImage file couldn't be open/read\n"), RET_ERR);
-	//data->img[i].addr = mlx_get_data_addr(data->img[i].img, &(data->img[i].bits_per_pixel), &(data->img[i].line_length), &(data->img[i].endian));
-	//if (!data->img[i].addr)
-	//	return (ft_printf("Error\nCouldn't get data on img file\n"), RET_ERR);
 	set_img_position(data, i, 0, 0);
 	return (1);
 }
 
-int	add_map_code(t_data *data)
+int	add_map_code(t_data *data, int i)
 {
-	int		i;
 	char	map_code[NB_IMAGES] = {
 		WALL_CODE,
 		COLL_CODE,
@@ -76,14 +72,9 @@ int	add_map_code(t_data *data)
 		PLAYER_EXIT_CODE,
 	};
 
-	i = 0;
-	while (i < NB_IMAGES)
-	{
-		data->img[i].map_code = map_code[i];
-		if (!is_in_charset(data->img[i].map_code))
-			return (ft_printf("Error\nCouldn't link map code to image\n"), RET_ERR);
-		i++;
-	}
+	data->img[i].map_code = map_code[i];
+	if (!is_in_charset(data->img[i].map_code))
+		return (ft_printf("Error\nCouldn't link map code to image\n"), RET_ERR);
 	return (1);
 }
 
