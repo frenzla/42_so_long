@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:05:30 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/26 14:55:57 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/26 17:05:13 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ void	win(t_data *data)
 	mlx_clear_window(data->mlx, data->mlx_win);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, win_img, (data->map.width*TILE_SIZE/2)-(img_width/2), (data->map.height*TILE_SIZE/2)-(img_height/2));
 	mlx_destroy_image(data->mlx, win_img);
+	ft_printf(GREEN "\n\n\
+	░█──░█ ░█▀▀▀█ ░█─░█ 　 ░█──░█ ▀█▀ ░█▄─░█ █ \n\
+	░█▄▄▄█ ░█──░█ ░█─░█ 　 ░█░█░█ ░█─ ░█░█░█ ▀ \n\
+	──░█── ░█▄▄▄█ ─▀▄▄▀ 　 ░█▄▀▄█ ▄█▄ ░█──▀█ ▄\n\n" RESET);
 	return ;
 }
 
