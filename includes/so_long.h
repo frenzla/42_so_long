@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/26 16:25:52 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/26 18:09:10 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,6 @@
 // Définir les codes de couleur ANSI
 #define RED "\x1b[31m"
 #define GREEN "\x1b[32m"
-#define YELLOW "\x1b[33m"
-#define BLUE "\x1b[34m"
-#define MAGENTA "\x1b[35m"
-#define CYAN "\x1b[36m"
 #define RESET "\x1b[0m"
 
 # define TRUE 1
@@ -62,9 +58,6 @@
 # define PLAYER_EXIT_CODE 'X'
 # define WIN_IMG_PATH "./assets/you_win.xpm"
 
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 480
-
 typedef struct s_img {
 	void	*img;
 	int		width;
@@ -89,7 +82,7 @@ typedef	struct s_map {
 typedef struct s_data {
 	void	*mlx;
 	void	*mlx_win;
-	t_img	img[6];
+	t_img	img[NB_IMAGES];
 	t_map	map;
 	int		game_over;
 }	t_data;
