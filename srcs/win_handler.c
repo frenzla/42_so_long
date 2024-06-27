@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:05:30 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/27 15:31:54 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 18:46:53 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	handle_input(int keysym, t_data *data)
 		{
 			ret = f_table[i].func(data, PLAYER);
 			if (ret)
-				return (ft_printf("Move number %d\n", nb_moves += ret), 0);
+				return (ft_printf("Move number %d\n", nb_moves += ret), 1);
 		}
 		i++;
 	}

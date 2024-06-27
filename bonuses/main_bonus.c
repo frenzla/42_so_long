@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/27 15:32:45 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 19:30:13 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	if (!data.mlx)
 		return (ft_printf("Error\nMinilibX error"), 1);
 	data.mlx_win = mlx_new_window(data.mlx, data.map.width * TILE_SIZE, \
-	data.map.height * TILE_SIZE, "Hello world!");
+	(data.map.height + 1) * TILE_SIZE, "Hello world!");
 	if (!data.mlx_win)
 		return (ft_printf("Error\nNew window couldn't open"), free(data.mlx), 1);
 	if (!init_imgs(img_paths, &data))
