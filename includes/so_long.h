@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/27 10:37:35 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 11:03:32 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define WALL_PATH "./assets/tree_on_grass.xpm"
 # define WALL_CODE '1'
 # define COLL 1
-# define COLL_PATH "./assets/carrot_on_grass.xpm"
+# define COLL_PATH "./assets/mushroom_on_grass.xpm"
 # define COLL_CODE 'C'
 # define EXIT 2
 # define EXIT_PATH "./assets/exit_on_grass.xpm"
