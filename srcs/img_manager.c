@@ -6,20 +6,21 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:50:15 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/27 10:12:38 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 12:53:43 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	free_imgs_path(char **img_paths, int k)
+void	free_imgs_path(char **img_paths)
 {
 	int	i;
 
 	i = 0;
-	while (i < k)
+	while (i < NB_IMAGES)
 	{
-		free(img_paths[i]);
+		if (img_paths[i])
+			free(img_paths[i]);
 		i++;
 	}
 }
@@ -42,15 +43,15 @@ int	init_imgs(char **img_paths, t_data *data)
 	{
 		img_paths[i] = malloc(ft_strlen(paths[i]) + 1);
 		if (!img_paths[i])
-			return (free_imgs_path(img_paths, i), \
+			return (free_imgs_path(img_paths), \
 			ft_printf("Error\nCouldn't create img file\n"), RET_ERR);
 		ft_strlcpy(img_paths[i], paths[i], ft_strlen(paths[i]) + 1);
 		ret = new_img_from_file(img_paths[i], data, i) + add_map_code(data, i);
 		if (ret != 2)
-			return (free_imgs_path(img_paths, i), RET_ERR);
+			return (free_imgs_path(img_paths), RET_ERR);
 		i++;
 	}
-	return (free_imgs_path(img_paths, i), 1);
+	return (free_imgs_path(img_paths), 1);
 }
 
 int	new_img_from_file(char *path, t_data *data, int i)

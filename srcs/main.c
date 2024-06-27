@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/27 10:39:16 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 12:54:09 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 	if (!data.mlx_win)
 		return (ft_printf("Error\nNew window couldn't open"), free(data.mlx), 1);
 	if (!init_imgs(img_paths, &data))
-		return (close_game(&data, 0), 1); //close_game to test when init fails
+		return (close_game(&data, 0), 1);
 	data.game_over = 0;
 	render_map(&data);
 	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, \
