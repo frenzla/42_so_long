@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_mov.c                                       :+:      :+:    :+:   */
+/*   player_mov_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 09:31:06 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/27 10:27:58 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 15:40:36 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	adjust_map(t_data *data, int i_img)
 {
@@ -56,8 +56,6 @@ int	go_right(t_data *data, int i_img)
 
 int	go_left(t_data *data, int i_img)
 {
-	int	ret;
-
 	if (data->map.map_layout[data->img[i_img].y][data->img[i_img].x - 1] == '1' \
 	|| data->game_over)
 		return (RET_ERR);
@@ -72,8 +70,6 @@ int	go_left(t_data *data, int i_img)
 
 int	go_up(t_data *data, int i_img)
 {
-	int	ret;
-
 	if (data->map.map_layout[data->img[i_img].y - 1][data->img[i_img].x] == '1' \
 	|| data->game_over)
 		return (RET_ERR);
@@ -88,8 +84,6 @@ int	go_up(t_data *data, int i_img)
 
 int	go_down(t_data *data, int i_img)
 {
-	int	ret;
-
 	if (data->map.map_layout[data->img[i_img].y + 1][data->img[i_img].x] == '1' \
 	|| data->game_over)
 		return (RET_ERR);

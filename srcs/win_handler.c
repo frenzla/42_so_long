@@ -6,11 +6,11 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:05:30 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/27 14:38:52 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 15:31:54 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <so_long.h>
+#include "so_long.h"
 
 int	handle_input(int keysym, t_data *data)
 {

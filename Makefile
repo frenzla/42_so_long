@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/27 14:25:22 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/27 15:41:30 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,16 +22,16 @@ SRC_FILES =		img_manager.c	\
 				win_handler.c	\
 				map_verif_2.c
 
-BONUSDIR = ./bonuses
-BONUS =			img_manager_bonus.c	\
-				player_mov_bonus.c	\
-				map_parsing_bonus.c	\
-				map_verif_bonus.c	\
-				map_handler_bonus.c	\
-				main_bonus.c		\
-				win_handler_bonus.c	\
-				map_verif_2_bonus.c	\
-				mov_count_bonus.c
+BONUSDIR = ./bonuses/
+BONUS =		img_manager_bonus.c	\
+			player_mov_bonus.c	\
+			map_parsing_bonus.c	\
+			map_verif_bonus.c	\
+			map_handler_bonus.c	\
+			main_bonus.c		\
+			win_handler_bonus.c	\
+			map_verif_2_bonus.c	\
+			mov_count_bonus.c
 
 LIBFT_PATH = ./libft/
 LIBFT = libft.a
@@ -45,8 +45,8 @@ INCLUDES_PATH = ./includes
 INCLUDES = -I$(INCLUDES_PATH) -I$(LIBFT_PATH)
 
 SRCS = $(addprefix $(SRCDIR), $(SRC_FILES))
-BONUS_FILES = $(addprefix $(BONUSDIR), $(BONUS))
 OBJS = $(SRCS:.c=.o)
+BONUS_FILES = $(addprefix $(BONUSDIR), $(BONUS))
 OBJS_BONUS = $(BONUS_FILES:.c=.o)
 
 TESTDIR=./tests
@@ -88,7 +88,7 @@ $(TESTDIR)/%.o : $(TESTDIR)/%.c
 test: $(OBJS) $(LIBFT_FILE) $(TESTBINS)
 	for test in $(TESTBINS) ; do ./$$test ; done
 
-bonus : ${OBJ_BONUS} $(LIBFT_FILE)
-	$(CC) $(CFLAGS) -g3 -ggdb3 -o $@ $^ $(MLX_FLAGS) $(LIBFT_FLAGS)
+bonus : ${OBJS_BONUS} $(LIBFT_FILE)
+	$(CC) $(CFLAGS) -g3 -ggdb3 -o $(NAME) $^ $(MLX_FLAGS) $(LIBFT_FLAGS)
 
 .PHONY: all clean fclean re test bonus

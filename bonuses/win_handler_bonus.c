@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   win_handler.c                                      :+:      :+:    :+:   */
+/*   win_handler_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:05:30 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/27 10:38:15 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 15:40:57 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <so_long.h>
+#include "so_long_bonus.h"
 
 int	handle_input(int keysym, t_data *data)
 {
@@ -28,7 +28,7 @@ int	handle_input(int keysym, t_data *data)
 	if (data->map.map_layout[data->img[PLAYER].y][data->img[PLAYER].x] == 'P')
 		data->map.move_out_i_img = BG;
 	i = 0;
-	while (i < (sizeof(f_table) / sizeof(f_table[0])))
+	while ((long unsigned)i < (sizeof(f_table) / sizeof(f_table[0])))
 	{
 		if (f_table[i].keycode == keysym)
 		{
