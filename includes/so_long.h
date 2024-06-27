@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/27 12:52:56 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 14:41:02 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_map {
 	int		start_y;
 	int		nb_collectibles;
 	char	move_in;
-	char	move_out_i_img;
+	int		move_out_i_img;
 }	t_map;
 
 typedef struct s_data {
@@ -90,7 +90,7 @@ typedef struct s_data {
 typedef int	(*t_keystroke_func)(t_data *data, int i_img);
 
 typedef struct s_keycode_f_mapping {
-	unsigned int		keycode;
+	int					keycode;
 	t_keystroke_func	func;
 }	t_keycode_f_mapping;
 

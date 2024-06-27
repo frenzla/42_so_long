@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 09:52:20 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/27 14:35:06 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 10:19:45 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	get_map_info(t_data *data)
 {
+	int		nb_collectibles;
 	int		i;
 	int		k;
 

@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/24 17:41:37 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/27 14:25:22 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,18 @@ SRC_FILES =		img_manager.c	\
 				map_handler.c	\
 				main.c			\
 				win_handler.c	\
-				map_verif_2.c	\
+				map_verif_2.c
 
-BONUSDIR = ./
-BONUS =
+BONUSDIR = ./bonuses
+BONUS =			img_manager_bonus.c	\
+				player_mov_bonus.c	\
+				map_parsing_bonus.c	\
+				map_verif_bonus.c	\
+				map_handler_bonus.c	\
+				main_bonus.c		\
+				win_handler_bonus.c	\
+				map_verif_2_bonus.c	\
+				mov_count_bonus.c
 
 LIBFT_PATH = ./libft/
 LIBFT = libft.a
@@ -51,23 +59,20 @@ RM = rm -f
 
 all : $(NAME)
 
-#insert flags when ready!
 ./%.o : ./%.c
-	$(CC) -g3 -ggdb3 $(INCLUDES) -o $@ -c $<
+	$(CC) $(CFLAGS) -g3 -ggdb3 $(INCLUDES) -o $@ -c $<
 
 $(LIBFT_FILE) :
 	make -C $(LIBFT_PATH)
 
 $(NAME) : $(OBJS) $(LIBFT_FILE)
-	$(CC) -g3 -ggdb3 -o $@ $^ $(MLX_FLAGS) $(LIBFT_FLAGS)
-#delete this one
-#	make clean
+	$(CC) $(CFLAGS) -g3 -ggdb3 -o $@ $^ $(MLX_FLAGS) $(LIBFT_FLAGS)
 
 clean :
 	make -C $(LIBFT_PATH) clean
 	$(RM) $(OBJS)
 	$(RM) $(TESTBINS)
-#	$(RM) $(OBJS_BONUS)
+	$(RM) $(OBJS_BONUS)
 
 fclean : clean
 	make -C $(LIBFT_PATH) fclean
@@ -83,4 +88,7 @@ $(TESTDIR)/%.o : $(TESTDIR)/%.c
 test: $(OBJS) $(LIBFT_FILE) $(TESTBINS)
 	for test in $(TESTBINS) ; do ./$$test ; done
 
-.PHONY: all clean fclean re test
+bonus : ${OBJ_BONUS} $(LIBFT_FILE)
+	$(CC) $(CFLAGS) -g3 -ggdb3 -o $@ $^ $(MLX_FLAGS) $(LIBFT_FLAGS)
+
+.PHONY: all clean fclean re test bonus
