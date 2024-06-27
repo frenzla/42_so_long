@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/26 18:09:10 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 10:37:35 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@
 # include <stdlib.h>
 //To delete
 # include </home/alarose/Criterion/include/criterion/criterion.h>
-#include <unistd.h>
+# include <unistd.h>
 
 // Définir les codes de couleur ANSI
-#define RED "\x1b[31m"
-#define GREEN "\x1b[32m"
-#define RESET "\x1b[0m"
+# define RED "\x1b[31m"
+# define GREEN "\x1b[32m"
+# define RESET "\x1b[0m"
 
 # define TRUE 1
 # define FALSE 0
@@ -67,7 +67,7 @@ typedef struct s_img {
 	char	map_code;
 }	t_img;
 
-typedef	struct s_map {
+typedef struct s_map {
 	char	*map_path;
 	int		width;
 	int		height;
@@ -77,7 +77,7 @@ typedef	struct s_map {
 	int		nb_collectibles;
 	char	move_in;
 	char	move_out_i_img;
-} t_map;
+}	t_map;
 
 typedef struct s_data {
 	void	*mlx;
@@ -87,12 +87,12 @@ typedef struct s_data {
 	int		game_over;
 }	t_data;
 
-typedef int (*keystroke_func)(t_data *data, int i_img);
+typedef int	(*t_keystroke_func)(t_data *data, int i_img);
 
-typedef struct {
-	unsigned int	keycode;
-	keystroke_func	func;
-} keycode_f_mapping;
+typedef struct s_keycode_f_mapping {
+	unsigned int		keycode;
+	t_keystroke_func	func;
+}	t_keycode_f_mapping;
 
 int		go_right(t_data *data, int i_img);
 int		go_left(t_data *data, int i_img);

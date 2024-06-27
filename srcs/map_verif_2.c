@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:10:42 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/26 15:04:31 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 10:21:48 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,32 +76,15 @@ Map should be surrounded by walls\n"RESET), RET_ERR);
 	return (1);
 }
 
-//flood fill
-
-#include <unistd.h>
-
 int	position_is_valid(int y, int x, char ***map, int nb_lines)
 {
 	if (x < 1 || x > ft_strlen((*map)[0]) - 2 || y < 0 || y > nb_lines - 2)
 		return (0);
-	if ((*map)[y][x] == '0' || (*map)[y][x] == 'E' ||	\
+	if ((*map)[y][x] == '0' || (*map)[y][x] == 'E' || \
 		(*map)[y][x] == 'C' || (*map)[y][x] == 'P')
 		return (1);
 	return (0);
 }
-
-//#include <time.h> // For below checks. Must stay here
-/*  Add this inside "path_ok" to see filling up in real time:
-	struct timespec req;	// Define the timespec structure for sleeping half a second
-	req.tv_sec = 0;				// Seconds
-	req.tv_nsec = 100000000L;	// Nanoseconds (500 milliseconds)
-	nanosleep(&req, (struct timespec *)NULL); // Sleep
-
-	//print map for checks
-	int	i = 0;
-	while (map[i]) // delete when checks are done
-		printf("%s\n", map[i++]); // delete when checks are done
-*/
 
 int	path_ok(int y, int x, t_data *data, char **map)
 {
@@ -124,65 +107,3 @@ int	path_ok(int y, int x, t_data *data, char **map)
 		return (1);
 	return (RET_ERR);
 }
-/*
-int	main(int argc, char **argv)
-{
-	t_data	data;
-	int		ret;
-	int		nb_lines;
-
-	if (argc != 2)
-		return (ft_printf("Error\nIncorrect input. Please enter map path (only)"), 1);
-
-	//parse map
-	ret = get_map(argv[1], &data);
-	if (!data.map.map_layout || ret == RET_ERR)
-		printf(RED "parsing failed OR map not valid, but here carrying on...\n" RESET);
-
-	//show map & info
-	nb_lines = 0;
-	while (data.map.map_layout[nb_lines])
-		printf(BLUE"%s\n" RESET, data.map.map_layout[nb_lines++]);
-	printf(GREEN "Map path = %s\n", data.map.map_path);
-	printf("Map width = %d & Map height = %d\n", data.map.width, data.map.height);
-	printf("Starting position: y = %d | x = %d\n", data.map.start_y, data.map.start_x);
-	printf("NB collectibles = %d\n" RESET, data.map.nb_collectibles);
-
-	//Flood fill
-	ret = path_ok(data.map.start_y, data.map.start_x, &data, data.map.map_layout);
-	printf("ret = %d\n", ret);
-	return (0);
-}
-*/
-/*
-int	main(int argc, char **argv)
-{
-	int fd;
-	t_data data;
-	int ret;
-	int nb_lines;
-
-	data.map.map_path = argv[1];
-	data.map.height = get_nb_lines(argv[1]);
-
-	fd = open(argv[1], O_RDONLY);
-	ret = parse_map(fd, &data);
-	close(fd);
-
-	nb_lines = 0;
-	while (data.map.map_layout[nb_lines])
-		printf(BLUE"%s\n" RESET, data.map.map_layout[nb_lines++]);
-
-	ret = get_map_info(&data);
-
-	printf(GREEN "Map path = %s\n", data.map.map_path);
-	printf("Map width = %d & Map height = %d\n", data.map.width, data.map.height);
-	printf("Starting position: y = %d | x = %d\n", data.map.start_y, data.map.start_x);
-	printf("NB collectibles = %d\n" RESET, data.map.nb_collectibles);
-
-	nb_lines = 0;
-	while (data.map.map_layout[nb_lines])
-		printf(BLUE"%s\n" RESET, data.map.map_layout[nb_lines++]);
-
-}
-*/

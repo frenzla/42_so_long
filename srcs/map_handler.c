@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 09:52:20 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/26 15:09:48 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 10:19:45 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	get_map_info(t_data *data)
 	return (1);
 }
 
-char **copy_map(char **map, int height)
+char	**copy_map(char **map, int height)
 {
-	int	i;
-	char **new_map;
+	int		i;
+	char	**new_map;
 
 	new_map = malloc(sizeof(char *) * (height + 1));
 	if (!new_map)
@@ -66,7 +66,7 @@ char **copy_map(char **map, int height)
 	return (new_map);
 }
 
-void free_map(char **map)
+void	free_map(char **map)
 {
 	int	i;
 
@@ -93,18 +93,31 @@ void	render_map(t_data *data)
 		k = 0;
 		while (data->map.map_layout[i][k])
 		{
-			i_img = 0;
-			while (i_img < NB_IMAGES)
+			i_img = -1;
+			while (++i_img < NB_IMAGES)
 			{
 				if (data->map.map_layout[i][k] == data->img[i_img].map_code)
 				{
 					set_img_position(data, i_img, k, i);
-					mlx_put_image_to_window(data->mlx, data->mlx_win, data->img[i_img].img, data->img[i_img].x * TILE_SIZE, data->img[i_img].y * TILE_SIZE);
+					mlx_put_image_to_window(data->mlx, data->mlx_win, \
+					data->img[i_img].img, data->img[i_img].x * TILE_SIZE, \
+					data->img[i_img].y * TILE_SIZE);
 				}
-				i_img++;
 			}
 			k++;
 		}
 		i++;
 	}
+}
+
+int	render(t_data *data)
+{
+	if (data->mlx_win != NULL)
+	{
+		render_map(data);
+		mlx_put_image_to_window(data->mlx, data->mlx_win, \
+		data->img[PLAYER].img, data->img[PLAYER].x, data->img[PLAYER].y);
+		return (1);
+	}
+	return (RET_ERR);
 }

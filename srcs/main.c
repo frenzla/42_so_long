@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/26 18:06:21 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 10:39:16 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,3 @@ int	main(int argc, char **argv)
 	mlx_loop(data.mlx);
 	return (0);
 }
-
-/*
-int	handle_no_event(void *data)
-{
-    //This function needs to exist, but it is useless for the moment
-    return (0);
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 09:29:14 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/12 16:14:33 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/27 10:45:38 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*get_next_line(int fd)
 {
-	char			*buff;
-	int				ret_read;
-	static p_list	*stock = NULL;
+	char				*buff;
+	int					ret_read;
+	static t_gnl_list	*stock = NULL;
 
 	buff = NULL;
 	if (fd < 0 || BUFFER_SIZE < 1 || BUFFER_SIZE > INT_MAX)
