@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 18:30:37 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/28 19:34:32 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	free_imgs_path(char **img_paths);
 int		adjust_map(t_data *data, int i_img);
 
 //bonus functions
-int		display_nb_moves(t_data *data , int nb_moves);
+int		display_banner(t_data *data , int nb_moves);
 void	img_pixel_put(t_img *img, int x, int y, int color);
 void	render_bg(t_img *img, int color);
 int		render_banner(t_data *data);
@@ -154,5 +154,6 @@ int		add_full_square(t_data *data, t_img *banner, int x, int y);
 int		add_empty_square(t_data *data, t_img *banner, int x, int y);
 int		add_coll_tracker(t_data *data, t_img *banner);
 void	put_squares(t_data *data, int total_coll, t_img *tracker);
+int		gen_tracker(t_data *data, int len, int total_coll, t_img *banner);
 
 #endif

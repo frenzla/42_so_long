@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 09:52:20 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 12:06:13 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/28 19:36:58 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	render_map(t_data *data)
 		}
 		i++;
 	}
-	display_nb_moves(data , 0);
+	display_banner(data, 0);
 }
 
 void	render_tile(t_data *data, int i, int k, int i_img)

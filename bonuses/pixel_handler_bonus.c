@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:12:36 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 18:31:05 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/28 19:39:19 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	put_img_to_img(t_img *dst, t_img *src, int x, int y)
 	int	j;
 
 	i = 0;
-	while(i < src->width)
+	while (i < src->width)
 	{
 		j = 0;
 		while (j < src->height)
