@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 11:56:56 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/28 15:11:53 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,10 +139,14 @@ int		close_game(t_data *data, int i);
 void	free_imgs_path(char **img_paths);
 int		adjust_map(t_data *data, int i_img);
 
+//bonus functions
 int		display_nb_moves(t_data *data , int nb_moves);
 void	img_pixel_put(t_img *img, int x, int y, int color);
 void	render_bg(t_data *data, t_img *img, int color);
 int		render_banner(t_data *data);
 void	render_tile(t_data *data, int i, int k, int i_img);
+void	put_img_to_img(t_img *dst, t_img *src, int x, int y);
+int		get_pixel_img(t_img *img, int x, int y);
+int		add_logo(t_data *data, t_img *banner);
 
 #endif

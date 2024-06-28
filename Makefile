@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/28 11:36:37 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/28 14:24:09 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ BONUS =		img_manager_bonus.c	\
 			main_bonus.c		\
 			win_handler_bonus.c	\
 			map_verif_2_bonus.c	\
+			pixel_handler_bonus.c	\
 			mov_count_bonus.c
 
 LIBFT_PATH = ./libft/

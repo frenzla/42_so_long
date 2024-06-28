@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:13:22 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 11:30:21 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/28 15:13:46 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,43 +36,28 @@ int	render_banner(t_data *data)
 	if (!data->mlx_win)
 		return (RET_ERR);
 	banner.img = mlx_new_image(data->mlx, data->map.width * TILE_SIZE, TILE_SIZE);
+	if (!banner.img)
+		return (RET_ERR);
 	banner.addr = mlx_get_data_addr(banner.img, &banner.bpp, &banner.line_len, &banner.endian);
 	render_bg(data, &banner, BANNER_COLOR);
+	add_logo(data, &banner);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, banner.img, 0, data->map.height * TILE_SIZE);
 	mlx_destroy_image(data->mlx, banner.img);
 	return (1);
 }
 
-void	render_bg(t_data *data, t_img *img, int color)
+int add_logo(t_data *data, t_img *banner)
 {
-	int	i;
-	int	j;
+	t_img	text;
 
-	i = 0;
-	while (i < TILE_SIZE)
+	if (data->map.width > 8)
 	{
-		j = 0;
-		while (j < data->map.width * TILE_SIZE)
-		{
-			img_pixel_put(img, j++, i, color);
-		}
-		++i;
+		text.img = mlx_xpm_file_to_image(data->mlx, "./assets/so_long_img.xpm", &text.width, &text.height);
+		if (!text.img)
+			return (ft_printf("Couldn't load logo\n"), RET_ERR);
+		text.addr = mlx_get_data_addr(text.img, &text.bpp, &text.line_len, &text.endian);
+		put_img_to_img(banner, &text, (data->map.width * TILE_SIZE / 2) - (text.width / 2), 0);
+		mlx_destroy_image(data->mlx, text.img);
 	}
-}
-
-void	img_pixel_put(t_img *img, int x, int y, int color)
-{
-	char	*pixel;
-	int		i;
-
-	i = img->bpp - 8;
-	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	while (i >= 0)
-	{
-		if (img->endian != 0)
-			*pixel++ = (color >> i) & 0xFF;
-		else
-			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
-		i -= 8;
-	}
+	return (1);
 }
