@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/27 19:32:06 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/28 11:56:56 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,13 @@
 # include </home/alarose/Criterion/include/criterion/criterion.h>
 # include <unistd.h>
 
-// Définir les codes de couleur ANSI
 # define RED "\x1b[31m"
 # define GREEN "\x1b[32m"
 # define RESET "\x1b[0m"
+
+# define FONT "-schumacher-clean-bold-r-normal--15-150-75-75-c-90-iso646.1991-irv"
+# define FONT_COLOR 0x36205A
+# define BANNER_COLOR 0xCF995F
 
 # define TRUE 1
 # define FALSE 0
@@ -58,11 +61,15 @@
 # define PLAYER_EXIT_CODE 'X'
 # define WIN_IMG_PATH "./assets/you_win.xpm"
 
+//To delete
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 600
+
 typedef struct s_img {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
+	int		bpp;
+	int		line_len;
 	int		endian;
 	int		width;
 	int		height;
@@ -133,5 +140,9 @@ void	free_imgs_path(char **img_paths);
 int		adjust_map(t_data *data, int i_img);
 
 int		display_nb_moves(t_data *data , int nb_moves);
+void	img_pixel_put(t_img *img, int x, int y, int color);
+void	render_bg(t_data *data, t_img *img, int color);
+int		render_banner(t_data *data);
+void	render_tile(t_data *data, int i, int k, int i_img);
 
 #endif
