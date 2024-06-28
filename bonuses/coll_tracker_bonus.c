@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:31:49 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 18:49:19 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/28 18:55:59 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int add_empty_square(t_data *data, t_img *banner, int x, int y)
 int	add_coll_tracker(t_data *data, t_img *banner)
 {
 	t_img		tracker;
-	int			len;
+	static int	len;
 	static int	first_time = 0;
-	int			total_coll;
+	static int	total_coll;
 	int			x;
 	int			y;
 
