@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:12:36 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 15:02:28 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/28 18:31:05 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ void	put_img_to_img(t_img *dst, t_img *src, int x, int y)
 	int	j;
 
 	i = 0;
-	while(i < src->width) {
+	while(i < src->width)
+	{
 		j = 0;
-		while (j < src->height) {
+		while (j < src->height)
+		{
 			img_pixel_put(dst, x + i, y + j, get_pixel_img(src, i, j));
 			j++;
 		}
@@ -53,16 +55,16 @@ void	img_pixel_put(t_img *img, int x, int y, int color)
 	}
 }
 
-void	render_bg(t_data *data, t_img *img, int color)
+void	render_bg(t_img *img, int color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < TILE_SIZE)
+	while (i < img->height)
 	{
 		j = 0;
-		while (j < data->map.width * TILE_SIZE)
+		while (j < img->width)
 		{
 			img_pixel_put(img, j++, i, color);
 		}

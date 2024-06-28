@@ -6,11 +6,11 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 15:11:53 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/28 18:30:37 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG__BONUS_H
+#ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
 
 # include "/home/alarose/sgoinfre/mlx/mlx.h"
@@ -30,13 +30,15 @@
 # define RESET "\x1b[0m"
 
 # define FONT "-schumacher-clean-bold-r-normal--15-150-75-75-c-90-iso646.1991-irv"
-# define FONT_COLOR 0x36205A
-# define BANNER_COLOR 0xCF995F
+# define FONT_COLOR 0xf9d38c
+# define BANNER_COLOR 0x6E356A
 
 # define TRUE 1
 # define FALSE 0
 # define RET_ERR 0
 # define TILE_SIZE 32
+# define SQUARE_LEN 12
+# define IN_BETWEEN 6
 
 # define MAP_PATH "./maps/mapOK.ber"
 
@@ -142,11 +144,15 @@ int		adjust_map(t_data *data, int i_img);
 //bonus functions
 int		display_nb_moves(t_data *data , int nb_moves);
 void	img_pixel_put(t_img *img, int x, int y, int color);
-void	render_bg(t_data *data, t_img *img, int color);
+void	render_bg(t_img *img, int color);
 int		render_banner(t_data *data);
 void	render_tile(t_data *data, int i, int k, int i_img);
 void	put_img_to_img(t_img *dst, t_img *src, int x, int y);
 int		get_pixel_img(t_img *img, int x, int y);
 int		add_logo(t_data *data, t_img *banner);
+int		add_full_square(t_data *data, t_img *banner, int x, int y);
+int		add_empty_square(t_data *data, t_img *banner, int x, int y);
+int		add_coll_tracker(t_data *data, t_img *banner);
+void	put_squares(t_data *data, int total_coll, t_img *tracker);
 
 #endif
