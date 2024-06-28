@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:31:49 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 18:55:59 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/28 19:05:24 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	add_coll_tracker(t_data *data, t_img *banner)
 	int			x;
 	int			y;
 
-
 	if (!data->mlx_win)
 		return (RET_ERR);
 	if (first_time++ == 0)
@@ -72,8 +71,6 @@ int	add_coll_tracker(t_data *data, t_img *banner)
 		len = SQUARE_LEN * data->map.nb_collectibles + (data->map.nb_collectibles - 1) * IN_BETWEEN + (TILE_SIZE / 2);
 		total_coll = data->map.nb_collectibles;
 	}
-	printf("time coming in the function: %d | total_coll: %d | len: %d\n", first_time, total_coll, len);
-
 	if (data-> map.width > (8 + len / TILE_SIZE))
 	{
 		tracker.img = mlx_new_image(data->mlx, len, SQUARE_LEN + 4);
@@ -87,6 +84,7 @@ int	add_coll_tracker(t_data *data, t_img *banner)
 		x = data->map.width * TILE_SIZE - len;
 		y = TILE_SIZE / 2 - tracker.height / 2;
 		put_img_to_img(banner, &tracker, x, y);
+		mlx_destroy_image(data->mlx, tracker.img);
 	}
 	return (1);
 }
@@ -101,14 +99,16 @@ void	put_squares(t_data *data, int total_coll, t_img *tracker)
 	diff_coll = total_coll - data->map.nb_collectibles;
 
 	i = 0;
-	while (i++ < diff_coll)
+	while (i < diff_coll)
 	{
 		add_full_square(data, tracker, x, 2);
 		x += SQUARE_LEN + IN_BETWEEN;
+		i++;
 	}
-	while (i++ < total_coll)
+	while (i < total_coll)
 	{
 		add_empty_square(data, tracker, x, 2);
 		x += SQUARE_LEN + IN_BETWEEN;
+		i++;
 	}
 }
