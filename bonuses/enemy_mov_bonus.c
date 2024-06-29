@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 17:52:32 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 17:53:32 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/29 18:35:48 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 
 static void	enemy_right(t_data *data, int i)
 {
+	if (data->img[ENEMY].x + 1 == data->img[PLAYER].x && data->img[ENEMY].y + 1 == data->img[PLAYER].y)
+		return(lose(data)); // not working
 	go_right(data, ENEMY);
-	set_new_position(data, data->img[ENEMY].x++,data->img[ENEMY].y, i);
+	set_new_position(data, data->img[ENEMY].x,data->img[ENEMY].y, i);
 }
 
 static void	enemy_down(t_data *data, int i)
 {
 	go_down(data, ENEMY);
-	set_new_position(data, data->img[ENEMY].x--,data->img[ENEMY].y++, i);
+	set_new_position(data, data->img[ENEMY].x,data->img[ENEMY].y, i);
 }
 
 static void	enemy_left(t_data *data, int i)
 {
 	go_left(data, ENEMY);
-	set_new_position(data, data->img[ENEMY].x--,data->img[ENEMY].y, i);
+	set_new_position(data, data->img[ENEMY].x,data->img[ENEMY].y, i);
 }
 
 static void	enemy_up(t_data *data, int i)
 {
 	go_up(data, ENEMY);
-	set_new_position(data, data->img[ENEMY].x,data->img[ENEMY].y++, i);
+	set_new_position(data, data->img[ENEMY].x,data->img[ENEMY].y, i);
 }
 
 int	move_enemies(t_data *data)
