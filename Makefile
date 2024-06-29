@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/29 15:06:07 by alarose          ###   ########.fr        #
+#    Updated: 2024/06/29 17:54:46 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ BONUS =		img_manager_bonus.c	\
 			pixel_handler_bonus.c	\
 			coll_tracker_bonus.c	\
 			enemy_handler_bonus.c	\
+			enemy_mov_bonus.c		\
 			loop_events_bonus.c		\
 			mov_count_bonus.c
 
