@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 17:32:47 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/29 18:01:09 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,5 +178,6 @@ int		handle_no_event(t_data *data);
 int		move_enemies(t_data *data);
 int		init_prog(t_data *data, char **img_paths);
 void	set_new_position(t_data *data, int x, int y, int i);
+void	lose(t_data *data);
 
 #endif
