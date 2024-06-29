@@ -6,12 +6,12 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 14:14:43 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/29 10:56:02 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
+/*
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -38,3 +38,4 @@ int	main(int argc, char **argv)
 	mlx_loop(data.mlx);
 	return (0);
 }
+*/

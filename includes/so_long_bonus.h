@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 19:34:32 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/29 12:36:31 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <math.h>
 //To delete
 # include </home/alarose/Criterion/include/criterion/criterion.h>
 # include <unistd.h>
@@ -60,12 +61,18 @@
 # define BG_CODE '0'
 # define PLAYER_EXIT 5
 # define PLAYER_EXIT_PATH "./assets/player_on_exit.xpm"
+# define WOLF 6
+# define WOLF_PATH "./assets/wolf_on_grass.xpm"
+# define WOLF_CODE 'K'
 # define PLAYER_EXIT_CODE 'X'
 # define WIN_IMG_PATH "./assets/you_win.xpm"
 
 //To delete
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
+
+# define TILES_PER_ENEMIES 8
+# define ENEMY_ZONE 35
 
 typedef struct s_img {
 	void	*img;
@@ -90,6 +97,8 @@ typedef struct s_map {
 	int		nb_collectibles;
 	char	move_in;
 	int		move_out_i_img;
+	int		free_space;
+	int		nb_enemies;
 }	t_map;
 
 typedef struct s_data {
@@ -155,5 +164,7 @@ int		add_empty_square(t_data *data, t_img *banner, int x, int y);
 int		add_coll_tracker(t_data *data, t_img *banner);
 void	put_squares(t_data *data, int total_coll, t_img *tracker);
 int		gen_tracker(t_data *data, int len, int total_coll, t_img *banner);
+int		define_enemies(t_data *data);
+int		put_enemies(int y, int x, t_data *data, char **map);
 
 #endif
