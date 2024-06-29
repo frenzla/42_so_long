@@ -9,7 +9,7 @@ _bonus{
                 "-I../includes/",
                 "-I../libft/",
                 "-g",
-                "move_count_bonus.c", "coll_tracker_bonus.c", "pixel_handler_bonus.c","main_bonus.c","img_manager_bonus.c","map_handler_bonus.c","map_parsing_bonus.c", "map_verif_bonus.c", "map_verif_2_bonus.c", "player_mov_bonus.c", "win_handler_bonus.c",
+                "enemy_handler_bonus.c", "move_count_bonus.c", "coll_tracker_bonus.c", "pixel_handler_bonus.c","main_bonus.c","img_manager_bonus.c","map_handler_bonus.c","map_parsing_bonus.c", "map_verif_bonus.c", "map_verif_2_bonus.c", "player_mov_bonus.c", "win_handler_bonus.c",
                 "-L/home/alarose/sgoinfre/mlx", "-lmlx_Linux", "-lXext", "-lX11",
                 "../libft/libft.a", "-L../libft/", "-lft",
                 "-o",

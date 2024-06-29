@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:13:22 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 19:38:37 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/29 14:44:39 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	render_banner(t_data *data)
 	banner.height = TILE_SIZE;
 	banner.img = mlx_new_image(data->mlx, banner.width, banner.height);
 	if (!banner.img)
-		return (ft_printf("Couldn't load banner\n"), RET_ERR);
+		return (ft_printf("Error\nCouldn't load banner\n"), RET_ERR);
 	banner.addr = mlx_get_data_addr(banner.img, &banner.bpp, \
 	&banner.line_len, &banner.endian);
 	render_bg(&banner, BANNER_COLOR);
@@ -62,7 +62,7 @@ int	add_logo(t_data *data, t_img *banner)
 		text.img = mlx_xpm_file_to_image(data->mlx, \
 		"./assets/so_long_img.xpm", &text.width, &text.height);
 		if (!text.img)
-			return (ft_printf("Couldn't load logo\n"), RET_ERR);
+			return (ft_printf("Error\nCouldn't load logo\n"), RET_ERR);
 		text.addr = mlx_get_data_addr(text.img, &text.bpp, \
 		&text.line_len, &text.endian);
 		put_img_to_img(banner, &text, \

@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 12:36:31 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/29 14:22:26 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 
 # define MAP_PATH "./maps/mapOK.ber"
 
-# define NB_IMAGES 6
+# define NB_IMAGES 7
 # define WALL 0
 # define WALL_PATH "./assets/tree_on_grass.xpm"
 # define WALL_CODE '1'
@@ -101,10 +101,16 @@ typedef struct s_map {
 	int		nb_enemies;
 }	t_map;
 
+typedef struct s_enemy {
+	int	x;
+	int	y;
+}	t_enemy;
+
 typedef struct s_data {
 	void	*mlx;
 	void	*mlx_win;
 	t_img	img[NB_IMAGES];
+	t_enemy	*enemies;
 	t_map	map;
 	int		game_over;
 }	t_data;
@@ -166,5 +172,6 @@ void	put_squares(t_data *data, int total_coll, t_img *tracker);
 int		gen_tracker(t_data *data, int len, int total_coll, t_img *banner);
 int		define_enemies(t_data *data);
 int		put_enemies(int y, int x, t_data *data, char **map);
+void	set_enemy_position(t_data *data, int x, int y, int i);
 
 #endif

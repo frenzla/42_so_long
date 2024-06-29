@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:05:30 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 19:39:03 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/29 13:58:29 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	clean_quit(t_data *data)
 			mlx_destroy_image(data->mlx, data->img[i].img);
 		i++;
 	}
+	if (data->enemies)
+		free(data->enemies);
 	return ;
 }
 

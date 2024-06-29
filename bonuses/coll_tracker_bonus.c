@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:31:49 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/28 19:40:41 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/29 14:44:47 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	gen_tracker(t_data *data, int len, int total_coll, t_img *banner)
 	tracker.width = len;
 	tracker.height = SQUARE_LEN + 4;
 	if (!tracker.img)
-		return (ft_printf("Couldn't load collectible tracker\n"), RET_ERR);
+		return (ft_printf("Error\nCouldn't load collectible tracker\n"), RET_ERR);
 	tracker.addr = mlx_get_data_addr(tracker.img, \
 	&tracker.bpp, &tracker.line_len, &tracker.endian);
 	render_bg(&tracker, BANNER_COLOR);

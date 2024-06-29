@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:33:46 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/27 15:38:09 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/29 14:45:41 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ int	get_map(char *map_path, t_data *data)
 	if (get_map_info(data) == RET_ERR)
 		return (ft_printf(RED"Error\nCouldn't get map data\n" RESET), RET_ERR);
 	temp = copy_map(data->map.map_layout, data->map.height);
-	if (!temp)
-		return (ft_printf(RED"Error\nCouldn't copy map\n" RESET), RET_ERR);
+	data->map.free_space = 0;
 	if (!path_ok(data->map.start_y, data->map.start_x, data, temp))
 		return (free_map(temp), ft_printf(RED"Error\n\
 No valid path in map\n" RESET), RET_ERR);
