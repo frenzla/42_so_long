@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 10:54:22 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 14:50:07 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/29 17:35:25 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,14 @@ void	set_enemy_position(t_data *data, int x, int y, int i)
 		data->enemies[i].y = y;
 }
 
+void	set_new_position(t_data *data, int x, int y, int i)
+{
+		data->map.map_layout[data->enemies[i].y][data->enemies[i].x] = '0';
+		data->map.map_layout[y][x] = 'K';
+		data->enemies[i].x = x;
+		data->enemies[i].y = y;
+}
+/*
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -115,4 +123,4 @@ int	main(int argc, char **argv)
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, handle_input, &data);
 	mlx_loop(data.mlx);
 	return (0);
-}
+}*/

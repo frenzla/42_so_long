@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:50:15 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 13:24:03 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/29 16:37:03 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	init_imgs(char **img_paths, t_data *data)
 		PLAYER_PATH,
 		BG_PATH,
 		PLAYER_EXIT_PATH,
-		WOLF_PATH,
+		ENEMY_PATH,
 	};
 
 	i = 0;
@@ -74,7 +74,7 @@ int	add_map_code(t_data *data, int i)
 		PLAYER_CODE,
 		BG_CODE,
 		PLAYER_EXIT_CODE,
-		WOLF_CODE,
+		ENEMY_CODE,
 	};
 
 	data->img[i].map_code = map_code[i];

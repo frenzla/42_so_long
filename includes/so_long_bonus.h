@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 14:22:26 by alarose          ###   ########.fr       */
+/*   Updated: 2024/06/29 17:32:47 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
+# include <time.h>
 //To delete
 # include </home/alarose/Criterion/include/criterion/criterion.h>
 # include <unistd.h>
@@ -61,9 +62,9 @@
 # define BG_CODE '0'
 # define PLAYER_EXIT 5
 # define PLAYER_EXIT_PATH "./assets/player_on_exit.xpm"
-# define WOLF 6
-# define WOLF_PATH "./assets/wolf_on_grass.xpm"
-# define WOLF_CODE 'K'
+# define ENEMY 6
+# define ENEMY_PATH "./assets/wolf_on_grass.xpm"
+# define ENEMY_CODE 'K'
 # define PLAYER_EXIT_CODE 'X'
 # define WIN_IMG_PATH "./assets/you_win.xpm"
 
@@ -85,6 +86,8 @@ typedef struct s_img {
 	int		x;
 	int		y;
 	char	map_code;
+	char	move_in;
+	int		move_out_i_img;
 }	t_img;
 
 typedef struct s_map {
@@ -95,8 +98,6 @@ typedef struct s_map {
 	int		start_x;
 	int		start_y;
 	int		nb_collectibles;
-	char	move_in;
-	int		move_out_i_img;
 	int		free_space;
 	int		nb_enemies;
 }	t_map;
@@ -173,5 +174,9 @@ int		gen_tracker(t_data *data, int len, int total_coll, t_img *banner);
 int		define_enemies(t_data *data);
 int		put_enemies(int y, int x, t_data *data, char **map);
 void	set_enemy_position(t_data *data, int x, int y, int i);
+int		handle_no_event(t_data *data);
+int		move_enemies(t_data *data);
+int		init_prog(t_data *data, char **img_paths);
+void	set_new_position(t_data *data, int x, int y, int i);
 
 #endif
