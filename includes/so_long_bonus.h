@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 18:01:09 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 15:04:36 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@
 # define ENEMY_CODE 'K'
 # define PLAYER_EXIT_CODE 'X'
 # define WIN_IMG_PATH "./assets/you_win.xpm"
+# define GA_IMG_PATH "./assets/game_over.xpm"
 
 //To delete
 # define WINDOW_WIDTH 800
