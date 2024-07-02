@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:13:22 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 15:46:21 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 19:31:26 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	display_banner(t_data *data, int nb_moves)
 	if (!render_banner(data))
 		return (RET_ERR);
 	mlx_string_put(data->mlx, data->mlx_win, 20, \
-	(data->map.height + 1) * TILE_SIZE - 12, FONT_COLOR, str);
+	(data->map.height + 1) * TILE_SIZE - 10, FONT_COLOR, str);
 	free(str);
 	return (1);
 }
@@ -65,7 +65,8 @@ int	add_logo(t_data *data, t_img *banner)
 			return (ft_printf("Error\nCouldn't load logo\n"), RET_ERR);
 		text.addr = mlx_get_data_addr(text.img, &text.bpp, \
 		&text.line_len, &text.endian);
-		if (((data->map.width * TILE_SIZE / 2) - (text.width / 2)) > TILE_SIZE * 5)
+		if (((data->map.width * TILE_SIZE / 2) - (text.width / 2)) \
+		> TILE_SIZE * 5)
 			put_img_to_img(banner, &text, \
 			(data->map.width * TILE_SIZE / 2) - (text.width / 2), 0);
 		mlx_destroy_image(data->mlx, text.img);

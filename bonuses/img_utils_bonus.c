@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_events_bonus.c                                :+:      :+:    :+:   */
+/*   img_utils_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/29 15:01:28 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 19:32:09 by alarose          ###   ########.fr       */
+/*   Created: 2024/07/02 19:05:04 by alarose           #+#    #+#             */
+/*   Updated: 2024/07/02 19:06:58 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_bonus.h"
+#include "so_long.h"
 
-int	handle_no_event(t_data *data)
+void	free_imgs_path(char **img_paths)
 {
-	static int	i = 0;
+	int	i;
 
-	i++;
-	if (i % 20000 == 0 && data->game_over == 0)
-		move_enemies(data);
-	if (i % 20000 == 0)
-		i = 0;
-	return (0);
+	i = 0;
+	while (i < NB_IMAGES)
+	{
+		if (img_paths[i])
+			free(img_paths[i]);
+		i++;
+	}
 }

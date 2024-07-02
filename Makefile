@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/06/29 17:54:46 by alarose          ###   ########.fr        #
+#    Updated: 2024/07/02 19:06:03 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC_FILES =		img_manager.c	\
 
 BONUSDIR = ./bonuses/
 BONUS =		img_manager_bonus.c	\
+			img_utils_bonus.c			\
 			player_mov_bonus.c	\
 			map_parsing_bonus.c	\
 			map_verif_bonus.c	\

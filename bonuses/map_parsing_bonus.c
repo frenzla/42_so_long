@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:33:46 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 14:45:41 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 19:20:42 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,19 @@ int	map_is_valid(char ***map, int nb_lines)
 		return (1);
 	else
 		return (RET_ERR);
+}
+
+void	free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		map[i] = NULL;
+		i++;
+	}
+	free(map);
+	map = NULL;
 }

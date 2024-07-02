@@ -6,42 +6,16 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:50:15 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 18:03:04 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 19:04:24 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-void	free_imgs_path(char **img_paths)
+static int	load(char **img_paths, const char *paths[NB_IMAGES], t_data *data)
 {
 	int	i;
-
-	i = 0;
-	while (i < NB_IMAGES)
-	{
-		if (img_paths[i])
-			free(img_paths[i]);
-		i++;
-	}
-}
-
-int	init_imgs(char **img_paths, t_data *data)
-{
-	int			i;
-	int			ret;
-	const char	*paths[NB_IMAGES] = {
-		WALL_PATH,
-		COLL_PATH,
-		EXIT_PATH,
-		PLAYER_PATH,
-		BG_PATH,
-		PLAYER_EXIT_PATH,
-		ENEMY_PATH,
-		ENEMY_UP_PATH,
-		ENEMY_RIGHT_PATH,
-		ENEMY_DOWN_PATH,
-		ENEMY_LEFT_PATH,
-	};
+	int	ret;
 
 	i = 0;
 	while (i < NB_IMAGES)
@@ -57,6 +31,27 @@ int	init_imgs(char **img_paths, t_data *data)
 		i++;
 	}
 	return (free_imgs_path(img_paths), 1);
+}
+
+int	init_imgs(char **img_paths, t_data *data)
+{
+	int			ret;
+	const char	*paths[NB_IMAGES] = {
+		WALL_PATH,
+		COLL_PATH,
+		EXIT_PATH,
+		PLAYER_PATH,
+		BG_PATH,
+		PLAYER_EXIT_PATH,
+		ENEMY_PATH,
+		ENEMY_UP_PATH,
+		ENEMY_RIGHT_PATH,
+		ENEMY_DOWN_PATH,
+		ENEMY_LEFT_PATH,
+	};
+
+	ret = load(img_paths, paths, data);
+	return (ret);
 }
 
 int	new_img_from_file(char *path, t_data *data, int i)

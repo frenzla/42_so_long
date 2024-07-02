@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 18:22:56 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 19:29:41 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define GREEN "\x1b[32m"
 # define RESET "\x1b[0m"
 
-# define FONT "-schumacher-clean-bold-r-normal--15-150-75-75-c-90-iso646.1991-irv"
+# define FONT "10x20"
 # define FONT_COLOR 0xf9d38c
 # define BANNER_COLOR 0x6E356A
 
@@ -171,7 +171,7 @@ void	free_imgs_path(char **img_paths);
 int		adjust_map(t_data *data, int i_img);
 
 //bonus functions
-int		display_banner(t_data *data , int nb_moves);
+int		display_banner(t_data *data, int nb_moves);
 void	img_pixel_put(t_img *img, int x, int y, int color);
 void	render_bg(t_img *img, int color);
 int		render_banner(t_data *data);
