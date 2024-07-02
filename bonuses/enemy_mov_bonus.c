@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 17:52:32 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 16:41:03 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 16:55:03 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,5 @@ int	move_enemies(t_data *data)
 		i++;
 	}
 	i = 0;
-/*	while (i < data->map.height)
-	{
-		printf("%s\n", data->map.map_layout[i]);
-		i++;
-	}*/
 	return (0);
 }

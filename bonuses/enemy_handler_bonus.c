@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 10:54:22 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 16:40:52 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:40:37 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	set_new_position(t_data *data, int x, int y, int i)
 		data->enemies[i].x = x;
 		data->enemies[i].y = y;
 }
+
 /*
 int	main(int argc, char **argv)
 {

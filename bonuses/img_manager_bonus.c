@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:50:15 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 16:37:03 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:45:12 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ int	init_imgs(char **img_paths, t_data *data)
 		BG_PATH,
 		PLAYER_EXIT_PATH,
 		ENEMY_PATH,
+		WOLF_UP_PATH,
+		WOLF_RIGHT_PATH,
+		WOLF_DOWN_PATH,
+		WOLF_LEFT_PATH,
 	};
 
 	i = 0;
@@ -74,6 +78,10 @@ int	add_map_code(t_data *data, int i)
 		PLAYER_CODE,
 		BG_CODE,
 		PLAYER_EXIT_CODE,
+		ENEMY_CODE,
+		ENEMY_CODE,
+		ENEMY_CODE,
+		ENEMY_CODE,
 		ENEMY_CODE,
 	};
 
