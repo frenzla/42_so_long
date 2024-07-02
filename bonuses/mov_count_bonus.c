@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:13:22 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 14:44:39 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 15:46:21 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ int	add_logo(t_data *data, t_img *banner)
 			return (ft_printf("Error\nCouldn't load logo\n"), RET_ERR);
 		text.addr = mlx_get_data_addr(text.img, &text.bpp, \
 		&text.line_len, &text.endian);
-		put_img_to_img(banner, &text, \
-		(data->map.width * TILE_SIZE / 2) - (text.width / 2), 0);
+		if (((data->map.width * TILE_SIZE / 2) - (text.width / 2)) > TILE_SIZE * 5)
+			put_img_to_img(banner, &text, \
+			(data->map.width * TILE_SIZE / 2) - (text.width / 2), 0);
 		mlx_destroy_image(data->mlx, text.img);
 	}
 	return (1);

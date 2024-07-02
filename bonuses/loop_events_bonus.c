@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:01:28 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 17:53:39 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 15:39:25 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@ int	handle_no_event(t_data *data)
 	static int	i = 0;
 
 	i++;
-	if (i % 4000 == 0)
-	{
-		printf("i = %d\n", i); //delete
-		i = 0;
+	if (i % 8000 == 0 && data->game_over == 0) //change this for enemy mov.
 		move_enemies(data);
-	}
 	if (i % 8000 == 0) //can change interval for reset (if other event need larger interval)
 		i = 0; // reset for i not to go beyond int max
 	return (0);
