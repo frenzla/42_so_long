@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 17:52:32 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 18:35:48 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:29:39 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	enemy_right(t_data *data, int i)
 {
-	if (data->img[ENEMY].x + 1 == data->img[PLAYER].x && data->img[ENEMY].y + 1 == data->img[PLAYER].y)
-		return(lose(data)); // not working
+	//if (data->img[ENEMY].x + 1 == data->img[PLAYER].x && data->img[ENEMY].y + 1 == data->img[PLAYER].y)
+	//	return(lose(data)); // not working
 	go_right(data, ENEMY);
 	set_new_position(data, data->img[ENEMY].x,data->img[ENEMY].y, i);
 }
