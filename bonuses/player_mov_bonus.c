@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 09:31:06 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 14:57:37 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 16:51:40 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	adjust_map(t_data *data, int i_img)
 		{
 			data->img[i_img].move_out_i_img = EXIT;
 			mlx_put_image_to_window(data->mlx, data->mlx_win, \
-			data->img[i_img].img, data->img[i_img].x * TILE_SIZE, \
+			data->img[PLAYER_EXIT].img, data->img[i_img].x * TILE_SIZE, \
 			data->img[i_img].y * TILE_SIZE);
 			return (1);
 		}

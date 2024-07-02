@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:05:30 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 15:05:00 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 16:08:06 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,12 @@ void	win(t_data *data)
 	int		img_height;
 
 	data->game_over = 1;
-	win_img = mlx_xpm_file_to_image(data->mlx, \
-	WIN_IMG_PATH, &img_width, &img_height);
+	if (data->map.width < SWITCH_W)
+		win_img = mlx_xpm_file_to_image(data->mlx, \
+		WIN_SMALL_IMG_PATH, &img_width, &img_height);
+	else
+		win_img = mlx_xpm_file_to_image(data->mlx, \
+		WIN_IMG_PATH, &img_width, &img_height);
 	mlx_clear_window(data->mlx, data->mlx_win);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, win_img, \
 	(data->map.width * TILE_SIZE / 2) - (img_width / 2), (\
@@ -102,8 +106,12 @@ void	lose(t_data *data) //CHANGE TO LOSE
 	int		img_height;
 
 	data->game_over = 1;
-	win_img = mlx_xpm_file_to_image(data->mlx, \
-	GA_IMG_PATH, &img_width, &img_height);
+	if (data->map.width < SWITCH_W)
+		win_img = mlx_xpm_file_to_image(data->mlx, \
+		GA_SMALL_IMG_PATH, &img_width, &img_height);
+	else
+		win_img = mlx_xpm_file_to_image(data->mlx, \
+		GA_IMG_PATH, &img_width, &img_height);
 	mlx_clear_window(data->mlx, data->mlx_win);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, win_img, \
 	(data->map.width * TILE_SIZE / 2) - (img_width / 2), (\
