@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 17:44:16 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 18:22:56 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@
 # define ENEMY 6
 # define ENEMY_PATH "./assets/wolf_on_grass.xpm"
 # define ENEMY_CODE 'K'
-# define WOLF_UP 7
-# define WOLF_UP_PATH "./assets/wolf_up.xpm"
-# define WOLF_RIGHT 8
-# define WOLF_RIGHT_PATH "./assets/wolf_right.xpm"
-# define WOLF_DOWN 9
-# define WOLF_DOWN_PATH "./assets/wolf_down.xpm"
-# define WOLF_LEFT 10
-# define WOLF_LEFT_PATH "./assets/wolf_left.xpm"
+# define ENEMY_UP 7
+# define ENEMY_UP_PATH "./assets/wolf_up.xpm"
+# define ENEMY_RIGHT 8
+# define ENEMY_RIGHT_PATH "./assets/wolf_right.xpm"
+# define ENEMY_DOWN 9
+# define ENEMY_DOWN_PATH "./assets/wolf_down.xpm"
+# define ENEMY_LEFT 10
+# define ENEMY_LEFT_PATH "./assets/wolf_left.xpm"
 
 # define WIN_IMG_PATH "./assets/you_win.xpm"
 # define WIN_SMALL_IMG_PATH "./assets/you_win_small.xpm"
@@ -192,5 +192,6 @@ int		move_enemies(t_data *data);
 int		init_prog(t_data *data, char **img_paths);
 void	set_new_position(t_data *data, int x, int y, int i);
 void	lose(t_data *data);
+void	set_enemy_data(t_data *data, int enemy_move, int i);
 
 #endif

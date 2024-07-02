@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 09:31:06 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 16:51:40 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/02 18:46:11 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	go_right(t_data *data, int i_img)
 
 	next_tile = data->map.map_layout[data->img[i_img].y][data->img[i_img].x + 1];
 
-	if (next_tile == '1' || data->game_over || (i_img == ENEMY && (next_tile == 'C' || \
+	if (next_tile == '1' || data->game_over || (i_img >= ENEMY && (next_tile == 'C' || \
 	next_tile == 'E' || next_tile == 'K')))
 		return (RET_ERR);
 	if (i_img == PLAYER && next_tile == 'K')
@@ -65,7 +65,7 @@ int	go_left(t_data *data, int i_img)
 
 	next_tile = data->map.map_layout[data->img[i_img].y][data->img[i_img].x - 1];
 
-	if (next_tile == '1' || data->game_over || (i_img == ENEMY && (next_tile == 'C' || \
+	if (next_tile == '1' || data->game_over || (i_img >= ENEMY && (next_tile == 'C' || \
 	next_tile == 'E' || next_tile == 'K')))
 		return (RET_ERR);
 	if (i_img == PLAYER && next_tile == 'K')
@@ -84,7 +84,7 @@ int	go_up(t_data *data, int i_img)
 
 	next_tile = data->map.map_layout[data->img[i_img].y - 1][data->img[i_img].x];
 
-	if (next_tile == '1' || data->game_over || (i_img == ENEMY && (next_tile == 'C' || \
+	if (next_tile == '1' || data->game_over || (i_img >= ENEMY && (next_tile == 'C' || \
 	next_tile == 'E' || next_tile == 'K')))
 		return (RET_ERR);
 	if (i_img == PLAYER && next_tile == 'K')
@@ -103,7 +103,7 @@ int	go_down(t_data *data, int i_img)
 
 	next_tile = data->map.map_layout[data->img[i_img].y + 1][data->img[i_img].x];
 
-	if (next_tile == '1' || data->game_over || (i_img == ENEMY && (next_tile == 'C' || \
+	if (next_tile == '1' || data->game_over || (i_img >= ENEMY && (next_tile == 'C' || \
 	next_tile == 'E' || next_tile == 'K')))
 		return (RET_ERR);
 	if (i_img == PLAYER && next_tile == 'K')
