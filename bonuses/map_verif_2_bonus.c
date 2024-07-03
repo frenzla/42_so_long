@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:10:42 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 13:28:48 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/03 19:02:12 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	path_ok(int y, int x, t_data *data, char **map)
 	if (got_exit && collec == data->map.nb_collectibles)
 		return (got_exit = 0, collec = 0, 1);
 	map[y][x] = 'X';
-	data->map.free_space++;
+	//data->map.free_space++;
 	if (path_ok(y, x + 1, data, map) || path_ok(y, x - 1, data, map) || \
 		path_ok(y + 1, x, data, map) || path_ok(y - 1, x, data, map))
 		return (1);

@@ -27,3 +27,5 @@ map14:	not valid		unknown char in map
 map15:	not valid		not closed by walls (starting point on map limit)
 
 map16:	not valid		wrong extension on map path
+
+map18:	valid			SP, coll & exit very close (impacts nb_enemies)

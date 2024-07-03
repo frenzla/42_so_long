@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 19:29:41 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:15:08 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ void	win(t_data *data);
 int		close_game(t_data *data, int i);
 void	free_imgs_path(char **img_paths);
 int		adjust_map(t_data *data, int i_img);
+void	init_data(t_data *data);
 
 //bonus functions
 int		display_banner(t_data *data, int nb_moves);

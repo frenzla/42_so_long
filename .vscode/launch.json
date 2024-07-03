@@ -10,7 +10,7 @@
 			"request": "launch",
 			"program": "so_long",
 			"args": [
-				"/home/alarose/projects/so_long/maps/map_mandatory.ber"
+				"/home/alarose/projects/so_long/tests/map_tests/maps_for_tests/map2.ber"
 			],
 			"cwd": "${workspaceFolder}",
 		}

@@ -6,16 +6,37 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 10:54:22 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 19:12:03 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/03 19:31:15 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long_bonus.h>
 
+static void	count_enemies(int y, int x, t_data *data, char **map)
+{
+	if (!position_is_valid(y, x, &map, data->map.height))
+		return ;
+
+	if (map[y][x] == '0' || map[y][x] == 'C' || map[y][x] == 'P')
+	{
+		data->map.free_space++;
+		map[y][x] = 'V';
+		count_enemies(y - 1, x, data, map);
+		count_enemies(y + 1, x, data, map);
+		count_enemies(y, x - 1, data, map);
+		count_enemies(y, x + 1, data, map);
+	}
+}
+
 int	define_enemies(t_data *data)
 {
 	char	**temp;
 
+	temp = copy_map(data->map.map_layout, data->map.height);
+	data->map.free_space = 0;
+	count_enemies(data->map.start_y, data->map.start_x, data, temp);
+	free_map(temp);
+	printf("COUNT: %d\n", data->map.free_space);
 	data->map.nb_enemies = (data->map.free_space - \
 	data->map.nb_collectibles - 2) / ENEMY_ZONE;
 	temp = copy_map(data->map.map_layout, data->map.height);

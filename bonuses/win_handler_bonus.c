@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:05:30 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 19:20:36 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:46:23 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,15 @@ void	clean_quit(t_data *data)
 	i = 0;
 	if (data->map.map_layout)
 		free_map(data->map.map_layout);
+	i = 0;
+	if (data->enemies)
+		free(data->enemies);
 	while (i < NB_IMAGES)
 	{
 		if (data->img[i].img)
 			mlx_destroy_image(data->mlx, data->img[i].img);
 		i++;
 	}
-	if (data->enemies)
-		free(data->enemies);
 	return ;
 }
 

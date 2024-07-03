@@ -6,7 +6,7 @@
 #    By: alarose <alarose@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/07 10:17:33 by alarose           #+#    #+#              #
-#    Updated: 2024/07/02 19:06:03 by alarose          ###   ########.fr        #
+#    Updated: 2024/07/03 18:25:08 by alarose          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,17 +74,26 @@ $(LIBFT_FILE) :
 $(NAME) : $(OBJS) $(LIBFT_FILE)
 	$(CC) $(CFLAGS) -g3 -ggdb3 -o $@ $^ $(MLX_FLAGS) $(LIBFT_FLAGS)
 
+bonus: .bonus
+
+.bonus : $(OBJS_BONUS) $(LIBFT_FILE)
+	$(CC) $(CFLAGS) -g3 -ggdb3 -o $(NAME) $^ $(MLX_FLAGS) $(LIBFT_FLAGS)
+	@touch $@
+
 clean :
 	make -C $(LIBFT_PATH) clean
 	$(RM) $(OBJS)
 	$(RM) $(TESTBINS)
 	$(RM) $(OBJS_BONUS)
+	$(RM) .bonus
 
 fclean : clean
 	make -C $(LIBFT_PATH) fclean
 	$(RM) $(NAME)
 
 re : fclean all
+
+re_bonus : fclean bonus
 
 re_test : fclean test
 
@@ -94,7 +103,4 @@ $(TESTDIR)/%.o : $(TESTDIR)/%.c
 test: $(OBJS) $(LIBFT_FILE) $(TESTBINS)
 	for test in $(TESTBINS) ; do ./$$test ; done
 
-bonus : ${OBJS_BONUS} $(LIBFT_FILE)
-	$(CC) $(CFLAGS) -g3 -ggdb3 -o $(NAME) $^ $(MLX_FLAGS) $(LIBFT_FLAGS)
-
-.PHONY: all clean fclean re test bonus
+.PHONY: all clean fclean re re_test test bonus re_bonus

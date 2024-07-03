@@ -6,11 +6,11 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 19:05:04 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/02 19:06:58 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:59:30 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	free_imgs_path(char **img_paths)
 {
