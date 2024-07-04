@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 10:54:22 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/03 19:31:15 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/04 10:17:23 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	count_enemies(int y, int x, t_data *data, char **map)
 {
 	if (!position_is_valid(y, x, &map, data->map.height))
 		return ;
-
 	if (map[y][x] == '0' || map[y][x] == 'C' || map[y][x] == 'P')
 	{
 		data->map.free_space++;
@@ -50,30 +49,27 @@ int	define_enemies(t_data *data)
 	return (1);
 }
 
-int	put_enemies(int y, int x, t_data *data, char **map)
+void	put_enemies(int y, int x, t_data *data, char **map)
 {
-	static int	got_exit = 0;
-	static int	collec = 0;
 	static int	count = 0;
 	static int	i = 0;
 
 	if (!position_is_valid(y, x, &map, data->map.height))
-		return (RET_ERR);
-	if (map[y][x] == 'E')
-		got_exit = 1;
-	if (map[y][x] == 'C')
-		collec++;
-	if (got_exit && collec == data->map.nb_collectibles)
-		return (got_exit = 0, collec = 0, 1);
-	if (map[y][x] != 'E' && map[y][x] != 'C')
-		count++;
-	map[y][x] = 'X';
-	if (count % ENEMY_ZONE == 0)
-		set_enemy_position(data, x, y, i++);
-	if (put_enemies(y, x + 1, data, map) || put_enemies(y, x - 1, data, map) || \
-		put_enemies(y + 1, x, data, map) || put_enemies(y - 1, x, data, map))
-		return (1);
-	return (RET_ERR);
+		return ;
+	if (map[y][x] == '0' || map[y][x] == 'C' || map[y][x] == 'P')
+	{
+		map[y][x] = 'V';
+		if (map[y][x] != 'E' || map[y][x] != 'C')
+		{
+			count++;
+			if (count % ENEMY_ZONE == 0)
+				set_enemy_position(data, x, y, i++);
+		}
+		put_enemies(y - 1, x, data, map);
+		put_enemies(y + 1, x, data, map);
+		put_enemies(y, x - 1, data, map);
+		put_enemies(y, x + 1, data, map);
+	}
 }
 
 void	set_enemy_position(t_data *data, int x, int y, int i)

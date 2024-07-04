@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/03 16:15:08 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/04 10:07:33 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,6 @@ int		add_coll_tracker(t_data *data, t_img *banner);
 void	put_squares(t_data *data, int total_coll, t_img *tracker);
 int		gen_tracker(t_data *data, int len, int total_coll, t_img *banner);
 int		define_enemies(t_data *data);
-int		put_enemies(int y, int x, t_data *data, char **map);
 void	set_enemy_position(t_data *data, int x, int y, int i);
 int		handle_no_event(t_data *data);
 int		move_enemies(t_data *data);
@@ -194,5 +193,6 @@ int		init_prog(t_data *data, char **img_paths);
 void	set_new_position(t_data *data, int x, int y, int i);
 void	lose(t_data *data);
 void	set_enemy_data(t_data *data, int enemy_move, int i);
+void	put_enemies(int y, int x, t_data *data, char **map);
 
 #endif
