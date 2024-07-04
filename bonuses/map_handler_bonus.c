@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 09:52:20 by alarose           #+#    #+#             */
-/*   Updated: 2024/06/29 14:48:13 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/04 11:55:26 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	**copy_map(char **map, int height)
 	int		i;
 	char	**new_map;
 
+	new_map = NULL;
 	new_map = malloc(sizeof(char *) * (height + 1));
 	if (!new_map)
 		return (ft_printf("Error\nCouldn't copy map\n"), NULL);

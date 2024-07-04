@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:31:00 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/04 10:07:33 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/04 10:58:47 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ typedef struct s_img {
 }	t_img;
 
 typedef struct s_map {
-	char	*map_path;
 	int		width;
 	int		height;
 	char	**map_layout;
@@ -169,7 +168,7 @@ void	win(t_data *data);
 int		close_game(t_data *data, int i);
 void	free_imgs_path(char **img_paths);
 int		adjust_map(t_data *data, int i_img);
-void	init_data(t_data *data);
+void	init_data(char **imgs_paths, t_data *data);
 
 //bonus functions
 int		display_banner(t_data *data, int nb_moves);

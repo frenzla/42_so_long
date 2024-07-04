@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:10:42 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/03 19:02:12 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/04 11:58:13 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,15 @@ Map should be surrounded by walls\n"RESET), RET_ERR);
 
 int	position_is_valid(int y, int x, char ***map, int nb_lines)
 {
+	if (!(*map))
+		return (RET_ERR);
 	if (x < 1 || (unsigned long) x > \
 	ft_strlen((*map)[0]) - 2 || y < 0 || y > nb_lines - 2)
 		return (0);
 	if ((*map)[y][x] == '0' || (*map)[y][x] == 'E' || \
 		(*map)[y][x] == 'C' || (*map)[y][x] == 'P')
 		return (1);
-	return (0);
+	return (RET_ERR);
 }
 
 int	path_ok(int y, int x, t_data *data, char **map)

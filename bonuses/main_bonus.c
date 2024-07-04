@@ -6,24 +6,24 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/03 16:32:25 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/04 11:47:47 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-void	init_data(t_data *data)
+void	init_data(char **imgs_paths, t_data *data)
 {
 	int	i;
 
 	data->mlx = NULL;
 	data->mlx_win = NULL;
-	data->map.map_path = NULL;
 	data->map.map_layout = NULL;
 	data->enemies = NULL;
 	i = 0;
 	while (i < NB_IMAGES)
 	{
+		imgs_paths[i] = NULL;
 		data->img[i].img = NULL;
 		data->img[i].addr = NULL;
 		i++;
@@ -54,11 +54,11 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (ft_printf(RED "Error\nIncorrect input" RESET), 1);
-	init_data(&data);
+	init_data(img_paths, &data);
 	if (!get_map(argv[1], &data))
 		return (close_game(&data, 0), 1);
 	if (!init_prog(&data, img_paths))
-		close_game(&data, 1);
+		return (close_game(&data, 1), 1);
 	render_map(&data);
 	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, \
 	close_game, &data);

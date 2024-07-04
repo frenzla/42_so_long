@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 10:54:22 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/04 10:17:23 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/04 12:02:11 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	define_enemies(t_data *data)
 	char	**temp;
 
 	temp = copy_map(data->map.map_layout, data->map.height);
+	if (!temp)
+		return (RET_ERR);
 	data->map.free_space = 0;
 	count_enemies(data->map.start_y, data->map.start_x, data, temp);
 	free_map(temp);
