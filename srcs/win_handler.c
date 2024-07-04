@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:05:30 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/03 16:15:36 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/04 12:09:05 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,28 @@ int	close_game(t_data *data, int i)
 		exit(0);
 	}
 	return (i);
+}
+
+int	get_nb_lines(char *map_path)
+{
+	int		fd;
+	char	*line;
+	int		nb_lines;
+
+	fd = open(map_path, O_RDONLY);
+	if (fd < 1)
+		return (ft_printf(RED"Error\nCouldn't open file" RESET), RET_ERR);
+	line = get_next_line(fd);
+	if (!line)
+		return (close(fd), ft_printf(RED"Error\nFile empty\n"RESET), RET_ERR);
+	else
+		nb_lines = 0;
+	while (line)
+	{
+		nb_lines++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (nb_lines);
 }

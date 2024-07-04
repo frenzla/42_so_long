@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:52:25 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/04 11:16:23 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/04 12:07:08 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	main(int argc, char **argv)
 	data.mlx_win = mlx_new_window(data.mlx, data.map.width * TILE_SIZE, \
 	data.map.height * TILE_SIZE, "Hello world!");
 	if (!data.mlx_win)
-		return (ft_printf("Error\nNew window couldn't open"), close_game(&data, 0), 1);
+		return (ft_printf("Error\nNew window couldn't open"), \
+		close_game(&data, 0), 1);
 	if (!init_imgs(img_paths, &data))
 		return (close_game(&data, 0), 1);
 	data.game_over = 0;

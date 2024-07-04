@@ -6,7 +6,7 @@
 /*   By: alarose <alarose@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 10:54:22 by alarose           #+#    #+#             */
-/*   Updated: 2024/07/04 12:02:11 by alarose          ###   ########.fr       */
+/*   Updated: 2024/07/04 12:11:51 by alarose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,6 @@ void	set_enemy_position(t_data *data, int x, int y, int i)
 	data->map.map_layout[y][x] = 'K';
 	data->enemies[i].x = x;
 	data->enemies[i].y = y;
-}
-
-void	set_new_position(t_data *data, int x, int y, int i)
-{
-		data->map.map_layout[data->enemies[i].y][data->enemies[i].x] = '0';
-		data->map.map_layout[y][x] = 'K';
-		data->enemies[i].x = x;
-		data->enemies[i].y = y;
 }
 
 int	move_enemies(t_data *data)
