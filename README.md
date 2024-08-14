@@ -25,6 +25,7 @@ Part of my coding mastering journey 🥷
 ## How to Install and Run the Project 
 
 - `git clone` [MinilibX](https://github.com/42Paris/minilibx-linux), the X-Window (X11R6) programming API used for the graphics.
+- `git clone` the project
 - Change the `MINI_LIB_PATH` in the project's [Makefile](https://github.com/frenzla/42_so_long/blob/main/Makefile) to where you cloned the MinilibX.
 - `make` to run the game in its simplest version / `make bonus` to run the game with moving enemies
 - `./so_long maps/map.ber` to launch the game.
